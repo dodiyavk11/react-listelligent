@@ -1,0 +1,229 @@
+.hit-agents-f-section{
+    background: #FF6C2C;
+    padding: 70px 0px;
+}
+.hit-agents-f-section h3 {
+    color: #fff;
+    font-size: 44px;
+    font-weight: 800;
+    font-family: Montserrat;
+}
+.hit-agents-f-section p {
+    color: #fff;
+    font-size: 37px;
+    opacity: .87;
+    margin: 15px 0px;
+    font-family: Montserrat;
+}
+.agent-video-popup-container{
+    display: flex;
+    justify-content: end;
+}
+.agent-video-popup{
+    width: 100%;
+    display: flex;
+    justify-content: end;
+    position: relative;
+}
+.agent-video-popup img{
+    width: 85%;
+    border-radius: 10px;
+}
+.agent-video-popup a {
+    position: absolute;
+    top: 35%;
+    left: 52%;
+    color: #FF6C2C;
+}
+.agent-video-popup a svg{
+    font-size: 75px;
+    background: white;
+    border-radius: 50px;
+}
+
+
+.hiw-agent-second-section{
+    background-color: #f7faff;
+    padding: 70px 0px;
+}
+.hiw-agent-second-section h1 {
+    color: #3f4650;
+    font-family: Montserrat;
+    font-size: 35px;
+    font-weight: 700;
+    text-align: center;
+    opacity: .87;
+}
+.agent-step-container{
+    margin: 50px 0px 0px 0px;
+}
+.agent-steps-title :nth-child(2) span {
+    color: #3f4650;
+    opacity: .87;
+    font-size: 22px;
+    font-weight: 600;
+}
+.agent-steps-desc > div > div > div > p {
+    color: #3f4650;
+    font-size: 18px;
+    font-weight: 400;
+    opacity: .87;
+}
+.hiw-agent-step-btn{
+    background-color: #FF6C2C !important;
+}
+.hiw-agent-steps > span > span > svg{
+    color: #ffab86;
+}
+.hiw-agent-steps > span > .Mui-active svg{
+    color: #FF6C2C;
+}
+.hiw-agent-steps > span > .Mui-completed svg{
+    color: #FF6C2C;
+}
+
+.seller-step-container{
+    margin: 50px 0px 0px 0px;
+}
+.seller-steps-title :nth-child(2) span {
+    color: #3f4650;
+    opacity: .87;
+    font-size: 22px;
+    font-weight: 600;
+}
+.seller-steps-desc > div > div > div > p {
+    color: #3f4650;
+    font-size: 18px;
+    font-weight: 400;
+    opacity: .87;
+}
+.hiw-seller-step-btn{
+    background-color: #FF6C2C !important;
+}
+.hiw-seller-steps > span > span > svg{
+    color: #ffab86;
+}
+.hiw-seller-steps > span > .Mui-active svg{
+    color: #FF6C2C;
+}
+.hiw-seller-steps > span > .Mui-completed svg{
+    color: #FF6C2C;
+}
+
+
+.hiw-agent-third-section{
+    background-color: #f7faff;
+    padding: 0px 0px 70px 0px;
+}
+.hiw-agent-third-section h1 {
+    background-color: #FF6C2C;
+    padding: 15px;
+    text-align: center;
+    color: #fff;
+    font-family: Montserrat;
+    font-weight: 700;
+}
+.hiw-agent-acordian-btn button:not(.collapsed) {
+    background-color: #FF6C2C !important;
+    box-shadow: none !important;
+    color: #fff;
+}
+.hiw-agent-acordian-btn button::after{
+    color: #fff !important;
+}
+.hiw-agent-acordian-btn button:focus{
+    box-shadow: none !important;
+}
+
+
+@media(max-width: 1224px){
+    .hit-agents-f-section {
+        padding: 0px 0px 25px 0px;
+    }
+    .hit-agents-f-section h3 {
+        font-size: 28px;
+    }
+    .hit-agents-f-section p {
+        font-size: 18px;
+    }
+    .agent-video-popup a {
+        top: 30%;
+        left: 52%;
+    }
+    .agent-video-popup a svg {
+        font-size: 60px;
+    }
+    .hiw-agent-second-section {
+        padding: 30px 0px;
+    }
+    .hiw-agent-second-section h1 {
+        font-size: 25px;
+    }
+    .agent-step-container {
+        margin: 15px 0px 0px 0px;
+    }
+    .seller-step-container {
+        margin: 15px 0px 0px 0px;
+    }
+    .agent-steps-title :nth-child(2) span {
+        font-size: 20px;
+    }
+    .agent-steps-desc > div > div > div > p {
+        font-size: 16px;
+    }
+    .seller-steps-desc > div > div > div > p {
+        font-size: 16px;
+    }
+    .hiw-agent-third-section h1 {
+        font-size: 28px;
+    }
+}
+
+
+@media(max-width: 767px){
+    .hit-agents-f-section h3 {
+        font-size: 24px;
+    }
+    .hit-agents-f-section p {
+        font-size: 16px;
+    }
+    .agent-video-popup {
+        justify-content: center;
+    }
+    .agent-video-popup a {
+        top: 28%;
+        left: 42%;
+    }
+    .hiw-agent-second-section h1 {
+        font-size: 22px;
+        margin: 20px 0px 0px 0px;
+    }
+    .agent-steps-title :nth-child(2) span {
+        font-size: 18px;
+    }
+    .agent-steps-desc > div > div > div > p {
+        font-size: 14px;
+    }
+    .hiw-agent-steps > span > .Mui-active svg {
+        font-size: 20px;
+    }
+    .hiw-agent-steps > span > span > svg {
+        font-size: 20px;
+    }
+    .seller-steps-title :nth-child(2) span {
+        font-size: 18px;
+    }
+    .seller-steps-desc > div > div > div > p {
+        font-size: 14px;
+    }
+    .hiw-seller-steps > span > .Mui-active svg {
+        font-size: 20px;
+    }
+    .hiw-seller-steps > span > span > svg {
+        font-size: 20px;
+    }
+    .hiw-agent-third-section h1 {
+        font-size: 20px;
+        padding: 10px;
+    }
+}

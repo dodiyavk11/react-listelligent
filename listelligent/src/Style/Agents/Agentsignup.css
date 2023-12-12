@@ -1,0 +1,250 @@
+.agent-header {
+    background: #FF6C2C;
+    padding: 50px 0px;
+}
+.agent-header h1 {
+    font-size: 40px;
+    font-weight: 700;
+    color: #fff;
+    font-family: Montserrat;
+}
+.agent-header p {
+    font-size: 20px;
+    font-weight: 500;
+    color: #fff;
+    font-family: Montserrat;
+    opacity: .87;
+    margin: 0px 0px 10px 0px;
+}
+.agent-header a {
+    color: #fff;
+    text-decoration: none;
+    background: #f57f17;
+    padding: 15px 30px;
+    border-radius: 50px;
+    font-size: 18px;
+    font-weight: 700;
+}
+.button {
+    margin: 55px 0px 0px 0px;
+}
+
+
+.agentsign-first-section{
+    background: #f5f9fc;
+    padding: 70px 0px;
+}
+.agentsign-first-section h1 {
+    color: #4b5c75;
+    font-family: Montserrat;
+    font-size: 28px;
+    text-align: center;
+    font-weight: 800;
+    margin-bottom: 40px;
+    opacity: .87;
+}
+
+.reason-item{
+    margin: 20px 0px;
+}
+.reason-item h4{
+    color: #4b5c75;
+    font-family: Montserrat;
+    font-size: 20px;
+    margin-bottom: 16px;
+}
+.reason-item p{
+    color: #3f4650;
+    font-family: Montserrat;
+    font-size: 18px;
+    opacity: .87;
+}
+.reason-item svg{
+    font-size: 35px;
+    color: #FF6C2C;
+}
+
+
+.agentsign-second-section{
+    padding: 70px 0px;
+}
+.agentsign-second-section h1{
+    color: #4b5c75;
+    font-family: Montserrat;
+    font-size: 28px;
+    font-weight: 800;
+    margin-bottom: 40px;
+    opacity: .87;
+}
+.steplabels :nth-child(1) svg {
+    color: #4b86db;
+    font-size: 27px;
+    font-weight: 600;
+}
+.steplabels :nth-child(2) span {
+    color: #3f4650;
+    font-weight: 700;
+    opacity: .87;
+    font-size: 18px;
+    font-family: Montserrat;
+}
+.signup-btn {
+    background-color: #f57f17 !important;
+    border-radius: 50px !important;
+    padding: 10px 25px !important;
+    font-size: 14px !important;
+    font-weight: 600 !important;
+}
+.agent-step-label > span > .Mui-active svg{
+    color: #FF6C2C;
+}
+.agent-step-label > span > .Mui-disabled svg{
+    color: #FF6C2C;
+}
+
+
+.agentsign-third-section{
+    background-color: #f5f9fc;
+    padding: 40px 0px;
+}
+.agentsign-third-section h1 {
+    color: #3f4650;
+    font-family: Montserrat;
+    font-size: 35px;
+    font-weight: 700;
+    text-align: center;
+    opacity: .87;
+}
+.accordian-container {
+    margin: 60px 0px 0px 0px;
+}
+.agent-sign-acordian-btn button:not(.collapsed) {
+    background-color: #FF6C2C !important;
+    box-shadow: none !important;
+    color: #fff;
+}
+.agent-sign-acordian-btn button::after{
+    color: #fff !important;
+}
+.agent-sign-acordian-btn button:focus{
+    box-shadow: none !important;
+}
+
+.agentsign-fourth-section{
+    background: #FF6C2C;
+    padding: 70px 0px;
+}
+.agentsign-fourth-section h1{
+    color: #fff;
+    font-family: Montserrat;
+    font-size: 35px;
+    font-weight: 700;
+    text-align: center;
+    opacity: .87;
+    margin: 0px;
+}
+.agentsign-fourth-section a{
+    color: #fff;
+    text-decoration: none;
+    background: #f57f17;
+    padding: 15px 30px;
+    border-radius: 50px;
+    font-size: 18px;
+    font-weight: 700;
+}
+
+
+@media(max-width: 1024px){
+    .agent-header {
+        padding: 10px 0px 50px 0px;
+    }
+    .agent-header h1 {
+        font-size: 30px;
+    }
+    .agent-header p {
+        font-size: 18px;
+    }
+    .button {
+        margin: 45px 0px 0px 0px;
+    }
+    .agentsign-first-section {
+        padding: 35px 0px;
+    }
+    .agentsign-first-section h1 {
+        font-size: 20px;
+    }
+    .reason-item svg {
+        font-size: 25px;
+    }
+    .reason-item h4 {
+        margin-bottom: 8px;
+    }
+    .agentsign-second-section {
+        padding: 50px 0px;
+    }
+    .agentsign-second-section h1 {
+        font-size: 19px;
+    }
+    .steplabels :nth-child(1) svg {
+        font-size: 22px;
+    }
+    .steplabels :nth-child(2) span {
+        font-size: 16px;
+    }
+    .signup-btn {
+        font-size: 12px !important;
+    }
+    .agentsign-third-section {
+        padding: 25px 0px;
+    }
+    .agentsign-third-section h1 {
+        font-size: 30px;
+    }
+    .accordian-container {
+        margin: 20px 0px 0px 0px;
+    }
+    .agentsign-fourth-section {
+        padding: 35px 0px;
+    }
+    .agentsign-fourth-section h1 {
+        font-size: 22px;
+    }
+    .agentsign-fourth-section a {
+        font-size: 16px;
+    }
+}
+
+
+@media(max-width: 767px){
+    .agent-header h1 {
+        font-size: 30px;
+        text-align: center;
+    }
+    .agent-header p {
+        font-size: 18px;
+        text-align: center;
+    }
+    .button {
+        margin: 10px 0px 0px 0px;
+        display: flex;
+        justify-content: center;
+    }
+    .button {
+        margin: 10px 0px 0px 0px;
+        display: flex;
+        justify-content: center;
+    }
+    .reason-item svg {
+        font-size: 35px;
+    }
+    .agentsign-second-section {
+        padding: 30px 0px;
+    }
+    .agentsign-second-section h1 {
+        font-size: 16px;
+        margin: 10px 0px;
+    }
+    .agentsign-third-section h1 {
+        font-size: 19px;
+    }
+}

@@ -1,0 +1,21 @@
+.dataTable{
+    margin: 50px 0px;
+}
+.search-input {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    background-color: #FF6C2C;
+    padding: 8px 20px;
+    align-items: center;
+}
+.search-input h2{
+    font-size: 25px;
+    font-weight: 600;
+    font-family: Montserrat;
+    margin: 0;
+    color: #fff;
+}
+.search-input input{
+    width: 20%;
+}

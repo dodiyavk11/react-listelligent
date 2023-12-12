@@ -1,0 +1,43 @@
+.agentform-container{
+    position: relative;
+}
+.agentform-box {
+    width: 900px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, 25%);
+    border: 1px solid;
+    border-radius: 10px;
+    padding: 50px 35px;
+    right: calc(-50% + 200px);
+}
+.agentform-box h1{
+    text-align: center;
+    font-family: Montserrat;
+    font-weight: 500;
+}
+.agentform-box p{
+    font-family: Montserrat;
+    font-weight: 500;
+}
+.agentform-box .form-label {
+    margin-bottom: .5rem;
+    font-weight: 500;
+    font-family: Montserrat;
+}
+.agentform-box #formDate {
+    width: 100%;
+    border: 1px solid #dee2e6;
+    padding: 6px;
+    border-radius: 6px;
+}
+.agentform-box a {
+    background: linear-gradient(180deg,#f57f17 0,#f27e17 100%);
+    padding: 5px 25px;
+    border-radius: 5px;
+    color: #fff;
+    font-family: Montserrat;
+    text-decoration: none;
+    text-align: center;
+}

@@ -1,0 +1,72 @@
+.navbar {
+    background-color: #FF6C2C !important;
+    padding: 20px 0px;
+}
+.navbar-brand{
+    font-size: 25px;
+    font-weight: 700;
+    color: #fff;
+}
+.navbar-brand:hover{
+    color: #fff;
+}
+.nav-links{
+    align-items: center;
+}
+.nav-links a {
+    color: #fff;
+    text-decoration: none;
+    padding: 0px 20px;
+    font-weight: 500;
+}
+.offcanvas.show:not(.hiding), .offcanvas.showing {
+    transform: none;
+    background-color: #FF6C2C;
+}
+.header-login-btn {
+    border-radius: 50px;
+    padding: 5px 25px;
+    font-weight: 500;
+    border: 2px solid #fff;
+    color: #fff;
+    text-decoration: none;
+}
+.header-logout-btn {
+    border-radius: 50px;
+    padding: 5px 25px;
+    font-weight: 500;
+    border: 2px solid #fff;
+    color: #fff;
+    text-decoration: none;
+}
+.header-login-btn:hover{
+    background: none;
+    border: 2px solid #fff;
+    color: #fff;
+}
+
+button.navbar-toggler.collapsed {
+    background: #fff;
+}
+button:focus:not(:focus-visible) {
+    box-shadow: none;
+}
+div#offcanvasNavbarLabel-expand-xl {
+    color: #fff;
+}
+
+
+@media(max-width: 1224px){
+    .nav-links{
+        align-items: normal;
+    }
+    .nav-links a {
+        color: #fff;
+        text-decoration: none;
+        padding: 8px 0px;
+        font-weight: 500;
+    }
+    .header-login-btn {
+        margin: 10px 0px 0px 0px;
+    }
+}

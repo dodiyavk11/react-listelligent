@@ -1,0 +1,311 @@
+.myprofile-conteiner {
+    background: #f7faff;
+    padding: 60px 0px;
+}
+.myprofile-conteiner img {
+    width: 100%;
+    border-radius: 100px;
+}
+.myprofile-social-icons svg {
+    width: 35px;
+    height: 30px;
+}
+.myprofile-social-icons .facebook{
+    color: #4267B2;
+}
+.myprofile-social-icons .linkedin{
+    color: #0077b5;
+}
+.myprofile-social-icons .twitter{
+    color: #1DA1F2;
+}
+.myprofile-social-icons .youtube{
+    color: #CD201F;
+}
+.myprofile-video-content img{
+    width: 100%;
+    border-radius: 10px;
+}
+.myprofile-video-content{
+    position: relative;
+}
+.myprofile-video-content a {
+    position: absolute;
+    top: 35%;
+    left: 42%;
+    color: #FF6C2C;
+}
+.myprofile-video-content a svg {
+    font-size: 75px;
+    background: white;
+    border-radius: 50px;
+}
+.myprofile-content h2 {
+    color: #3f4650;
+    font-weight: 700;
+    margin: 0;
+    font-family: Montserrat;
+}
+.myprofile-content p {
+    color: #3f4650;
+    margin: 10px 0px;
+    font-weight: 400;
+    font-size: 14px;
+}
+.myprofile-content span {
+    font-weight: 700;
+    margin: 0px 5px 0px 0px;
+}
+.myprofile-sub-img-content{
+    margin: 20px 0px;
+}
+.myprofile-sub-img-content h4 {
+    font-size: 30px;
+    color: #3f4650;
+    font-weight: 700;
+    font-family: Montserrat;
+    margin: 0px 0px 20px 0px;
+}
+.myprofile-sub-img img{
+    width: 90%;
+    border-radius: 10px;
+}
+
+
+.myprofile-agent-about-info {
+    background-color: #f7faff;
+    padding: 0px 0px 40px 0px;
+}
+.myprofile-agent-about-info-heading h3 {
+    font-size: 30px;
+    font-family: Montserrat;
+    color: #3f4650;
+    font-weight: 700;
+    margin: 0px 0px 30px 0px;
+}
+.myprofile-agent-about-info-heading p {
+    font-family: Montserrat;
+    font-weight: 500;
+}
+.myprofile-agent-about-info-heading span{
+    font-family: Montserrat;
+    font-weight: 700;
+}
+
+
+.container-fluid h1 {
+    font-family: Montserrat;
+    font-weight: 700;
+    margin: 0px 0px 30px 0px;
+    color: #3f4650;
+    opacity: .87;
+}
+.myprofile-slider {
+    background-color: #f7faff;
+    padding: 70px 0px;
+}
+.owl-carousel .owl-item img {
+    display: block;
+    width: 100%;
+    height: 60%;
+}
+.myprofile-carousel-card {
+    background-color: #fff;
+    border-radius: 15px;
+    box-shadow: 0px 0px 4px 2px rgb(187 187 187);
+    margin: 5px;
+    height: 400px;
+}
+.myprofile-carousel-card img{
+    border-radius: 15px 15px 0px 0px;
+}
+.myprofile-carousel-card-content {
+    padding: 20px 10px;
+}
+.myprofile-carousel-card-content h4 {
+    font-size: 20px;
+    font-weight: 800;
+    font-family: Montserrat;
+    color: #3f4650;
+    opacity: .87;
+}
+.myprofile-carousel-card-content p {
+    font-size: 17px;
+    color: #3f4650;
+    margin: 7px 0px 0px 0px;
+    font-weight: 400;
+}
+.mp-sq-icon {
+    display: flex;
+    justify-content: space-between;
+}
+.mp-sq-icon span {
+    font-size: 16px;
+    font-weight: 500;
+    font-family: Montserrat;
+    display: flex;
+    align-items: flex-start;
+    color: #3f4650;
+    opacity: .87;
+}
+.mp-sq-icon span svg{
+    font-size: 20px;
+}
+.mp-sq-icon span svg {
+    font-size: 25px;
+}
+
+.owl-carousel {
+    position: relative;
+}
+.owl-nav {
+    position: absolute;
+    top: 40%;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+}
+.owl-prev:hover {
+    background: none !important;
+}
+.owl-prev span{
+    font-size: 60px;
+}
+.owl-prev span:hover{
+    color: #FF6C2C;
+}
+.owl-next:hover{
+    background: none !important;
+}
+.owl-next span{
+    font-size: 60px;
+}
+.owl-next span:hover{
+    color: #FF6C2C;
+}
+.owl-dots{
+    display: none;
+}
+.owl-carousel .owl-nav button.owl-prev, .owl-carousel .owl-nav button.owl-next, .owl-carousel button.owl-dot {
+    margin: 0px -30px;
+}
+.myprofile-tag {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    background: #FF6C2C;
+    padding: 3px 30px;
+    border-radius: 20px;
+    font-size: 18px;
+    font-weight: 700;
+    color: #fff;
+}
+
+
+@media(max-width: 1224px){
+    .myprofile-conteiner {
+        padding: 30px 0px;
+    }
+    .myprofile-content h2 {
+        font-size: 24px;
+    }
+    .myprofile-content p {
+        margin: 0px 0px;
+    }
+    .myprofile-social-icons {
+        margin-top: 8px !important;
+    }
+    .myprofile-social-icons svg {
+        width: 25px;
+        height: 25px;
+    }
+    .myprofile-video-content a {
+        position: absolute;
+        top: 35%;
+        left: 40%;
+        color: #FF6C2C !important;
+    }
+    .myprofile-video-content a svg {
+        font-size: 50px;
+    }
+    .myprofile-sub-img-content h4 {
+        font-size: 26px;
+    }
+    .myprofile-agent-about-info h3 {
+        font-size: 26px;
+    }
+    .myprofile-agent-about-info p {
+        font-size: 14px;
+    }
+    .myprofile-slider {
+        padding: 0px 0px 40px 0px;
+    }
+    .container-fluid h1 {
+        font-size: 26px;
+    }
+}
+
+
+@media(max-width: 767px){
+    .myprofile-conteiner {
+        padding: 40px 0px 0px 0px;
+    }
+    .myprofile-conteiner img {
+        width: 50%;
+        border-radius: 50%;
+    }
+    .myprofile-angent-img-icons {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+    .myprofile-social-icons svg {
+        width: 35px;
+        height: 30px;
+    }
+    .myprofile-content h2 {
+        font-size: 28px;
+        text-align: center;
+        margin-top: 10px;
+    }
+    .myprofile-content p {
+        margin: 4px 0px;
+        text-align: center;
+    }
+    .myprofile-video-content img {
+        width: 100%;
+        border-radius: 10px;
+        margin: 10px 0px;
+    }
+    .myprofile-sub-img-content {
+        padding: 20px 0px;
+        margin: 0px;
+    }
+    .myprofile-sub-img-content h4 {
+        font-size: 23px;
+    }
+    .myprofile-sub-img img {
+        width: 100%;
+        border-radius: 5px;
+    }
+    .myprofile-agent-about-info-heading h3 {
+        font-size: 22px;
+    }
+    .container-fluid h1 {
+        font-size: 22px;
+        margin: 10px 0px !important;
+    }
+
+    .mp-sq-icon span svg {
+        font-size: 18px;
+    }
+    .mp-sq-icon span {
+        font-size: 14px;
+    }
+    .myprofile-carousel-card-content p {
+        font-size: 16px;
+    }
+    .owl-carousel .owl-nav button.owl-prev, .owl-carousel .owl-nav button.owl-next, .owl-carousel button.owl-dot {
+        margin: 0px -18px !important;
+    }
+}

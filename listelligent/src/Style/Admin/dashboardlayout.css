@@ -1,0 +1,74 @@
+.dashboard{
+    display: flex;
+}
+.sidebar {
+    width: 12%;
+    height: 100vh;
+    background: #66615B;
+    padding: 0px 30px;
+    position: fixed;
+    left: 0;
+}
+.main-content {
+    width: 88%;
+    background-color: #f4f3ef;
+    position: absolute;
+    right: 0;
+    height: 100vh;
+}
+
+
+/* Header */
+.dashboad-navbar {
+    background-color: #f4f3ef !important;
+    border-bottom: 1px solid #ddd;
+    padding: 10px 0px;
+}
+.dashboad-navbar .navbar-brand {
+    color: #66615B;
+    font-size: 20px;
+    font-weight: 400;
+    font-family: Montserrat;
+}
+.admin-header-logout-btn {
+    border-radius: 50px;
+    padding: 5px 25px;
+    font-weight: 500;
+    border: 2px solid #ddd;
+    color: #66615B;
+    text-decoration: none;
+}
+
+
+/* Sidebar */
+.sidebar-content h1 {
+    text-align: center;
+}
+.sidebar-content h1 a {
+    text-decoration: none;
+    color: #fff;
+    font-family: Montserrat;
+    font-weight: 500;
+    font-size: 30px;
+    margin-top: 10px;
+}
+.sidebar-content ul{
+    padding: 0;
+}
+.sidebar-content ul li {
+    list-style-type: none;
+    padding: 20px 0px;
+    display: flex;
+    align-items: end;
+}
+.sidebar-content ul li svg {
+    font-size: 28px;
+    color: #c1c1c1;
+    margin: 0px 10px 0px 0px;
+}
+.sidebar-content ul li a {
+    color: #c1c1c1;
+    text-decoration: none;
+    font-family: Montserrat;
+    font-weight: 500;
+}
