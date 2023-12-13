@@ -6,6 +6,7 @@
     font-size: 25px;
     font-weight: 700;
     color: #fff;
+    font-family: Montserrat;
 }
 .navbar-brand:hover{
     color: #fff;
@@ -18,6 +19,7 @@
     text-decoration: none;
     padding: 0px 20px;
     font-weight: 500;
+    font-family: Montserrat;
 }
 .offcanvas.show:not(.hiding), .offcanvas.showing {
     transform: none;

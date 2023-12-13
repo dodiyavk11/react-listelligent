@@ -17,6 +17,7 @@ import Signup from "./Pages/Auth/Signup";
 import Agentsignupform from "./Pages/Agents/Agentsignupform";
 import Protectedrout from "./Pages/Admin/Protectedrout";
 import Agentsview from "./Pages/Admin/Agentsview";
+import Agentdashboard from "./Pages/Agents/Agentdashboard";
 
 function App() {
   return (
@@ -39,6 +40,8 @@ function App() {
           <Route path="admin/dashboard" element={<Protectedrout Component={Dashboard} />} />
           <Route path="admin/icons" element={<Protectedrout Component={Icons} />} />
           <Route path="admin/agentsview" element={<Protectedrout Component={Agentsview} />} />
+
+          <Route path="agentDashboard" element={<Agentdashboard />} />
 
           <Route path="*" element={<Nopage />} />
         </Routes>
