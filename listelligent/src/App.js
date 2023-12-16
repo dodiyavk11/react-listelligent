@@ -18,6 +18,7 @@ import Agentsignupform from "./Pages/Agents/Agentsignupform";
 import Protectedrout from "./Pages/Admin/Protectedrout";
 import Agentsview from "./Pages/Admin/Agentsview";
 import Agentdashboard from "./Pages/Agents/Agentdashboard";
+import Myproposals from "./Pages/Agents/Myproposals";
 
 function App() {
   return (
@@ -42,6 +43,7 @@ function App() {
           <Route path="admin/agentsview" element={<Protectedrout Component={Agentsview} />} />
 
           <Route path="agentDashboard" element={<Agentdashboard />} />
+          <Route path="myProposal" element={<Myproposals />} />
 
           <Route path="*" element={<Nopage />} />
         </Routes>

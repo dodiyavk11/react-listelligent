@@ -1,0 +1,520 @@
+.proposel-header {
+    background-color: #ff8651;
+    padding: 10px 0px;
+}
+
+.seller-tab {
+    font-family: Montserrat !important;
+    font-size: 12px !important;
+    color: #fff !important;
+    padding: 10px 30px !important;
+    border-radius: 50px !important;
+    min-height: 20px !important;
+    font-weight: 600 !important;
+}
+
+.buyer-tab {
+    font-family: Montserrat !important;
+    font-size: 12px !important;
+    color: #fff !important;
+    padding: 10px 30px !important;
+    border-radius: 50px !important;
+    min-height: 20px !important;
+    font-weight: 600 !important;
+}
+
+.seller-archive-tab {
+    font-family: Montserrat !important;
+    font-size: 12px !important;
+    color: #fff !important;
+    padding: 10px 30px !important;
+    border-radius: 50px !important;
+    min-height: 20px !important;
+    font-weight: 600 !important;
+}
+
+.buyer-archive-tab {
+    font-family: Montserrat !important;
+    font-size: 12px !important;
+    color: #fff !important;
+    padding: 10px 30px !important;
+    border-radius: 50px !important;
+    min-height: 20px !important;
+    font-weight: 600 !important;
+}
+
+.seller-tab:hover {
+    background-color: #e66832 !important;
+}
+
+.buyer-tab:hover {
+    background-color: #e66832 !important;
+}
+
+.seller-archive-tab:hover {
+    background-color: #e66832 !important;
+}
+
+.buyer-archive-tab:hover {
+    background-color: #e66832 !important;
+}
+
+.proposal-header-tabs .Mui-selected {
+    background-color: #fff !important;
+    color: black !important;
+}
+
+.proposal-header-tabs .MuiTabs-indicator {
+    background-color: transparent !important;
+}
+
+
+
+.myseller-proposal-tem {
+    display: flex;
+    border: 1px solid #cdcdcd;
+    padding: 20px;
+    border-radius: 7px;
+    width: 100%;
+}
+
+.myseller-proposal-tem-content {
+    width: 50%;
+}
+
+.myseller-proposal-tem-btn {
+    width: 50%;
+    display: flex;
+    justify-content: end;
+    align-items: center;
+}
+
+.myseller-proposal-tem-content :nth-child(1) {
+    color: #919191;
+    margin: 0px 30px 0px 0px;
+    font-size: 16px;
+}
+
+span.myproposal-tem-status {
+    color: #5cbe85;
+    border: 1px solid #5cbe85;
+    border-radius: 15px;
+    padding: 1px 10px;
+    font-size: 12px;
+}
+
+.myseller-proposal-tem-btn button {
+    background-color: transparent;
+    border: 1px solid #FF6C2C;
+    color: #FF6C2C;
+    border-radius: 50px;
+}
+
+.myseller-proposal-tem-btn button:hover {
+    background-color: transparent;
+    border: 1px solid #FF6C2C;
+    color: #FF6C2C;
+}
+
+
+
+.filters-container {
+    margin: 30px 0px;
+}
+
+.urgent-filters {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.urgent-filters span {
+    color: #919191;
+    font-size: 14px;
+    font-family: Montserrat;
+}
+
+.urgent-filters button {
+    background-color: #e66832;
+    border-radius: 50px;
+    padding: 6px 30px;
+    font-size: 13px;
+    border: none;
+}
+
+.urgent-filters button:hover {
+    background-color: #e66832;
+}
+
+.status-filters {
+    display: flex;
+    align-items: center;
+}
+
+.status-filters span {
+    color: #919191;
+    font-size: 14px;
+    font-family: Montserrat;
+}
+
+.status-filters button {
+    background-color: #e66832;
+    padding: 6px 30px;
+    font-size: 13px;
+    border: none;
+    border-radius: 10px 0px 10px 0px;
+    margin: 0px 5px;
+}
+
+.status-filters button:hover {
+    background-color: #e66832;
+}
+
+
+
+.main-container {
+    margin: 30px 0px;
+    max-height: 800px;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 0 5px 5px rgba(56, 137, 235, .1);
+    height: 800px;
+}
+
+.proposal-list-card {
+    box-shadow: 0px 0px 4px #bdbdbd;
+    padding: 20px;
+}
+
+.status-tag {
+    border: 1px solid rgba(245, 127, 23, .05);
+    padding: 2px 8px;
+    border-radius: 20px;
+    font-size: 12px;
+    background: rgba(245, 127, 23, .1);
+    color: #f57f17;
+    font-weight: 700;
+    font-family: Montserrat;
+    cursor: pointer;
+}
+
+.proposal-list-card h3 {
+    font-family: Montserrat;
+    font-size: 22px;
+    font-weight: 600;
+}
+
+.address {
+    margin: 0;
+    font-family: Montserrat;
+    color: rgba(63, 70, 80, .5);
+    font-weight: 600;
+    font-size: 14px;
+}
+
+.submited-date {
+    font-size: 13px;
+    font-weight: 600;
+    color: #d3d4d7;
+}
+
+/* Right-side-content */
+.client-details {
+    width: 100%;
+    display: flex;
+    padding: 30px;
+}
+
+.client-details-heading {
+    width: 50%;
+    display: flex;
+    align-items: center;
+}
+
+.client-details-btn {
+    width: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: end;
+}
+
+.client-details-heading h3 {
+    font-family: Montserrat;
+    font-weight: 600;
+    font-size: 25px;
+    margin: 0;
+}
+
+.client-details-btn button {
+    background-color: transparent;
+    border: 1px solid #dedede;
+    color: #FF6C2C;
+    padding: 6px 40px;
+    border-radius: 30px;
+}
+
+.client-details-btn button:hover {
+    background-color: transparent;
+    border: 1px solid #dedede;
+    color: #FF6C2C;
+}
+
+.activityFeed-tab {
+    font-family: Montserrat !important;
+    font-weight: 700 !important;
+    font-size: 14px !important;
+}
+
+.ProposalOver-tab {
+    font-family: Montserrat !important;
+    font-weight: 700 !important;
+    font-size: 14px !important;
+}
+
+.PropertyInfo-tab {
+    font-family: Montserrat !important;
+    font-weight: 700 !important;
+    font-size: 14px !important;
+}
+
+.Documents-tab {
+    font-family: Montserrat !important;
+    font-weight: 700 !important;
+    font-size: 14px !important;
+}
+
+.client-detail-tab-contant .Mui-selected {
+    color: #FF6C2C !important;
+}
+
+.client-detail-tab-contant .MuiTabs-indicator {
+    background-color: #FF6C2C !important;
+}
+
+.client-filters {
+    width: 100%;
+    display: flex;
+}
+
+.client-filters-tabs {
+    width: 75%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.client-filters-btn {
+    width: 25%;
+    display: flex;
+    justify-content: end;
+    align-items: center;
+}
+
+.client-filters-tabs span {
+    color: #919191;
+    font-size: 14px;
+    font-family: Montserrat;
+}
+
+.client-filters-tabs button {
+    font-family: Montserrat;
+    padding: 5px 15px;
+    border-radius: 50px;
+    background-color: transparent;
+    color: #000;
+    font-weight: 600;
+    border: none;
+}
+
+.client-filters-tabs button:hover {
+    background-color: #FF6C2C;
+}
+
+.client-filters-btn button {
+    font-family: Montserrat;
+    background-color: transparent;
+    color: #000;
+    border: 1px solid #e7e7e7;
+    border-radius: 50px;
+    padding: 7px 30px;
+    font-weight: 500;
+}
+
+.client-filters-btn button:hover {
+    background-color: #ffae8c;
+    border: 1px solid #f75c19;
+    color: #fff;
+}
+
+.commission h3 {
+    font-family: Montserrat;
+    margin: 0;
+    color: #f57f17;
+}
+
+.commission p {
+    font-family: Montserrat;
+    margin: 0;
+    font-weight: 600;
+}
+
+.commission button {
+    font-family: Montserrat;
+    border: 1px solid #FF6C2C;
+    border-radius: 25px;
+    color: #FF6C2C;
+    background-color: transparent;
+    font-size: 15px;
+    font-weight: 600;
+}
+
+.commission button:hover {
+    background-color: transparent;
+    border: 1px solid #FF6C2C;
+    color: #FF6C2C;
+}
+
+.services {
+    margin: 35px 0px 0px 0px;
+}
+
+.services h3 {
+    font-family: Montserrat;
+    font-size: 25px;
+    font-weight: 600;
+}
+
+.services h3 svg {
+    color: #FF6C2C;
+    font-size: 30px;
+    margin: 0px 15px 0px 0px;
+}
+
+.services-option {
+    border-bottom: 1px solid #b9b9b9;
+    padding: 15px 0px;
+}
+
+.services-option :nth-child(1) span {
+    font-family: Montserrat;
+    font-size: 16px;
+    font-weight: 600;
+}
+
+.services-option :nth-child(2) span {
+    color: #FF6C2C;
+    font-family: Montserrat;
+    font-size: 16px;
+    font-weight: 600;
+}
+
+.property-info h1 {
+    font-family: Montserrat;
+    font-size: 24px;
+}
+
+.property-info h4 {
+    font-family: Montserrat;
+    font-size: 28px;
+    margin: 15px 0px 0px 0px;
+    color: #FF6C2C;
+}
+
+.property-info span {
+    font-family: Montserrat;
+    font-size: 15px;
+    font-weight: 500;
+}
+
+.property-info-menu {
+    display: flex;
+    align-items: center;
+    border-bottom: 1px solid #afafaf;
+    padding: 13px 0px;
+}
+
+.property-info-menu svg {
+    font-size: 16px;
+    margin: 0px 10px 0px 0px;
+    color: #FF6C2C;
+}
+
+.property-info-menu span {
+    font-size: 16px;
+    font-weight: 600;
+}
+
+.property-info-box {
+    border: 1px solid;
+    border-radius: 5px;
+    padding: 20px 30px;
+}
+
+.property-info-box h5 {
+    color: #FF6C2C;
+    font-family: Montserrat;
+    font-size: 25px;
+}
+
+.property-info-box p {
+    font-family: Montserrat;
+    font-size: 15px;
+}
+
+.admin-name p {
+    font-family: Montserrat;
+    font-size: 14px;
+}
+
+.property-doc svg {
+    font-size: 25px;
+    color: #FF6C2C;
+    margin: 0px 10px 0px 0px;
+}
+
+.property-doc span {
+    font-size: 18px;
+    font-family: Montserrat;
+    font-weight: 600;
+}
+.listing-input {
+    padding: 15px;
+    border: 1px solid #bdbdbd;
+    border-radius: 5px;
+    margin: 25px 0px;
+    display: flex;
+    align-items: center;
+}
+.listing-input p {
+    font-family: Montserrat;
+    font-size: 16px;
+    margin: 0;
+    font-weight: 600;
+}
+.file-input {
+    width: 20%;
+}
+.file-input__input {
+    width: 0.1px;
+    height: 0.1px;
+    opacity: 0;
+    overflow: hidden;
+    position: absolute;
+    z-index: -1;
+}
+.file-input__label {
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    border-radius: 20px;
+    font-size: 14px;
+    font-weight: 600;
+    color: #fff;
+    font-size: 10px;
+    padding: 4px 12px;
+    background-color: #FF6C2C;
+    box-shadow: 0px 0px 2px rgba(0, 0, 0, 0.25);
+}
+.file-input__label svg{
+    color: #fff;
+}

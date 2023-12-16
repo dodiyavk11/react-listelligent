@@ -48,3 +48,8 @@
 .nav-link:focus{
     color: #fff !important;
 }
+
+.proposel-header {
+    background-color: antiquewhite;
+    padding: 10px 0px;
+}

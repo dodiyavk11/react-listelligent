@@ -11,7 +11,7 @@ const Agentheader = () => {
     return (
         <>
             {['xl'].map((expand) => (
-                <Navbar key={expand} expand={expand} className="bg-body-tertiary mb-3">
+                <Navbar key={expand} expand={expand} className="bg-body-tertiary">
                     <Container>
                         <Navbar.Brand href="/agentDashboard">Listelligent</Navbar.Brand>
                         <Navbar.Toggle aria-controls={`offcanvasNavbar-expand-${expand}`} />
@@ -31,7 +31,7 @@ const Agentheader = () => {
                                     <Link to={'#'}>My Proposals</Link>
                                     <NavDropdown className='dropdownmenu' title="User Name" id={`offcanvasNavbarDropdown-expand-${expand}`}>
                                         <NavDropdown.Item href="/agentDashboard">Dashboard</NavDropdown.Item>
-                                        <NavDropdown.Item href="#">My Proposals</NavDropdown.Item>
+                                        <NavDropdown.Item href="/myProposal">My Proposals</NavDropdown.Item>
                                         <NavDropdown.Item href="#">My Performance</NavDropdown.Item>
                                         <NavDropdown.Item href="#">My Profile</NavDropdown.Item>
                                         <NavDropdown.Item href="#">Account</NavDropdown.Item>

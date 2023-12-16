@@ -156,9 +156,9 @@ const Agentdashboard = () => {
                         <Col md={12}>
                             <Box sx={{ width: '100%' }}>
                                 <Box>
-                                    <Tabs value={value} onChange={handleChange} aria-label="basic tabs example">
-                                        <Tab label="SELLERS" {...a11yProps(0)} />
-                                        <Tab label="BUYERS" {...a11yProps(1)} />
+                                    <Tabs className="dashboard-tabs" value={value} onChange={handleChange} aria-label="basic tabs example">
+                                        <Tab className="seller-btn" label="SELLERS" {...a11yProps(0)} />
+                                        <Tab className="buyer-btn" label="BUYERS" {...a11yProps(1)} />
                                     </Tabs>
                                 </Box>
 
@@ -392,7 +392,7 @@ const Agentdashboard = () => {
                                 <p>Profile</p>
                                 <div>
                                     <CircularProgressWithLabel value={progress} />
-                                    <p>Your agent profile strength is 100%. Keep your profile up to date to increase chance of winning.</p>
+                                    <p><span>Your agent profile strength is 100%. Keep your profile up to date to increase chance of winning.</span></p>
                                     <Button>Edit Profile<GoArrowRight /></Button>
                                 </div>
                             </div>
