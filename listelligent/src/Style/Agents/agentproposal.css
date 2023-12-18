@@ -227,8 +227,17 @@ span.myproposal-tem-status {
 
 .client-details-heading {
     width: 50%;
-    display: flex;
     align-items: center;
+}
+.client-details-heading svg{
+    color: #FF6C2C;
+    font-size: 20px;
+    margin: 0px 10px 0px 0px;
+}
+
+.client-details-heading span{
+    font-family: Montserrat;
+    margin: 0px 10px 0px 0px;
 }
 
 .client-details-btn {

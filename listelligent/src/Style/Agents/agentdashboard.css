@@ -54,6 +54,7 @@
     background-color: rgb(228, 228, 228) !important;
     font-weight: 700 !important;
 }
+
 .buyer-btn {
     border-radius: 0px 50px 50px 0px !important;
     padding: 10px 40px !important;
@@ -161,29 +162,35 @@ button.load-more-btn.btn.btn-primary {
     border-radius: 6px;
     margin: 50px 0px;
 }
+
 .seller-proposal-tem {
     display: flex;
     justify-content: space-between;
     padding: 30px;
     border-right: 1px solid #bdbdbd;
 }
+
 .seller-proposal-tem h5 {
     font-family: Montserrat;
     font-size: 20px;
     font-weight: 700;
 }
+
 .seller-proposal-tem span {
     font-family: Montserrat;
     font-size: 18px;
     font-weight: 600;
 }
+
 .seller-proposal-tem span svg {
     font-size: 20px;
     color: #5dbe82;
 }
+
 .seller-proposal-tem p {
     margin: 0;
 }
+
 .tem-status {
     font-size: 13px;
     color: #5cbe85;
@@ -193,9 +200,11 @@ button.load-more-btn.btn.btn-primary {
     font-weight: 700;
     margin: 0px 0px 10px 0px !important;
 }
-.tem-status-content p{
+
+.tem-status-content p {
     text-align: end;
 }
+
 .seller-tem button {
     background-color: transparent;
     border: 1px solid #FF6C2C;
@@ -203,17 +212,27 @@ button.load-more-btn.btn.btn-primary {
     padding: 4px 25px;
     color: #FF6C2C;
 }
-.seller-tem button:hover{
+
+.seller-tem button:hover {
     background-color: transparent;
     color: #FF6C2C;
     border: 1px solid #FF6C2C;
 }
-.box-shadow{
+
+.box-shadow {
     box-shadow: 0px 0px 4px #bdbdbd;
 }
-.buyer-proposal-tem{
+
+.buyer-proposal-tem {
     padding: 30px;
 }
+
+.buyer-proposal-tem h5 {
+    font-family: Montserrat;
+    font-size: 20px;
+    font-weight: 700;
+}
+
 .progressbar {
     margin: 0;
     font-family: Montserrat;
@@ -223,17 +242,20 @@ button.load-more-btn.btn.btn-primary {
 }
 
 
-.performance-container{
+.performance-container {
     margin: 50px 0px;
 }
+
 .performance-container h5 {
     font-family: Montserrat;
     font-size: 20px;
     font-weight: 600;
 }
-.performance-container p{
+
+.performance-container p {
     font-family: Montserrat;
 }
+
 .performance-card {
     box-shadow: 0px 0px 4px #bdbdbd;
     border-bottom: 3px solid #e84a50;
@@ -241,49 +263,59 @@ button.load-more-btn.btn.btn-primary {
     border-radius: 4px;
     height: 295px;
 }
+
 .performance-card-top {
     padding: 40px 20px 0px 20px;
     height: 170px;
 }
+
 .performance-card-top span {
     border-radius: 50px;
     padding: 20px;
     background-color: #ffe9df;
 }
-.performance-card-top span svg{
+
+.performance-card-top span svg {
     font-size: 20px;
     color: #FF6C2C;
 }
+
 .performance-card-top h5 {
     font-size: 16px;
     font-weight: 600;
     margin: 30px 0px 0px 0px;
     font-family: Montserrat;
 }
+
 .performance-card-top p {
     font-size: 13px;
     margin: 5px 0px 0px 0px;
     color: #4b5c75;
 }
+
 .performance-card-bottom {
-    background: rgba(232,74,80,.03);
+    background: rgba(232, 74, 80, .03);
     padding: 10px 20px;
     height: 128px;
 }
+
 .performance-card-bottom h1 {
     font-family: Montserrat;
     color: #e84a50;
     font-weight: 700;
     font-size: 32px;
 }
+
 .performance-card-bottom p {
     font-family: Montserrat;
     font-size: 17px;
 }
-.performance-card-bottom p svg{
+
+.performance-card-bottom p svg {
     color: #e84a50;
     margin: 0px 10px 0px 0px;
 }
+
 .last-performance-card {
     box-shadow: 0px 0px 4px #bdbdbd;
     border-bottom: 3px solid #e84a50;
@@ -291,82 +323,96 @@ button.load-more-btn.btn.btn-primary {
     border-radius: 4px;
     height: 295px;
 }
+
 .last-performance-card span {
     border-radius: 50px;
     padding: 20px;
     background-color: #ffe9df;
     margin: 50px 0px;
 }
-.last-performance-card span svg{
+
+.last-performance-card span svg {
     font-size: 20px;
     color: #FF6C2C;
 }
+
 .last-performance-card-icon {
     display: flex;
     justify-content: center;
     align-items: center;
 }
-.last-performance-card-btn button{
+
+.last-performance-card-btn button {
     background-color: transparent;
     color: #FF6C2C;
     font-family: Montserrat;
     font-weight: 600;
     border: none;
 }
-.last-performance-card-btn button:hover{
+
+.last-performance-card-btn button:hover {
     background-color: transparent;
     color: #FF6C2C;
 }
 
 
-.profile{
+.profile {
     margin: 50px 0px;
 }
-.profile h3{
+
+.profile h3 {
     font-family: Montserrat;
     font-size: 20px;
     font-weight: 600;
 }
-.profile-card{
+
+.profile-card {
     box-shadow: 0px 0px 4px #bdbdbd;
     padding: 20px;
     border-radius: 7px;
 }
-.status-card{
+
+.status-card {
     box-shadow: 0px 0px 4px #bdbdbd;
     padding: 20px;
     border-radius: 7px;
 }
+
 .status-card p {
     margin: 0;
     font-family: Montserrat;
     font-size: 16px;
     font-weight: 600;
 }
+
 .status-card p span {
     font-family: Montserrat;
     font-size: 14px;
     font-weight: 400;
     color: #3f4650;
 }
+
 .status-card input {
     width: 50%;
-    background-color: rgba(56,137,235,.1019607843);
+    background-color: rgba(56, 137, 235, .1019607843);
     border: none;
     height: 32px;
     border-radius: 6px;
     padding: 10px;
 }
-.profile-card p{
+
+.profile-card p {
     font-family: Montserrat;
     font-size: 16px;
     font-weight: 600;
 }
-.profile-card p span{
+
+.profile-card p span {
     font-family: Montserrat;
     font-size: 14px;
     font-weight: 400;
 }
+
 .profile-card button {
     background-color: transparent;
     color: #FF6C2C;
@@ -374,7 +420,114 @@ button.load-more-btn.btn.btn-primary {
     font-weight: 600;
     border: none;
 }
-.profile-card button:hover{
+
+.profile-card button:hover {
     background-color: transparent;
     color: #FF6C2C;
+}
+
+
+
+@media(max-width: 1224px) {
+    .proposal_search_form {
+        margin: 0px 0px 20px 0px;
+    }
+    .seller-proposals h5 {
+        font-size: 16px;
+    }
+    .seller-proposals p {
+        margin: 7px 0px;
+        font-size: 13px;
+    }
+    .card-btn {
+        text-align: center;
+    }
+    .leave-btn.btn {
+        font-size: 12px;
+        width: 100%;
+        margin: 0px 0px 10px 0px;
+    }
+    .view-proposal {
+        font-size: 12px;
+        width: 100%;
+    }
+    .seller-proposals {
+        height: 310px;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-around;
+    }
+    .seller-proposal-tem h5 {
+        font-size: 16px;
+    }
+    .seller-proposal-tem span {
+        font-size: 14px;
+    }
+    .seller-proposal-tem span svg {
+        font-size: 18px;
+    }
+    .tem-status {
+        font-size: 10px;
+    }
+    .seller-tem button {
+        padding: 4px 16px;
+        font-size: 13px;
+    }
+    .buyer-proposal-tem h5 {
+        font-family: Montserrat;
+        font-size: 16px;
+        font-weight: 700;
+    }
+    .progressbar {
+        font-size: 12px;
+    }
+    .performance-card {
+        margin: 15px 0px;
+    }
+}
+
+
+
+@media(max-width: 767px){
+    .filters-menu-container {
+        display: unset;
+    }
+    .filters-menu {
+        width: 100%;
+        display: inline-block;
+    }
+    .seller-proposals {
+        margin: 15px 0px;
+    }
+    .seller-proposal-tem {
+        display: unset;
+        padding: 15px 10px;
+        border-right: 0px solid #bdbdbd;
+        text-align: center;
+    }
+    .seller-proposal-left {
+        width: 100%;
+    }
+    .tem-status-content {
+        width: 100%;
+    }
+    .buyer-proposal-tem {
+        padding: 15px 10px;
+        text-align: center;
+    }
+    .tem-status-content p {
+        text-align: center;
+    }
+    .border1{
+        border-bottom: 1px solid;
+    }
+    .seller-tem button {
+        margin: 10px 0px;
+    }
+    .box-shadow {
+        margin: 0px 0px;
+    }
+    .status-card {
+        margin: 20px 0px;
+    }
 }

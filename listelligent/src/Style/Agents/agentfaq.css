@@ -1,0 +1,78 @@
+.faq-header-container {
+    background-color: #FF6C2C;
+    padding: 90px 0px;
+}
+.faq-header h3 {
+    font-family: Montserrat;
+    text-align: center;
+    color: #fff;
+    font-weight: 600;
+    margin: 0px 0px 20px 0px;
+}
+
+.bread-crums-container{
+    box-shadow: 0px 0px 4px #bdbdbd;
+}
+.bread-crums a {
+    font-family: Montserrat;
+    text-decoration: none;
+    color: #000;
+    font-size: 12px;
+    font-weight: 500;
+}
+
+.faq-box {
+    border: 1px solid #c5c5c5;
+    border-radius: 6px;
+    margin: 50px 0px;
+}
+.box-header {
+    padding: 20px 20px 0px 20px;
+}
+.box-header h5 {
+    font-family: Montserrat;
+    font-weight: 500;
+    font-size: 18px;
+}
+.box-content a{
+    text-decoration: none;
+    font-family: Montserrat;
+    padding: 20px 20px 0px 35px;
+    font-weight: 400;
+}
+
+
+.popular-articles h3 {
+    font-family: Montserrat;
+    font-size: 20px;
+    font-weight: 500;
+}
+.popular-articles ul{
+    padding: 0;
+}
+.popular-articles ul li {
+    list-style-type: none;
+    padding: 0px 0px 35px 0px;
+}
+.popular-articles ul li a {
+    text-decoration: none;
+    font-family: Montserrat;
+    font-size: 18px;
+    font-weight: 500;
+}
+
+
+.last-section{
+    margin: 40px 0px;
+}
+.last-section h6 {
+    font-family: Montserrat;
+    font-size: 20px;
+    font-weight: 500;
+}
+.last-section p {
+    font-family: Montserrat;
+    margin: 5px 0px 5px 0px;
+    font-size: 16px;
+    font-weight: 400;
+}

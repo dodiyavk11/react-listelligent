@@ -1,5 +1,5 @@
 import React from 'react';
-import Layout from '../../components/Layouts/Layout';
+import Agentlayout from '../../components/Agent/Agentlayout';
 import '../../Style/Agents/myprofile.css';
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
@@ -34,7 +34,7 @@ const Myprofile = () => {
     const [modalShow, setModalShow] = React.useState(false);
 
     return (
-        <Layout>
+        <Agentlayout>
             <div className='myprofile-conteiner'>
                 <Container>
                     <Row>
@@ -192,7 +192,7 @@ const Myprofile = () => {
                     </Row>
                 </Container>
             </div>
-        </Layout>
+        </Agentlayout>
     )
 }
 

@@ -115,17 +115,17 @@ const Agentdashboard = () => {
 
     return (
         <Agentlayout>
-            <div className='proposal_search_form_container'>
+            <div className='proposal_search_form_container mt-4'>
                 <Container>
                     <Row className='mb-3'>
-                        <Col md={6}>
+                        <Col lg={6}>
                             <div className='proposal_search_form'>
                                 <span>Proposals</span>
                                 <input type='text' placeholder='Search for a Name, Phone #, Email or Address'></input>
                                 <button>Go</button>
                             </div>
                         </Col>
-                        <Col md={6}>
+                        <Col lg={6}>
                             <div className='filters-menu-container'>
                                 <span className='filters-menu'>
                                     <FaChalkboardUser />
@@ -175,7 +175,7 @@ const Agentdashboard = () => {
                                                     <p>14283 Mariana Dr, Poway, CA 92064</p>
                                                     <p>Estimate $637K - $792K</p>
                                                     <p>Submitted on 10/09/2023 12:14 PM</p>
-                                                    <div>
+                                                    <div className='card-btn'>
                                                         <Button className='leave-btn'>Leave Update</Button>
                                                         <Button className='view-proposal'>View Proposal</Button>
                                                     </div>
@@ -191,7 +191,7 @@ const Agentdashboard = () => {
                                                     <p>9838 Apple Tree Dr, San Diego, CA 92124</p>
                                                     <p>Estimate $660K - $819K</p>
                                                     <p>Submitted on 10/03/2023 10:38 AM</p>
-                                                    <div>
+                                                    <div className='card-btn'>
                                                         <Button className='leave-btn'>Leave Update</Button>
                                                         <Button className='view-proposal'>View Proposal</Button>
                                                     </div>
@@ -207,7 +207,7 @@ const Agentdashboard = () => {
                                                     <p>3444 Don Lorenzo Dr, Carlsbad, CA 92010</p>
                                                     <p>Estimate $501K - $800K</p>
                                                     <p>Submitted on 09/28/2023 12:39 PM</p>
-                                                    <div>
+                                                    <div className='card-btn'>
                                                         <Button className='leave-btn'>Leave Update</Button>
                                                         <Button className='view-proposal'>View Proposal</Button>
                                                     </div>
@@ -233,7 +233,7 @@ const Agentdashboard = () => {
                                                     <p>6534 Persa St, Carlsbad, CA 92009</p>
                                                     <p>Estimate $1.65M - $1.79M</p>
                                                     <p>Submitted on 11/28/2023 7:09 AM</p>
-                                                    <div>
+                                                    <div className='card-btn'>
                                                         <Button className='leave-btn'>Leave Update</Button>
                                                         <Button className='view-proposal'>View Proposal</Button>
                                                     </div>
@@ -249,7 +249,7 @@ const Agentdashboard = () => {
                                                     <p>3042 Starry Night Dr, Escondido, CA 92029</p>
                                                     <p>Estimate $1M - $2M</p>
                                                     <p>Submitted on 11/04/2023 11:46 AM</p>
-                                                    <div>
+                                                    <div className='card-btn'>
                                                         <Button className='leave-btn'>Leave Update</Button>
                                                         <Button className='view-proposal'>View Proposal</Button>
                                                     </div>
@@ -265,7 +265,7 @@ const Agentdashboard = () => {
                                                     <p>1172 Ocelot Ave, Chula Vista, CA 91911</p>
                                                     <p>Estimate $470K - $539K</p>
                                                     <p>Submitted on 10/30/2023 7:25 PM</p>
-                                                    <div>
+                                                    <div className='card-btn'>
                                                         <Button className='leave-btn'>Leave Update</Button>
                                                         <Button className='view-proposal'>View Proposal</Button>
                                                     </div>
@@ -287,9 +287,9 @@ const Agentdashboard = () => {
             <div className='template-container'>
                 <Container>
                     <Row className='box-shadow'>
-                        <Col md={6}>
+                        <Col md={6} className='border1'>
                             <div className='seller-proposal-tem'>
-                                <div>
+                                <div className='seller-proposal-left'>
                                     <h5>Seller Proposal Template</h5>
                                     <span><IoIosCheckmarkCircle />Completed</span>
                                 </div>
@@ -327,7 +327,7 @@ const Agentdashboard = () => {
                     </Row>
 
                     <Row>
-                        <Col md={3}>
+                        <Col lg={3}>
                             <div className='performance-card'>
                                 <div className='performance-card-top'>
                                     <span><MdOutlineMessage /></span>
@@ -340,7 +340,7 @@ const Agentdashboard = () => {
                                 </div>
                             </div>
                         </Col>
-                        <Col md={3}>
+                        <Col lg={3}>
                             <div className='performance-card'>
                                 <div className='performance-card-top'>
                                     <span><LuPhoneIncoming /></span>
@@ -353,7 +353,7 @@ const Agentdashboard = () => {
                                 </div>
                             </div>
                         </Col>
-                        <Col md={3}>
+                        <Col lg={3}>
                             <div className='performance-card'>
                                 <div className='performance-card-top'>
                                     <span><MdOutlineSettingsPhone /></span>
@@ -366,7 +366,7 @@ const Agentdashboard = () => {
                                 </div>
                             </div>
                         </Col>
-                        <Col md={3}>
+                        <Col lg={3}>
                             <div className='last-performance-card'>
                                 <div className='last-performance-card-icon'><span><IoIosMore /></span></div>
                                 <div className='last-performance-card-btn'><Button>Show all metrics<GoArrowRight /></Button></div>

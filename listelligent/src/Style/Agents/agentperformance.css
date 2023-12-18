@@ -1,0 +1,162 @@
+.performance h3 {
+    font-family: Montserrat;
+    font-size: 18px;
+    font-weight: 600;
+}
+.performance p {
+    font-family: Montserrat;
+    font-size: 16px;
+    font-weight: 400;
+}
+.performance-box h6{
+    font-family: Montserrat;
+    font-size: 18px;
+    font-weight: 600;
+}
+.performance-box p {
+    font-family: Montserrat;
+    font-size: 16px;
+    font-weight: 400;
+}
+.needs-attention h3 {
+    font-family: Montserrat;
+    font-size: 18px;
+    font-weight: 600;
+}
+.performance-box {
+    border: 1px solid #efefef;
+    padding: 20px;
+    border-radius: 7px;
+    box-shadow: 0px 0px 4px #bdbdbd;
+    margin: 20px 0px;
+}
+.average-div {
+    display: flex;
+    align-items: center;
+}
+.action-wrapper {
+    display: flex;
+    justify-content: end;
+}
+.number h4 {
+    font-family: Montserrat;
+    margin: 0;
+    font-size: 27px;
+    color: #dc3545;
+    font-weight: 700;
+}
+.average svg {
+    font-size: 28px;
+    margin: 0px 6px 0px 25px;
+}
+.average span {
+    font-family: Montserrat;
+    margin: 0;
+}
+.action-wrapper svg {
+    font-size: 20px;
+    margin: -4px 8px 0px 0px;
+    color: #ffac87;
+}
+.action-wrapper button {
+    background-color: transparent;
+    color: #8b8b8b;
+    border: 0px;
+    border-radius: 50px;
+    padding: 7px 20px;
+    font-size: 14px;
+    font-weight: 500;
+}
+.action-wrapper button:hover{
+    background-color: #fff0e9;
+    color: #8b8b8b;
+}
+.action-wrapper svg:hover{
+    color: #FF6C2C;
+}
+
+
+.going-well h3 {
+    font-family: Montserrat;
+    font-size: 18px;
+    font-weight: 600;
+}
+.going-well .number h4{
+    color: #33ac2e;
+}
+.going-well .average svg {
+    color: #33ac2e;
+}
+
+
+.locked h3{
+    font-family: Montserrat;
+    font-size: 18px;
+    font-weight: 600;
+}
+.locked .average svg{
+    margin: 0px 10px 0px 0px;
+}
+
+
+.badges{
+    margin: 40px 0px 60px 0px;
+}
+.badge-header h3 {
+    font-family: Montserrat;
+    font-size: 18px;
+    font-weight: 600;
+}
+.badge-header p {
+    font-family: Montserrat;
+    font-size: 16px;
+    font-weight: 500;
+}
+.badge-box {
+    flex-direction: column;
+    align-items: center;
+    display: flex;
+    border: 1px solid #efefef;
+    border-radius: 7px;
+    padding: 25px 20px;
+    height: 250px;
+    justify-content: space-evenly;
+    box-shadow: 0px 0px 4px #bdbdbd;
+}
+.badge-box img {
+    width: 35%;
+}
+.badge-box h4 {
+    font-family: Montserrat;
+    font-size: 20px;
+    font-weight: 600;
+}
+.badge-box p {
+    font-family: Montserrat;
+    text-align: center;
+    font-size: 16px;
+    font-weight: 500;
+}
+
+
+
+@media(max-width: 1224px){
+    .performance-box h6 {
+        font-size: 16px;
+    }
+    .performance-box p {
+        font-size: 14px;
+    }
+    .number h4 {
+        font-size: 22px;
+    }
+    .average span {
+        font-size: 12px;
+    }
+    .badge-box img {
+        width: 15%;
+    }
+    .badge-box {
+        margin: 10px 0px;
+    }
+}
