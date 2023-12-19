@@ -76,3 +76,32 @@
     font-size: 16px;
     font-weight: 400;
 }
+
+
+
+
+@media(max-width: 1224px){
+    .faq-header-container {
+        padding: 20px 0px 90px 0px;
+    }
+}
+
+@media(max-width: 767px){
+    .box-content a {
+        padding: 0px 0px 0px 0px;
+        font-size: 16px;
+    }
+    .box-content {
+        padding: 0px 15px;
+    }
+    .popular-articles ul li {
+        list-style-type: none;
+        padding: 0px 0px 20px 0px;
+    }
+    .popular-articles ul li a {
+        text-decoration: none;
+        font-family: Montserrat;
+        font-size: 16px;
+        font-weight: 500;
+    }
+}

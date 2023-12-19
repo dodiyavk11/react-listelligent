@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import Agentlayout from '../../components/Agent/Agentlayout';
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
@@ -26,6 +26,8 @@ import { PiPiggyBank } from "react-icons/pi";
 import { IoSpeedometerOutline } from "react-icons/io5";
 import { LuClock10 } from "react-icons/lu";
 import { SlCalender } from "react-icons/sl";
+import Form from 'react-bootstrap/Form';
+import Modal from 'react-bootstrap/Modal';
 
 
 // Header-Tabs
@@ -79,6 +81,274 @@ const Myproposals = () => {
     const tabhandleChange = (event, newValue) => {
         tabsetValue(newValue);
     };
+
+
+    // Proposal-list-pagination and data
+    const cardsPerPage = 10;
+    const [currentPage, setCurrentPage] = useState(0);
+
+    const data = [
+        { name: 'Cassandra Szaras', address: '6534 Persa St, Carlsbad, CA 92009', date: '11/28/2023' },
+        { name: 'John Heiler', address: '6534 Persa St, Carlsbad, CA 92009', date: '11/28/2023' },
+        { name: 'Rachel Lannin', address: '6534 Persa St, Carlsbad, CA 92009', date: '11/28/2023' },
+        { name: 'Dalton Hacker', address: '6534 Persa St, Carlsbad, CA 92009', date: '11/28/2023' },
+        { name: 'Svetlana Pritsker', address: '6534 Persa St, Carlsbad, CA 92009', date: '11/28/2023' },
+        { name: 'Bruce, Michelle Enigenburg', address: '6534 Persa St, Carlsbad, CA 92009', date: '11/28/2023' },
+        { name: 'Lucina Firman', address: '6534 Persa St, Carlsbad, CA 92009', date: '11/28/2023' },
+        { name: 'Bernadette Harvey', address: '6534 Persa St, Carlsbad, CA 92009', date: '11/28/2023' },
+        { name: 'Steve Wallace', address: '6534 Persa St, Carlsbad, CA 92009', date: '11/28/2023' },
+        { name: 'Christina Franken', address: '6534 Persa St, Carlsbad, CA 92009', date: '11/28/2023' },
+        { name: 'David', address: '6534 Persa St, Carlsbad, CA 92009', date: '11/28/2023' },
+        { name: 'Frank', address: '6534 Persa St, Carlsbad, CA 92009', date: '11/28/2023' },
+        { name: 'Dorothy', address: '6534 Persa St, Carlsbad, CA 92009', date: '11/28/2023' },
+        { name: 'Josue', address: '6534 Persa St, Carlsbad, CA 92009', date: '11/28/2023' },
+        { name: 'Brian', address: '6534 Persa St, Carlsbad, CA 92009', date: '11/28/2023' },
+        { name: 'Daniel', address: '6534 Persa St, Carlsbad, CA 92009', date: '11/28/2023' },
+    ];
+
+
+    const [modalShow, setModalShow] = React.useState(false);
+
+    const [selectedCard, setSelectedCard] = useState(null);
+
+    const handleClick = (card) => {
+        console.log('Clicked card data:', card);
+        setSelectedCard(card);
+    };
+
+    const renderCards_list = () => {
+        const startIndex = currentPage * cardsPerPage;
+        const endIndex = startIndex + cardsPerPage;
+        return data.slice(startIndex, endIndex).map((card, index) => (
+            <div className='proposal-list-card' key={index} onClick={() => { setModalShow(true); handleClick(card); }}>
+                <p><span className='status-tag'>Submited</span></p>
+                <h3>{card.name}</h3>
+                <p className='address'>{card.address}</p>
+                <p className='submited-date'>Submitted on {card.date}</p>
+            </div>
+        ));
+    };
+
+    const renderSelectedCardDetails = () => {
+        if (selectedCard) {
+            return (
+                <div className='proposal-list-content'>
+
+                    <div className='client-details'>
+                        <div className='client-details-heading'>
+                            <h3>{selectedCard.name}</h3>
+                        </div>
+                        <div className='client-details-btn'>
+                            <Button>Archive</Button>
+                        </div>
+                    </div>
+
+
+                    <Box sx={{ width: '100%' }}>
+                        <Box sx={{ borderBottom: 1, borderColor: 'divider' }} className='client-detail-tab-contant'>
+                            <Tabs value={tabvalue} onChange={tabhandleChange} aria-label="basic tabs example">
+                                <Tab className='activityFeed-tab' label="Activity Feed" {...a11yProps(0)} />
+                                <Tab className='ProposalOver-tab' label="Proposal Overview" {...a11yProps(1)} />
+                                <Tab className='PropertyInfo-tab' label="Property Info" {...a11yProps(2)} />
+                                <Tab className='Documents-tab' label="Documents" {...a11yProps(3)} />
+                            </Tabs>
+                        </Box>
+                        <CustomTabPanel value={tabvalue} index={0} className="p-3">
+                            <div className=''>
+                                <Container>
+                                    <Row>
+                                        <Col md={12}>
+                                            <div className='client-filters'>
+                                                <div className='client-filters-tabs'>
+                                                    <span>Filter:</span>
+                                                    <Button>All</Button>
+                                                    <Button>Clients Activities</Button>
+                                                    <Button>My Notes & Updates</Button>
+                                                    <Button>Advisor</Button>
+                                                </div>
+                                                <div className='client-filters-btn'>
+                                                    <Button>Add Note</Button>
+                                                </div>
+                                            </div>
+                                        </Col>
+                                    </Row>
+                                </Container>
+                            </div>
+                        </CustomTabPanel>
+                        <CustomTabPanel value={tabvalue} index={1} className="p-3">
+                            <div className='commissions'>
+                                <Container>
+                                    <div className='commission'>
+                                        <Row className='align-items-center'>
+                                            <Col md={3}>
+                                                <h3>1.50%</h3>
+                                                <p>Listing Commission</p>
+                                            </Col>
+                                            <Col md={3}>
+                                                <h3>2.00%</h3>
+                                                <p>Buyside Commission</p>
+                                            </Col>
+                                            <Col md={3}>
+                                                <h3>3.50%</h3>
+                                                <p>Total Commission</p>
+                                            </Col>
+                                            <Col md={3}>
+                                                <Button>View Full Proposal</Button>
+                                            </Col>
+                                        </Row>
+                                    </div>
+
+                                    <div className='services'>
+                                        <h3><TiMessages />Services</h3>
+                                        <Row>
+                                            <Col md={6}>
+                                                <div className='services-option d-flex justify-content-between'>
+                                                    <div><span>Professional Photos</span></div>
+                                                    <div><span>Free</span></div>
+                                                </div>
+                                                <div className='services-option d-flex justify-content-between'>
+                                                    <div><span>Home Staging</span></div>
+                                                    <div><span>Extra $</span></div>
+                                                </div>
+                                                <div className='services-option d-flex justify-content-between'>
+                                                    <div><span>Dedicated Website</span></div>
+                                                    <div><span>Free</span></div>
+                                                </div>
+                                                <div className='services-option d-flex justify-content-between'>
+                                                    <div><span>Postcard and Flyers</span></div>
+                                                    <div><span>Free</span></div>
+                                                </div>
+                                            </Col>
+                                            <Col md={6}>
+                                                <div className='services-option d-flex justify-content-between'>
+                                                    <div><span>Video Tour</span></div>
+                                                    <div><span>Free</span></div>
+                                                </div>
+                                                <div className='services-option d-flex justify-content-between'>
+                                                    <div><span>Landscaping</span></div>
+                                                    <div><span>Extra $</span></div>
+                                                </div>
+                                                <div className='services-option d-flex justify-content-between'>
+                                                    <div><span>Realtor.com</span></div>
+                                                    <div><span>Free</span></div>
+                                                </div>
+                                            </Col>
+                                        </Row>
+                                    </div>
+                                </Container>
+                            </div>
+                        </CustomTabPanel>
+                        <CustomTabPanel value={tabvalue} index={2} className="p-3">
+                            <div className='property-info'>
+                                <Container>
+                                    <Row>
+                                        <h1>6534 Persa St, Carlsbad, CA 92009</h1>
+                                        <Col md={6}>
+                                            <h4>$1.65M - $1.79M</h4>
+                                            <span>UpNest Estimate</span>
+
+                                            <div className='property-info-menu'>
+                                                <IoHomeOutline /><span>Single Family</span>
+                                            </div>
+                                            <div className='property-info-menu'>
+                                                <IoIosResize /><span>2432 sqft</span>
+                                            </div>
+                                            <div className='property-info-menu'>
+                                                <LuBath /><span>2 Baths</span>
+                                            </div>
+                                            <div className='property-info-menu'>
+                                                <LiaBedSolid /><span>4 Beds</span>
+                                            </div>
+                                        </Col>
+                                        <Col md={6}>
+                                            <div className='property-info-box'>
+                                                <h5>Showcase your high end home experience!</h5>
+                                                <p>Sellers are ready to prepare their property for the market. They would like to get professional advice on market trends and pricing. They are looking for an agent who can sell quickly for the highest net profit! Adding a video greeting is a HUGE plus!</p>
+                                            </div>
+                                            <div className='mt-3 admin-name'><p><b>Johana Orozco</b> • UpNest Advisor</p></div>
+                                        </Col>
+                                    </Row>
+                                </Container>
+                            </div>
+                        </CustomTabPanel>
+                        <CustomTabPanel value={tabvalue} index={3} className="p-3">
+                            <div className='property-doc'>
+                                <MdOutlineDocumentScanner /><span>Listing Agreement</span>
+                                <div className='listing-input'>
+                                    <div class="file-input">
+                                        <input type="file" name="file-input" id="file-input" class="file-input__input" />
+                                        <label class="file-input__label" for="file-input">
+                                            <MdOutlineFileUpload /><span>Upload file</span>
+                                        </label>
+                                    </div>
+                                    <p>Max file size: 10 MB</p>
+                                </div>
+                            </div>
+
+                            <div className='property-doc'>
+                                <IoNewspaperOutline /><span>Closing Document</span>
+                                <div className='listing-input'>
+                                    <div class="file-input">
+                                        <input type="file" name="file-input" id="file-input" class="file-input__input" />
+                                        <label class="file-input__label" for="file-input">
+                                            <MdOutlineFileUpload /><span>Upload file</span>
+                                        </label>
+                                    </div>
+                                    <p>Max file size: 10 MB</p>
+                                </div>
+                            </div>
+                        </CustomTabPanel>
+                    </Box>
+                </div>
+            );
+        }
+        return null;
+    };
+
+    const nextPage = () => {
+        if ((currentPage + 1) * cardsPerPage < data.length) {
+            setCurrentPage(currentPage + 1);
+        }
+    };
+
+    const previousPage = () => {
+        if (currentPage > 0) {
+            setCurrentPage(currentPage - 1);
+        }
+    };
+
+
+
+    // Popup-Box
+    function MyVerticallyCenteredModal(props) {
+
+        const [isMobile, setIsMobile] = useState(false);
+
+        useEffect(() => {
+            const checkIsMobile = () => {
+                setIsMobile(window.innerWidth <= 767);
+            };
+
+            checkIsMobile();
+            window.addEventListener('resize', checkIsMobile);
+
+            return () => {
+                window.removeEventListener('resize', checkIsMobile);
+            };
+        }, []);
+
+        if (!isMobile) {
+            return null;
+        }
+
+        return (
+            <Modal {...props} aria-labelledby="contained-modal-title-vcenter" centered style={{ maxWidth: '100%', width: '100%', margin: 0 }}>
+                <Modal.Body closeButton>
+                    {renderSelectedCardDetails()}
+                </Modal.Body>
+            </Modal>
+        );
+    }
 
 
     return (
@@ -152,88 +422,61 @@ const Myproposals = () => {
                                         </Container>
                                     </div>
 
+                                    <div className='mobile-view-containt'>
+                                        <Container>
+                                            <Row>
+                                                <div className='mobile-urgency-filter'>
+                                                    <Form>
+                                                        <Form.Group className="mb-3" controlId="formBasicEmail">
+                                                            <Form.Label>Urgency</Form.Label>
+                                                            <Form.Select aria-label="Default select example">
+                                                                <option>All</option>
+                                                                <option value="1">Urgent</option>
+                                                                <option value="2">Important</option>
+                                                            </Form.Select>
+                                                        </Form.Group>
+                                                    </Form>
+                                                </div>
+                                                <div className='mobile-status-filters'>
+                                                    <Form>
+                                                        <Form.Group className="mb-3" controlId="formBasicEmail">
+                                                            <Form.Label>Status</Form.Label>
+                                                            <Form.Select aria-label="Default select example">
+                                                                <option>All</option>
+                                                                <option value="1">Pending</option>
+                                                                <option value="2">Submitted</option>
+                                                                <option value="1">Interviewing</option>
+                                                                <option value="2">Won</option>
+                                                                <option value="1">Listed</option>
+                                                                <option value="2">In Contract</option>
+                                                                <option value="1">Sold</option>
+                                                            </Form.Select>
+                                                        </Form.Group>
+                                                    </Form>
+                                                </div>
+                                            </Row>
+                                        </Container>
+                                    </div>
+
 
                                     <div className='main-container'>
                                         <Container>
                                             <Row>
                                                 <Col md={3} className='p-0'>
                                                     <div className='overflow-auto' style={{ height: "800px" }}>
-                                                        <div className='proposal-list-card'>
-                                                            <p><span className='status-tag'>Submited</span></p>
-                                                            <h3>Cassandra Szaras</h3>
-                                                            <p className='address'>6534 Persa St, Carlsbad, CA 92009</p>
-                                                            <p className='submited-date'>Submitted on 11/28/2023</p>
+                                                        <div className='proposal-list-container'>
+                                                            {renderCards_list()}
+                                                            <MyVerticallyCenteredModal show={modalShow} onHide={() => setModalShow(false)} />
                                                         </div>
-                                                        <div className='proposal-list-card'>
-                                                            <p><span className='status-tag'>Submited</span></p>
-                                                            <h3>Cassandra Szaras</h3>
-                                                            <p className='address'>6534 Persa St, Carlsbad, CA 92009</p>
-                                                            <p className='submited-date'>Submitted on 11/28/2023</p>
-                                                        </div>
-                                                        <div className='proposal-list-card'>
-                                                            <p><span className='status-tag'>Submited</span></p>
-                                                            <h3>Cassandra Szaras</h3>
-                                                            <p className='address'>6534 Persa St, Carlsbad, CA 92009</p>
-                                                            <p className='submited-date'>Submitted on 11/28/2023</p>
-                                                        </div>
-                                                        <div className='proposal-list-card'>
-                                                            <p><span className='status-tag'>Submited</span></p>
-                                                            <h3>Cassandra Szaras</h3>
-                                                            <p className='address'>6534 Persa St, Carlsbad, CA 92009</p>
-                                                            <p className='submited-date'>Submitted on 11/28/2023</p>
-                                                        </div>
-                                                        <div className='proposal-list-card'>
-                                                            <p><span className='status-tag'>Submited</span></p>
-                                                            <h3>Cassandra Szaras</h3>
-                                                            <p className='address'>6534 Persa St, Carlsbad, CA 92009</p>
-                                                            <p className='submited-date'>Submitted on 11/28/2023</p>
-                                                        </div>
-                                                        <div className='proposal-list-card'>
-                                                            <p><span className='status-tag'>Submited</span></p>
-                                                            <h3>Cassandra Szaras</h3>
-                                                            <p className='address'>6534 Persa St, Carlsbad, CA 92009</p>
-                                                            <p className='submited-date'>Submitted on 11/28/2023</p>
-                                                        </div>
-                                                        <div className='proposal-list-card'>
-                                                            <p><span className='status-tag'>Submited</span></p>
-                                                            <h3>Cassandra Szaras</h3>
-                                                            <p className='address'>6534 Persa St, Carlsbad, CA 92009</p>
-                                                            <p className='submited-date'>Submitted on 11/28/2023</p>
-                                                        </div>
-                                                        <div className='proposal-list-card'>
-                                                            <p><span className='status-tag'>Submited</span></p>
-                                                            <h3>Cassandra Szaras</h3>
-                                                            <p className='address'>6534 Persa St, Carlsbad, CA 92009</p>
-                                                            <p className='submited-date'>Submitted on 11/28/2023</p>
-                                                        </div>
-                                                        <div className='proposal-list-card'>
-                                                            <p><span className='status-tag'>Submited</span></p>
-                                                            <h3>Cassandra Szaras</h3>
-                                                            <p className='address'>6534 Persa St, Carlsbad, CA 92009</p>
-                                                            <p className='submited-date'>Submitted on 11/28/2023</p>
-                                                        </div>
-                                                        <div className='proposal-list-card'>
-                                                            <p><span className='status-tag'>Submited</span></p>
-                                                            <h3>Cassandra Szaras</h3>
-                                                            <p className='address'>6534 Persa St, Carlsbad, CA 92009</p>
-                                                            <p className='submited-date'>Submitted on 11/28/2023</p>
-                                                        </div>
-                                                        <div className='proposal-list-card'>
-                                                            <p><span className='status-tag'>Submited</span></p>
-                                                            <h3>Cassandra Szaras</h3>
-                                                            <p className='address'>6534 Persa St, Carlsbad, CA 92009</p>
-                                                            <p className='submited-date'>Submitted on 11/28/2023</p>
-                                                        </div>
-                                                        <div className='proposal-list-card'>
-                                                            <p><span className='status-tag'>Submited</span></p>
-                                                            <h3>Cassandra Szaras</h3>
-                                                            <p className='address'>6534 Persa St, Carlsbad, CA 92009</p>
-                                                            <p className='submited-date'>Submitted on 11/28/2023</p>
+                                                        <div id="pagination-controls">
+                                                            <button className='pagination-prev' onClick={previousPage} disabled={currentPage === 0}>Previous</button>
+                                                            <button className='pagination-next' onClick={nextPage} disabled={(currentPage + 1) * cardsPerPage >= data.length}>Next</button>
                                                         </div>
                                                     </div>
                                                 </Col>
                                                 <Col md={9} className='p-0'>
-                                                    <div className='proposal-list-content'>
+                                                    {renderSelectedCardDetails()}
+                                                    {/* <div className='proposal-list-content'>
 
                                                         <div className='client-details'>
                                                             <div className='client-details-heading'>
@@ -400,7 +643,7 @@ const Myproposals = () => {
                                                                 </div>
                                                             </CustomTabPanel>
                                                         </Box>
-                                                    </div>
+                                                    </div> */}
                                                 </Col>
                                             </Row>
                                         </Container>
@@ -459,87 +702,24 @@ const Myproposals = () => {
                                             <Row>
                                                 <Col md={3} className='p-0'>
                                                     <div className='overflow-auto' style={{ height: "800px" }}>
-                                                        <div className='proposal-list-card'>
-                                                            <p><span className='status-tag'>Submited</span></p>
-                                                            <h3>Cassandra Szaras</h3>
-                                                            <p className='address'>6534 Persa St, Carlsbad, CA 92009</p>
-                                                            <p className='submited-date'>Submitted on 11/28/2023</p>
+                                                        <div className='proposal-list-container'>
+                                                            {renderCards_list()}
+                                                            <MyVerticallyCenteredModal show={modalShow} onHide={() => setModalShow(false)} />
                                                         </div>
-                                                        <div className='proposal-list-card'>
-                                                            <p><span className='status-tag'>Submited</span></p>
-                                                            <h3>Cassandra Szaras</h3>
-                                                            <p className='address'>6534 Persa St, Carlsbad, CA 92009</p>
-                                                            <p className='submited-date'>Submitted on 11/28/2023</p>
-                                                        </div>
-                                                        <div className='proposal-list-card'>
-                                                            <p><span className='status-tag'>Submited</span></p>
-                                                            <h3>Cassandra Szaras</h3>
-                                                            <p className='address'>6534 Persa St, Carlsbad, CA 92009</p>
-                                                            <p className='submited-date'>Submitted on 11/28/2023</p>
-                                                        </div>
-                                                        <div className='proposal-list-card'>
-                                                            <p><span className='status-tag'>Submited</span></p>
-                                                            <h3>Cassandra Szaras</h3>
-                                                            <p className='address'>6534 Persa St, Carlsbad, CA 92009</p>
-                                                            <p className='submited-date'>Submitted on 11/28/2023</p>
-                                                        </div>
-                                                        <div className='proposal-list-card'>
-                                                            <p><span className='status-tag'>Submited</span></p>
-                                                            <h3>Cassandra Szaras</h3>
-                                                            <p className='address'>6534 Persa St, Carlsbad, CA 92009</p>
-                                                            <p className='submited-date'>Submitted on 11/28/2023</p>
-                                                        </div>
-                                                        <div className='proposal-list-card'>
-                                                            <p><span className='status-tag'>Submited</span></p>
-                                                            <h3>Cassandra Szaras</h3>
-                                                            <p className='address'>6534 Persa St, Carlsbad, CA 92009</p>
-                                                            <p className='submited-date'>Submitted on 11/28/2023</p>
-                                                        </div>
-                                                        <div className='proposal-list-card'>
-                                                            <p><span className='status-tag'>Submited</span></p>
-                                                            <h3>Cassandra Szaras</h3>
-                                                            <p className='address'>6534 Persa St, Carlsbad, CA 92009</p>
-                                                            <p className='submited-date'>Submitted on 11/28/2023</p>
-                                                        </div>
-                                                        <div className='proposal-list-card'>
-                                                            <p><span className='status-tag'>Submited</span></p>
-                                                            <h3>Cassandra Szaras</h3>
-                                                            <p className='address'>6534 Persa St, Carlsbad, CA 92009</p>
-                                                            <p className='submited-date'>Submitted on 11/28/2023</p>
-                                                        </div>
-                                                        <div className='proposal-list-card'>
-                                                            <p><span className='status-tag'>Submited</span></p>
-                                                            <h3>Cassandra Szaras</h3>
-                                                            <p className='address'>6534 Persa St, Carlsbad, CA 92009</p>
-                                                            <p className='submited-date'>Submitted on 11/28/2023</p>
-                                                        </div>
-                                                        <div className='proposal-list-card'>
-                                                            <p><span className='status-tag'>Submited</span></p>
-                                                            <h3>Cassandra Szaras</h3>
-                                                            <p className='address'>6534 Persa St, Carlsbad, CA 92009</p>
-                                                            <p className='submited-date'>Submitted on 11/28/2023</p>
-                                                        </div>
-                                                        <div className='proposal-list-card'>
-                                                            <p><span className='status-tag'>Submited</span></p>
-                                                            <h3>Cassandra Szaras</h3>
-                                                            <p className='address'>6534 Persa St, Carlsbad, CA 92009</p>
-                                                            <p className='submited-date'>Submitted on 11/28/2023</p>
-                                                        </div>
-                                                        <div className='proposal-list-card'>
-                                                            <p><span className='status-tag'>Submited</span></p>
-                                                            <h3>Cassandra Szaras</h3>
-                                                            <p className='address'>6534 Persa St, Carlsbad, CA 92009</p>
-                                                            <p className='submited-date'>Submitted on 11/28/2023</p>
+                                                        <div id="pagination-controls">
+                                                            <button className='pagination-prev' onClick={previousPage} disabled={currentPage === 0}>Previous</button>
+                                                            <button className='pagination-next' onClick={nextPage} disabled={(currentPage + 1) * cardsPerPage >= data.length}>Next</button>
                                                         </div>
                                                     </div>
                                                 </Col>
                                                 <Col md={9} className='p-0'>
-                                                    <div className='proposal-list-content'>
+                                                    {renderSelectedCardDetails()}
+                                                    {/* <div className='proposal-list-content'>
 
                                                         <div className='client-details'>
                                                             <div className='client-details-heading'>
                                                                 <h3>Cassandra Szaras</h3>
-                                                                <div className='mt-4 d-flex align-items-center'><FiPhoneOutgoing /><span>(858) 768-1623</span> <MdOutlineMailOutline /><span>jeaniemoua@gmail.com</span></div>
+                                                                <div className='mt-4 d-flex align-items-center'><span><FiPhoneOutgoing />(858) 768-1623</span><br></br><span><MdOutlineMailOutline />jeaniemoua@gmail.com</span></div>
                                                             </div>
                                                             <div className='client-details-btn'>
                                                                 <Button>Archive</Button>
@@ -643,7 +823,7 @@ const Myproposals = () => {
                                                                 </div>
                                                             </CustomTabPanel>
                                                         </Box>
-                                                    </div>
+                                                    </div> */}
                                                 </Col>
                                             </Row>
                                         </Container>
@@ -724,87 +904,24 @@ const Myproposals = () => {
                                             <Row>
                                                 <Col md={3} className='p-0'>
                                                     <div className='overflow-auto' style={{ height: "800px" }}>
-                                                        <div className='proposal-list-card'>
-                                                            <p><span className='status-tag'>Submited</span></p>
-                                                            <h3>Cassandra Szaras</h3>
-                                                            <p className='address'>6534 Persa St, Carlsbad, CA 92009</p>
-                                                            <p className='submited-date'>Submitted on 11/28/2023</p>
+                                                        <div className='proposal-list-container'>
+                                                            {renderCards_list()}
+                                                            <MyVerticallyCenteredModal show={modalShow} onHide={() => setModalShow(false)} />
                                                         </div>
-                                                        <div className='proposal-list-card'>
-                                                            <p><span className='status-tag'>Submited</span></p>
-                                                            <h3>Cassandra Szaras</h3>
-                                                            <p className='address'>6534 Persa St, Carlsbad, CA 92009</p>
-                                                            <p className='submited-date'>Submitted on 11/28/2023</p>
-                                                        </div>
-                                                        <div className='proposal-list-card'>
-                                                            <p><span className='status-tag'>Submited</span></p>
-                                                            <h3>Cassandra Szaras</h3>
-                                                            <p className='address'>6534 Persa St, Carlsbad, CA 92009</p>
-                                                            <p className='submited-date'>Submitted on 11/28/2023</p>
-                                                        </div>
-                                                        <div className='proposal-list-card'>
-                                                            <p><span className='status-tag'>Submited</span></p>
-                                                            <h3>Cassandra Szaras</h3>
-                                                            <p className='address'>6534 Persa St, Carlsbad, CA 92009</p>
-                                                            <p className='submited-date'>Submitted on 11/28/2023</p>
-                                                        </div>
-                                                        <div className='proposal-list-card'>
-                                                            <p><span className='status-tag'>Submited</span></p>
-                                                            <h3>Cassandra Szaras</h3>
-                                                            <p className='address'>6534 Persa St, Carlsbad, CA 92009</p>
-                                                            <p className='submited-date'>Submitted on 11/28/2023</p>
-                                                        </div>
-                                                        <div className='proposal-list-card'>
-                                                            <p><span className='status-tag'>Submited</span></p>
-                                                            <h3>Cassandra Szaras</h3>
-                                                            <p className='address'>6534 Persa St, Carlsbad, CA 92009</p>
-                                                            <p className='submited-date'>Submitted on 11/28/2023</p>
-                                                        </div>
-                                                        <div className='proposal-list-card'>
-                                                            <p><span className='status-tag'>Submited</span></p>
-                                                            <h3>Cassandra Szaras</h3>
-                                                            <p className='address'>6534 Persa St, Carlsbad, CA 92009</p>
-                                                            <p className='submited-date'>Submitted on 11/28/2023</p>
-                                                        </div>
-                                                        <div className='proposal-list-card'>
-                                                            <p><span className='status-tag'>Submited</span></p>
-                                                            <h3>Cassandra Szaras</h3>
-                                                            <p className='address'>6534 Persa St, Carlsbad, CA 92009</p>
-                                                            <p className='submited-date'>Submitted on 11/28/2023</p>
-                                                        </div>
-                                                        <div className='proposal-list-card'>
-                                                            <p><span className='status-tag'>Submited</span></p>
-                                                            <h3>Cassandra Szaras</h3>
-                                                            <p className='address'>6534 Persa St, Carlsbad, CA 92009</p>
-                                                            <p className='submited-date'>Submitted on 11/28/2023</p>
-                                                        </div>
-                                                        <div className='proposal-list-card'>
-                                                            <p><span className='status-tag'>Submited</span></p>
-                                                            <h3>Cassandra Szaras</h3>
-                                                            <p className='address'>6534 Persa St, Carlsbad, CA 92009</p>
-                                                            <p className='submited-date'>Submitted on 11/28/2023</p>
-                                                        </div>
-                                                        <div className='proposal-list-card'>
-                                                            <p><span className='status-tag'>Submited</span></p>
-                                                            <h3>Cassandra Szaras</h3>
-                                                            <p className='address'>6534 Persa St, Carlsbad, CA 92009</p>
-                                                            <p className='submited-date'>Submitted on 11/28/2023</p>
-                                                        </div>
-                                                        <div className='proposal-list-card'>
-                                                            <p><span className='status-tag'>Submited</span></p>
-                                                            <h3>Cassandra Szaras</h3>
-                                                            <p className='address'>6534 Persa St, Carlsbad, CA 92009</p>
-                                                            <p className='submited-date'>Submitted on 11/28/2023</p>
+                                                        <div id="pagination-controls">
+                                                            <button className='pagination-prev' onClick={previousPage} disabled={currentPage === 0}>Previous</button>
+                                                            <button className='pagination-next' onClick={nextPage} disabled={(currentPage + 1) * cardsPerPage >= data.length}>Next</button>
                                                         </div>
                                                     </div>
                                                 </Col>
                                                 <Col md={9} className='p-0'>
-                                                    <div className='proposal-list-content'>
+                                                    {renderSelectedCardDetails()}
+                                                    {/* <div className='proposal-list-content'>
 
                                                         <div className='client-details'>
                                                             <div className='client-details-heading'>
                                                                 <h3>Cassandra Szaras</h3>
-                                                                <div className='mt-4 d-flex align-items-center'><FiPhoneOutgoing /><span>(858) 768-1623</span> <MdOutlineMailOutline /><span>jeaniemoua@gmail.com</span></div>
+                                                                <div className='mt-4 d-flex align-items-center'><span><FiPhoneOutgoing />(858) 768-1623</span><br></br><span><MdOutlineMailOutline />jeaniemoua@gmail.com</span></div>
                                                             </div>
                                                             <div className='client-details-btn'>
                                                                 <Button>Unarchive</Button>
@@ -908,7 +1025,7 @@ const Myproposals = () => {
                                                                 </div>
                                                             </CustomTabPanel>
                                                         </Box>
-                                                    </div>
+                                                    </div> */}
                                                 </Col>
                                             </Row>
                                         </Container>

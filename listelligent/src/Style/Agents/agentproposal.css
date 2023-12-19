@@ -185,6 +185,9 @@ span.myproposal-tem-status {
     box-shadow: 0px 0px 4px #bdbdbd;
     padding: 20px;
 }
+.proposal-list-card:hover{
+    cursor: pointer;
+}
 
 .status-tag {
     border: 1px solid rgba(245, 127, 23, .05);
@@ -217,6 +220,30 @@ span.myproposal-tem-status {
     font-weight: 600;
     color: #d3d4d7;
 }
+#pagination-controls {
+    background: #eee;
+    padding: 20px 10px;
+    display: flex;
+    justify-content: space-evenly;
+}
+.pagination-prev{
+    font-family: Montserrat;
+    border: none;
+    color: #FF6C2C;
+    font-weight: 500;
+}
+.pagination-next {
+    font-family: Montserrat;
+    border: none;
+    color: #FF6C2C;
+    font-weight: 500;
+}
+.pagination-prev[disabled], .pagination-next[disabled] {
+    color: #6a6a6a;
+    font-weight: 400;
+}
+
+
 
 /* Right-side-content */
 .client-details {
@@ -268,6 +295,11 @@ span.myproposal-tem-status {
     color: #FF6C2C;
 }
 
+
+.css-heg063-MuiTabs-flexContainer {
+    display: flex;
+    overflow-x: auto;
+}
 .activityFeed-tab {
     font-family: Montserrat !important;
     font-weight: 700 !important;
@@ -526,4 +558,276 @@ span.myproposal-tem-status {
 }
 .file-input__label svg{
     color: #fff;
+}
+.mobile-view-containt{
+    display: none;
+}
+
+
+
+@media(max-width: 1224px){
+    .proposal-list-container {
+        border-right: 2px solid #e7e7e7;
+    }
+    .myseller-proposal-tem-content{
+        width: 70%;
+    }
+    .myseller-proposal-tem-btn{
+        width: 30%;
+    }
+    .urgent-filters {
+        display: flex;
+        align-items: center;
+        align-content: space-between;
+        flex-wrap: wrap;
+        justify-content: flex-start;
+    }
+    .urgent-filters button {
+        background-color: #e66832;
+        border-radius: 50px;
+        padding: 6px 30px;
+        font-size: 13px;
+        border: none;
+        margin: 5px 0px;
+    }
+    .status-filters {
+        display: flex;
+        align-items: center;
+        align-content: space-between;
+        flex-wrap: wrap;
+        justify-content: flex-end;
+    }
+    .status-filters button {
+        background-color: #e66832;
+        padding: 6px 30px;
+        font-size: 13px;
+        border: none;
+        border-radius: 10px 0px 10px 0px;
+        margin: 5px 5px;
+    }
+
+    .status-tag {
+        border: 1px solid rgba(245, 127, 23, .05);
+        padding: 2px 8px;
+        border-radius: 20px;
+        font-size: 10px;
+        background: rgba(245, 127, 23, .1);
+        color: #f57f17;
+        font-weight: 700;
+        font-family: Montserrat;
+        cursor: pointer;
+    }
+    .proposal-list-card h3 {
+        font-family: Montserrat;
+        font-size: 14px;
+        font-weight: 600;
+    }
+    .address {
+        margin: 0;
+        font-family: Montserrat;
+        color: rgba(63, 70, 80, .5);
+        font-weight: 600;
+        font-size: 12px;
+    }
+    .submited-date {
+        font-size: 11px;
+        font-weight: 600;
+        color: #d3d4d7;
+    }
+    .pagination-next {
+        font-family: Montserrat;
+        border: none;
+        color: #FF6C2C;
+        font-weight: 500;
+        font-size: 13px;
+    }
+    .pagination-prev {
+        font-family: Montserrat;
+        border: none;
+        color: #FF6C2C;
+        font-weight: 500;
+        font-size: 13px;
+    }
+
+    /* Right-side Div */
+    .client-details-heading h3 {
+        font-family: Montserrat;
+        font-weight: 600;
+        font-size: 20px;
+        margin: 0;
+    }
+    .client-details-btn button {
+        background-color: transparent;
+        border: 1px solid #dedede;
+        color: #FF6C2C;
+        padding: 4px 28px;
+        border-radius: 30px;
+        font-size: 14px;
+    }
+    .activityFeed-tab {
+        font-family: Montserrat !important;
+        font-weight: 700 !important;
+        font-size: 10px !important;
+    }
+    .ProposalOver-tab {
+        font-family: Montserrat !important;
+        font-weight: 700 !important;
+        font-size: 10px !important;
+    }
+    .PropertyInfo-tab {
+        font-family: Montserrat !important;
+        font-weight: 700 !important;
+        font-size: 10px !important;
+    }
+    .Documents-tab {
+        font-family: Montserrat !important;
+        font-weight: 700 !important;
+        font-size: 10px !important;
+    }
+
+    .client-filters-tabs button {
+        font-family: Montserrat;
+        padding: 5px 10px;
+        border-radius: 50px;
+        background-color: transparent;
+        color: #000;
+        font-weight: 600;
+        border: none;
+        font-size: 12px;
+    }
+    .client-filters-btn button {
+        font-family: Montserrat;
+        background-color: transparent;
+        color: #000;
+        border: 1px solid #e7e7e7;
+        border-radius: 50px;
+        padding: 7px 22px;
+        font-weight: 500;
+        font-size: 12px;
+    }
+
+    .commission h3 {
+        font-size: 20px;
+    }
+    .commission p {
+        font-size: 12px;
+    }
+    .commission button {
+        border-radius: 5px;
+        font-size: 10px;
+    }
+    .services h3 svg {
+        color: #FF6C2C;
+        font-size: 24px;
+        margin: 0px 10px 0px 0px;
+    }
+    .services h3 {
+        font-size: 20px;
+    }
+    .services-option {
+        padding: 12px 0px;
+    }
+    .services-option :nth-child(1) span {
+        font-size: 14px;
+    }
+    .services-option :nth-child(2) span {
+        font-size: 14px;
+    }
+    .property-info h1 {
+        font-size: 20px;
+    }
+    .property-info h4 {
+        font-size: 20px;
+    }
+    .property-info span {
+        font-size: 13px;
+    }
+    .property-info-box {
+        padding: 10px 18px;
+    }
+    .property-info-box h5 {
+        font-size: 20px;
+    }
+    .property-info-box p {
+        font-size: 13px;
+    }
+    .admin-name p {
+        font-size: 12px;
+    }
+
+    .property-doc svg {
+        font-size: 22px;
+    }
+    .property-doc span {
+        font-size: 16px;
+    }
+    .file-input {
+        width: 38%;
+    }
+    .listing-input p {
+        font-size: 14px;
+    }
+    .client-details-heading > div{
+        display: block !important;
+    }
+    .client-details-heading svg {
+        color: #FF6C2C;
+        font-size: 18px;
+        margin: 0px 1px 0px 0px;
+    }
+    .client-details-heading > div > span {
+        font-size: 16px;
+    }
+    .mobile-view-containt{
+        display: none;
+    }
+}
+
+
+
+@media(max-width: 767px){
+    .myseller-proposal-tem {
+        display: block;
+    }
+    /* .proposal-list-content {
+        display: none;
+    } */
+    .myseller-proposal-tem-content {
+        width: 100%;
+        justify-content: center;
+    }
+    .myseller-proposal-tem-btn {
+        width: 100%;
+        justify-content: center;
+    }
+    .myseller-proposal-tem-content span {
+        display: block;
+        width: 100%;
+        margin: 0px !important;
+    }
+    .main-container {
+        box-shadow: none;
+    }
+    .filters-container {
+        display: none;
+    }
+    .mobile-view-containt {
+        display: block;
+        margin: 30px 5px 0px 0px;
+    }
+    .mobile-urgency-filter {
+        width: 50%;
+    }
+    .mobile-status-filters {
+        width: 50%;
+    }
+    .proposal-list-container {
+        border-right: none;
+    }
+    .proposal-list-card {
+        box-shadow: 0px 0px 4px #bdbdbd;
+        padding: 20px;
+        margin: 10px 5px;
+        border-radius: 5px;
+    }
 }

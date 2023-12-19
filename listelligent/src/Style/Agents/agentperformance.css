@@ -124,7 +124,7 @@
     box-shadow: 0px 0px 4px #bdbdbd;
 }
 .badge-box img {
-    width: 35%;
+    width: 100px;
 }
 .badge-box h4 {
     font-family: Montserrat;
@@ -153,8 +153,12 @@
     .average span {
         font-size: 12px;
     }
-    .badge-box img {
-        width: 15%;
+    .action-wrapper {
+        display: flex;
+        justify-content: space-between;
+    }
+    .action-wrapper button {
+        padding: 7px 10px;
     }
     .badge-box {
         margin: 10px 0px;
