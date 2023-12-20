@@ -32,7 +32,7 @@ const Agentheader = () => {
                                         <NavDropdown.Item href="/myProposal">My Proposals</NavDropdown.Item>
                                         <NavDropdown.Item href="/agentPerformance">My Performance</NavDropdown.Item>
                                         <NavDropdown.Item href="/myAgentProfile">My Profile</NavDropdown.Item>
-                                        <NavDropdown.Item href="#">Account</NavDropdown.Item>
+                                        <NavDropdown.Item href="/agentsAccount">Account</NavDropdown.Item>
                                         <NavDropdown.Item href="/agentsFAQ">Agent FAQ</NavDropdown.Item>
                                         <NavDropdown.Item href="#">Logout</NavDropdown.Item>
                                     </NavDropdown>

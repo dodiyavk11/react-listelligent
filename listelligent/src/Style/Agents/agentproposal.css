@@ -298,7 +298,6 @@ span.myproposal-tem-status {
 
 .css-heg063-MuiTabs-flexContainer {
     display: flex;
-    overflow-x: auto;
 }
 .activityFeed-tab {
     font-family: Montserrat !important;
@@ -562,6 +561,11 @@ span.myproposal-tem-status {
 .mobile-view-containt{
     display: none;
 }
+.mobile-client-filters-tabs{
+    display: none;
+}
+
+
 
 
 
@@ -829,5 +833,123 @@ span.myproposal-tem-status {
         padding: 20px;
         margin: 10px 5px;
         border-radius: 5px;
+    }
+    .client-filters-tabs {
+        display: none;
+    }
+
+
+    /* Model-box */
+    .modal-content {
+        height: 85vh !important;
+    }
+    .modal-body {
+        width: 100% !important;
+    }
+    .client-details {
+        width: 100%;
+        display: block;
+        padding: 0;
+    }
+    .client-details-heading {
+        width: 100%;
+    }
+    .client-details-btn {
+        width: 100%;
+        justify-content: flex-start;
+        margin: 10px 0px 0px 0px;
+    }
+    .client-details-btn button {
+        width: 100%;
+    }
+
+    .activityFeed-tab {
+        font-size: 12px !important;
+    }
+    .ProposalOver-tab {
+        font-size: 12px !important;
+    }
+    .PropertyInfo-tab {
+        font-size: 12px !important;
+    }
+    .Documents-tab {
+        font-size: 12px !important;
+    }
+    
+    .css-19kzrtu {
+        padding: 10px 0px !important;
+    }
+    .form-label {
+        font-family: Montserrat;
+        margin: 0;
+        font-size: 12px;
+        color: #777;
+    }
+    select.form-select {
+        padding: 2px 10px;
+        color: #777;
+        font-family: Montserrat;
+    }
+
+    .client-filters {
+        width: 100%;
+        display: flex;
+        align-items: baseline;
+    }
+    .mobile-client-filters-tabs {
+        display: block;
+        width: 50%;
+    }
+    .client-filters-btn {
+        width: 50%;
+    }
+
+    div#simple-tabpanel-0 {
+        padding: 0 !important;
+        height: 500px !important;
+        overflow: auto;
+    }
+    div#simple-tabpanel-1 {
+        padding: 0 !important;
+        height: 500px !important;
+        overflow: auto;
+    }
+    div#simple-tabpanel-2 {
+        padding: 0 !important;
+        height: 500px !important;
+        overflow: auto;
+    }
+    div#simple-tabpanel-3 {
+        padding: 0 !important;
+        height: 500px !important;
+        overflow: auto;
+    }
+    .commission h3 {
+        font-size: 22px;
+    }
+    .commission p {
+        font-size: 14px;
+        margin: 0px 0px 10px 0px;
+    }
+    .commission button {
+        border-radius: 20px;
+        font-size: 14px;
+        width: 100%;
+        margin: 20px 0px 0px 0px;
+    }
+    .property-info-box {
+        margin: 15px 0px 0px 0px;
+    }
+    .listing-input {
+        padding: 15px;
+    }
+    .file-input {
+        width: 100%;
+    }
+    .property-doc svg {
+        font-size: 20px;
+    }
+    .property-doc span {
+        font-size: 14px;
     }
 }

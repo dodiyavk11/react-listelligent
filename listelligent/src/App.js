@@ -20,6 +20,7 @@ import Agentsview from "./Pages/Admin/Agentsview";
 import Agentdashboard from "./Pages/Agents/Agentdashboard";
 import Myproposals from "./Pages/Agents/Myproposals";
 import Agentperformance from "./Pages/Agents/Agentperformance";
+import Agentaccount from "./Pages/Agents/Agentaccount";
 import Agentsfaq from "./Pages/Agents/Agentsfaq";
 
 function App() {
@@ -47,6 +48,7 @@ function App() {
           <Route path="myProposal" element={<Myproposals />} />
           <Route path="agentPerformance" element={<Agentperformance />} />
           <Route path="myAgentProfile" element={<Myprofile />} />
+          <Route path="agentsAccount" element={<Agentaccount />} />
           <Route path="agentsFAQ" element={<Agentsfaq />} />
 
           <Route path="*" element={<Nopage />} />

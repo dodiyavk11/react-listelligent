@@ -109,18 +109,11 @@ const Myproposals = () => {
 
     const [modalShow, setModalShow] = React.useState(false);
 
-    const [selectedCard, setSelectedCard] = useState(null);
-
-    const handleClick = (card) => {
-        console.log('Clicked card data:', card);
-        setSelectedCard(card);
-    };
-
     const renderCards_list = () => {
         const startIndex = currentPage * cardsPerPage;
         const endIndex = startIndex + cardsPerPage;
         return data.slice(startIndex, endIndex).map((card, index) => (
-            <div className='proposal-list-card' key={index} onClick={() => { setModalShow(true); handleClick(card); }}>
+            <div className='proposal-list-card' key={index} onClick={() => { setModalShow(true); cardClick(card); }}>
                 <p><span className='status-tag'>Submited</span></p>
                 <h3>{card.name}</h3>
                 <p className='address'>{card.address}</p>
@@ -129,14 +122,30 @@ const Myproposals = () => {
         ));
     };
 
-    const renderSelectedCardDetails = () => {
-        if (selectedCard) {
+    const nextPage = () => {
+        if ((currentPage + 1) * cardsPerPage < data.length) {
+            setCurrentPage(currentPage + 1);
+        }
+    };
+    const previousPage = () => {
+        if (currentPage > 0) {
+            setCurrentPage(currentPage - 1);
+        }
+    };
+
+
+    const [sellerSelectedCard, setSellerSelectedCard] = useState(null);
+    const cardClick = (card) => {
+        setSellerSelectedCard(card);
+    };
+    const sellerSelectedCardDetails = () => {
+        if (sellerSelectedCard) {
             return (
                 <div className='proposal-list-content'>
 
                     <div className='client-details'>
                         <div className='client-details-heading'>
-                            <h3>{selectedCard.name}</h3>
+                            <h3>{sellerSelectedCard.name}</h3>
                         </div>
                         <div className='client-details-btn'>
                             <Button>Archive</Button>
@@ -146,7 +155,7 @@ const Myproposals = () => {
 
                     <Box sx={{ width: '100%' }}>
                         <Box sx={{ borderBottom: 1, borderColor: 'divider' }} className='client-detail-tab-contant'>
-                            <Tabs value={tabvalue} onChange={tabhandleChange} aria-label="basic tabs example">
+                            <Tabs value={tabvalue} onChange={tabhandleChange} variant="scrollable" aria-label="basic tabs example">
                                 <Tab className='activityFeed-tab' label="Activity Feed" {...a11yProps(0)} />
                                 <Tab className='ProposalOver-tab' label="Proposal Overview" {...a11yProps(1)} />
                                 <Tab className='PropertyInfo-tab' label="Property Info" {...a11yProps(2)} />
@@ -165,6 +174,19 @@ const Myproposals = () => {
                                                     <Button>Clients Activities</Button>
                                                     <Button>My Notes & Updates</Button>
                                                     <Button>Advisor</Button>
+                                                </div>
+                                                <div className='mobile-client-filters-tabs'>
+                                                    <Form>
+                                                        <Form.Group className="mb-3 d-flex align-items-center">
+                                                            <Form.Label>Filter:</Form.Label>
+                                                            <Form.Select aria-label="Default select example">
+                                                                <option value="1">All</option>
+                                                                <option value="2">Clients Activities</option>
+                                                                <option value="3">My Notes & Updates</option>
+                                                                <option value="4">Advisor</option>
+                                                            </Form.Select>
+                                                        </Form.Group>
+                                                    </Form>
                                                 </div>
                                                 <div className='client-filters-btn'>
                                                     <Button>Add Note</Button>
@@ -305,22 +327,10 @@ const Myproposals = () => {
         return null;
     };
 
-    const nextPage = () => {
-        if ((currentPage + 1) * cardsPerPage < data.length) {
-            setCurrentPage(currentPage + 1);
-        }
-    };
-
-    const previousPage = () => {
-        if (currentPage > 0) {
-            setCurrentPage(currentPage - 1);
-        }
-    };
-
 
 
     // Popup-Box
-    function MyVerticallyCenteredModal(props) {
+    function MobilePopupBox(props) {
 
         const [isMobile, setIsMobile] = useState(false);
 
@@ -344,7 +354,7 @@ const Myproposals = () => {
         return (
             <Modal {...props} aria-labelledby="contained-modal-title-vcenter" centered style={{ maxWidth: '100%', width: '100%', margin: 0 }}>
                 <Modal.Body closeButton>
-                    {renderSelectedCardDetails()}
+                    {sellerSelectedCardDetails()}
                 </Modal.Body>
             </Modal>
         );
@@ -359,7 +369,7 @@ const Myproposals = () => {
                         <Container>
                             <Row>
                                 <Col>
-                                    <Tabs className='proposal-header-tabs align-items-center' value={value} onChange={handleChange} aria-label="basic tabs example">
+                                    <Tabs className='proposal-header-tabs align-items-center' variant="scrollable" value={value} onChange={handleChange} aria-label="basic tabs example">
                                         <Tab className='seller-tab' label="SELLERS" {...a11yProps(0)} />
                                         <Tab className='buyer-tab' label="BUYERS" {...a11yProps(1)} />
                                         <Tab className='seller-archive-tab' label="SELLERS ARCHIVE" {...a11yProps(2)} />
@@ -427,7 +437,7 @@ const Myproposals = () => {
                                             <Row>
                                                 <div className='mobile-urgency-filter'>
                                                     <Form>
-                                                        <Form.Group className="mb-3" controlId="formBasicEmail">
+                                                        <Form.Group className="mb-3">
                                                             <Form.Label>Urgency</Form.Label>
                                                             <Form.Select aria-label="Default select example">
                                                                 <option>All</option>
@@ -439,7 +449,7 @@ const Myproposals = () => {
                                                 </div>
                                                 <div className='mobile-status-filters'>
                                                     <Form>
-                                                        <Form.Group className="mb-3" controlId="formBasicEmail">
+                                                        <Form.Group className="mb-3">
                                                             <Form.Label>Status</Form.Label>
                                                             <Form.Select aria-label="Default select example">
                                                                 <option>All</option>
@@ -466,7 +476,7 @@ const Myproposals = () => {
                                                     <div className='overflow-auto' style={{ height: "800px" }}>
                                                         <div className='proposal-list-container'>
                                                             {renderCards_list()}
-                                                            <MyVerticallyCenteredModal show={modalShow} onHide={() => setModalShow(false)} />
+                                                            <MobilePopupBox show={modalShow} onHide={() => setModalShow(false)} />
                                                         </div>
                                                         <div id="pagination-controls">
                                                             <button className='pagination-prev' onClick={previousPage} disabled={currentPage === 0}>Previous</button>
@@ -475,7 +485,7 @@ const Myproposals = () => {
                                                     </div>
                                                 </Col>
                                                 <Col md={9} className='p-0'>
-                                                    {renderSelectedCardDetails()}
+                                                    {sellerSelectedCardDetails()}
                                                     {/* <div className='proposal-list-content'>
 
                                                         <div className='client-details'>
@@ -704,7 +714,7 @@ const Myproposals = () => {
                                                     <div className='overflow-auto' style={{ height: "800px" }}>
                                                         <div className='proposal-list-container'>
                                                             {renderCards_list()}
-                                                            <MyVerticallyCenteredModal show={modalShow} onHide={() => setModalShow(false)} />
+                                                            <MobilePopupBox show={modalShow} onHide={() => setModalShow(false)} />
                                                         </div>
                                                         <div id="pagination-controls">
                                                             <button className='pagination-prev' onClick={previousPage} disabled={currentPage === 0}>Previous</button>
@@ -713,7 +723,7 @@ const Myproposals = () => {
                                                     </div>
                                                 </Col>
                                                 <Col md={9} className='p-0'>
-                                                    {renderSelectedCardDetails()}
+                                                    {sellerSelectedCardDetails()}
                                                     {/* <div className='proposal-list-content'>
 
                                                         <div className='client-details'>
@@ -906,7 +916,7 @@ const Myproposals = () => {
                                                     <div className='overflow-auto' style={{ height: "800px" }}>
                                                         <div className='proposal-list-container'>
                                                             {renderCards_list()}
-                                                            <MyVerticallyCenteredModal show={modalShow} onHide={() => setModalShow(false)} />
+                                                            <MobilePopupBox show={modalShow} onHide={() => setModalShow(false)} />
                                                         </div>
                                                         <div id="pagination-controls">
                                                             <button className='pagination-prev' onClick={previousPage} disabled={currentPage === 0}>Previous</button>
@@ -915,7 +925,7 @@ const Myproposals = () => {
                                                     </div>
                                                 </Col>
                                                 <Col md={9} className='p-0'>
-                                                    {renderSelectedCardDetails()}
+                                                    {sellerSelectedCardDetails()}
                                                     {/* <div className='proposal-list-content'>
 
                                                         <div className='client-details'>

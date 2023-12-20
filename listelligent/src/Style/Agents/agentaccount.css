@@ -1,0 +1,126 @@
+.account-header-container{
+    box-shadow: 0px 0px 4px #bdbdbd;
+}
+.account-header {
+    padding: 30px 0px;
+}
+.account-header button {
+    font-family: Montserrat;
+    background-color: transparent;
+    color: #FF6C2C;
+    border: 0px;
+    font-size: 16px;
+    font-weight: 600;
+    padding: 0;
+    margin: 0px 0px 15px 0px;
+}
+.account-header button:hover{
+    background-color: transparent;
+    color: #FF6C2C;
+}
+.account-header h1 {
+    font-family: Montserrat;
+    font-size: 26px;
+    font-weight: 600;
+    margin: 0;
+}
+
+
+.account-forms{
+    margin: 40px 0px;
+}
+.acoount-tabs h5 {
+    font-family: Montserrat;
+    font-size: 16px;
+    opacity: .40;
+    font-weight: 600;
+}
+.acoount-tabs ul{
+    padding: 0;
+}
+.acoount-tabs ul li {
+    font-family: Montserrat;
+    list-style: none;
+    font-size: 16px;
+    font-weight: 600;
+    margin: 10px 0px;
+    cursor: pointer;
+    padding: 8px 15px;
+}
+/* .account-content {
+    margin: 28px 0px 0px 0px;
+} */
+
+/* checkbox style */
+.form-check-input {
+    width: 20px !important;
+    height: 20px !important;
+}
+
+
+.service-area-content{
+    display: flex;
+    justify-content: space-between;
+}
+.form-submit-btn-contener {
+    display: flex;
+    justify-content: end;
+    margin: 40px 0px 40px 0px;
+}
+.form-submit-btn {
+    background-color: #FF6C2C;
+    border-radius: 50px;
+    color: #fff;
+    font-family: Montserrat;
+    font-size: 14px;
+    font-weight: 600;
+    border: 0px;
+    padding: 14px 30px;
+}
+.form-submit-btn:hover{
+    background-color: #FF6C2C;
+}
+
+
+
+
+.toggler-wrapper {
+	display: block;
+	width: 45px;
+	height: 25px;
+	cursor: pointer;
+	position: relative;
+}
+.toggler-wrapper input[type="checkbox"] {
+	display: none;
+}
+.toggler-wrapper input[type="checkbox"]:checked+.toggler-slider {
+	background-color: #44cc66;
+}
+.toggler-wrapper .toggler-slider {
+	background-color: #ccc;
+	position: absolute;
+	border-radius: 100px;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	-webkit-transition: all 300ms ease;
+	transition: all 300ms ease;
+}
+.toggler-wrapper .toggler-knob {
+	position: absolute;
+	-webkit-transition: all 300ms ease;
+	transition: all 300ms ease;
+}
+.toggler-wrapper.style-1 input[type="checkbox"]:checked+.toggler-slider .toggler-knob {
+	left: calc(100% - 19px - 3px);
+}
+.toggler-wrapper.style-1 .toggler-knob {
+	width: calc(25px - 6px);
+	height: calc(25px - 6px);
+	border-radius: 50%;
+	left: 3px;
+	top: 3px;
+	background-color: #fff;
+}
