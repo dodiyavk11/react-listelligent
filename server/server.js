@@ -21,7 +21,7 @@ const db = mysql.createConnection({
     host: "localhost",
     user: "root",
     password: "",
-    database: "reactlogin"
+    database: "listelligent"
 });
 
 const verifyUser = (req, res, next) => {
@@ -47,7 +47,7 @@ app.get('/', verifyUser, (req, res) => {
 })
 
 app.post('/signup', (req, res) => {
-    const sql = "INSERT INTO login (`name`, `email`, `password`) VALUES (?)";
+    const sql = "INSERT INTO admin_register (`name`, `email`, `password`) VALUES (?)";
     bcrypt.hash(req.body.password.toString(), salt, (err, hash) => {
         if (err) return res.json({ Error: "Error for hassing password" });
         const values = [
@@ -64,7 +64,7 @@ app.post('/signup', (req, res) => {
 })
 
 app.post('/login', (req, res) => {
-    const sql = "SELECT * FROM login WHERE email = ?";
+    const sql = "SELECT * FROM admin_register WHERE email = ?";
     db.query(sql, [req.body.email], (err, data) => {
         if (err) return res.json({ Error: "Login error in server" });
         if (data.length > 0) {
@@ -96,7 +96,7 @@ app.get('/logout', (req, res) => {
 
 // Agent-SignUp
 app.post('/agentsignupform', (req, res) => {
-    const sql = "INSERT INTO agent_register (`name`, `license`, `license_date`, `mls_id`, `brokerage`, `office_address`, `building`, `zip_code`, `hp_address`, `hp_zip_code`, `hp_sales_price`, `realtor_profile`, `email`) VALUES (?)";
+    const sql = "INSERT INTO agent_data_register (`name`, `license`, `license_date`, `mls_id`, `brokerage`, `office_address`, `building`, `zip_code`, `hp_address`, `hp_zip_code`, `hp_sales_price`, `realtor_profile`, `email`) VALUES (?)";
 
     const values = [
         req.body.name,
@@ -122,7 +122,7 @@ app.post('/agentsignupform', (req, res) => {
 
 
 app.get('/agentsview', (req, res) => {
-    const sql = "SELECT * FROM agent_register";
+    const sql = "SELECT * FROM agent_data_register";
     db.query(sql, (err, result) => {
         if (err) return res.json({ Message: "Error inside agents register server" });
         return res.json(result);
@@ -160,6 +160,21 @@ app.post('/approveAgent', (req, res) => {
             console.log(error);
             return res.status(500).json({ Message: "Error sending email" });
         } else {
+
+            const sql = "INSERT INTO aprooved_agents (`user_name`, `password`) VALUES (?)";
+            bcrypt.hash(genrate_pass.toString(), salt, (err, agent_pass) => {
+                if (err) return res.json({ Error: "Error for hassing password" });
+                const values = [
+                    req.body.email,
+                    agent_pass
+                ]
+
+                db.query(sql, [values], (err, result) => {
+                    if (err) return res.json({ Error: "Inserting data Error in server" });
+                    return res.json({ Status: "Success" });
+                })
+            })
+
             return res.json({ Message: "Email Sent Successfully" });
         }
     });

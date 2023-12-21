@@ -56,6 +56,10 @@ const Agentsview = () => {
 
     const [records, setRecords] = useState(data);
 
+    useEffect(() => {
+        setRecords(data);
+    }, [data]);
+
     function handlefilter(event) {
         const newData = data.filter(row => {
             return row.name.toLowerCase().includes(event.target.value.toLowerCase());
