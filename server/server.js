@@ -96,7 +96,7 @@ app.get('/logout', (req, res) => {
 
 // Agent-SignUp
 app.post('/agentsignupform', (req, res) => {
-    const sql = "INSERT INTO agent_data_register (`name`, `license`, `license_date`, `mls_id`, `brokerage`, `office_address`, `building`, `zip_code`, `hp_address`, `hp_zip_code`, `hp_sales_price`, `realtor_profile`, `email`) VALUES (?)";
+    const sql = "INSERT INTO users (`name`, `license`, `license_date`, `mls_id`, `brokerage`, `office_address`, `building`, `zip_code`, `hp_address`, `hp_zip_code`, `hp_sales_price`, `realtor_profile`, `email`, `role`, `status`, `password`) VALUES (?)";
 
     const values = [
         req.body.name,
@@ -112,6 +112,9 @@ app.post('/agentsignupform', (req, res) => {
         req.body.hp_sales_price,
         req.body.realtor_profile,
         req.body.email,
+        req.body.role,
+        req.body.status,
+        req.body.password,
     ]
 
     db.query(sql, [values], (err, result) => {
@@ -122,7 +125,7 @@ app.post('/agentsignupform', (req, res) => {
 
 
 app.get('/agentsview', (req, res) => {
-    const sql = "SELECT * FROM agent_data_register";
+    const sql = "SELECT * FROM users";
     db.query(sql, (err, result) => {
         if (err) return res.json({ Message: "Error inside agents register server" });
         return res.json(result);
@@ -143,42 +146,42 @@ const transporter = nodemailer.createTransport({
 });
 
 
-app.post('/approveAgent', (req, res) => {
+// app.post('/approveAgent', (req, res) => {
 
-    let genrate_pass = Math.random().toString(36).substring(2, 10);
+//     let genrate_pass = Math.random().toString(36).substring(2, 10);
 
-    var mailOptions = {
-        from: "vishal.besticoder@gmail.com",
-        to: req.body.email,
-        subject: "Your Account",
-        text: `User Name:- ${req.body.email} \n
-        Password:- ${genrate_pass}`
-    }
+//     var mailOptions = {
+//         from: "vishal.besticoder@gmail.com",
+//         to: req.body.email,
+//         subject: "Your Account",
+//         text: `User Name:- ${req.body.email} \n
+//         Password:- ${genrate_pass}`
+//     }
 
-    transporter.sendMail(mailOptions, function (error, info) {
-        if (error) {
-            console.log(error);
-            return res.status(500).json({ Message: "Error sending email" });
-        } else {
+//     transporter.sendMail(mailOptions, function (error, info) {
+//         if (error) {
+//             console.log(error);
+//             return res.status(500).json({ Message: "Error sending email" });
+//         } else {
 
-            const sql = "INSERT INTO aprooved_agents (`user_name`, `password`) VALUES (?)";
-            bcrypt.hash(genrate_pass.toString(), salt, (err, agent_pass) => {
-                if (err) return res.json({ Error: "Error for hassing password" });
-                const values = [
-                    req.body.email,
-                    agent_pass
-                ]
+//             const sql = "INSERT INTO aprooved_agents (`user_name`, `password`) VALUES (?)";
+//             bcrypt.hash(genrate_pass.toString(), salt, (err, agent_pass) => {
+//                 if (err) return res.json({ Error: "Error for hassing password" });
+//                 const values = [
+//                     req.body.email,
+//                     agent_pass
+//                 ]
 
-                db.query(sql, [values], (err, result) => {
-                    if (err) return res.json({ Error: "Inserting data Error in server" });
-                    return res.json({ Status: "Success" });
-                })
-            })
+//                 db.query(sql, [values], (err, result) => {
+//                     if (err) return res.json({ Error: "Inserting data Error in server" });
+//                     return res.json({ Status: "Success" });
+//                 })
+//             })
 
-            return res.json({ Message: "Email Sent Successfully" });
-        }
-    });
-})
+//             return res.json({ Message: "Email Sent Successfully" });
+//         }
+//     });
+// })
 
 
 app.listen(3001, () => {

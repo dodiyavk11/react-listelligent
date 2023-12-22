@@ -129,7 +129,7 @@ const Agentaccount = () => {
                         <Col lg={9}>
                             <div className='account-content'>
                                 <Accordion activeKey={activeTab}>
-                                    <Accordion.Item eventKey="0">
+                                    <Accordion.Item eventKey="0" className='accordian-items'>
                                         <Accordion.Header onClick={() => handleLiClick('0')}>Client Preferences</Accordion.Header>
                                         <Accordion.Body>
                                             <div className='client-preference-content'>
@@ -240,7 +240,7 @@ const Agentaccount = () => {
                                         </Accordion.Body>
                                     </Accordion.Item>
 
-                                    <Accordion.Item eventKey="1">
+                                    <Accordion.Item eventKey="1" className='accordian-items'>
                                         <Accordion.Header onClick={() => handleLiClick('1')}>Contact Info</Accordion.Header>
                                         <Accordion.Body>
                                             <div className='contact-info'>
@@ -271,7 +271,7 @@ const Agentaccount = () => {
                                         </Accordion.Body>
                                     </Accordion.Item>
 
-                                    <Accordion.Item eventKey="2">
+                                    <Accordion.Item eventKey="2"  className='accordian-items'>
                                         <Accordion.Header onClick={() => handleLiClick('2')}>Additional Contact Info</Accordion.Header>
                                         <Accordion.Body>
                                             <div className='additional-contact-info'>
@@ -302,7 +302,7 @@ const Agentaccount = () => {
                                         </Accordion.Body>
                                     </Accordion.Item>
 
-                                    <Accordion.Item eventKey="3">
+                                    <Accordion.Item eventKey="3" className='accordian-items'>
                                         <Accordion.Header onClick={() => handleLiClick('3')}>Password</Accordion.Header>
                                         <Accordion.Body>
                                             <div className='password-accordion'>
@@ -327,7 +327,7 @@ const Agentaccount = () => {
                                         </Accordion.Body>
                                     </Accordion.Item>
 
-                                    <Accordion.Item eventKey="4">
+                                    <Accordion.Item eventKey="4" className='accordian-items'>
                                         <Accordion.Header onClick={() => handleLiClick('4')}>Brokerage Information</Accordion.Header>
                                         <Accordion.Body>
                                             <div className='brokerage-info-contener'>
@@ -401,7 +401,7 @@ const Agentaccount = () => {
                                         </Accordion.Body>
                                     </Accordion.Item>
 
-                                    <Accordion.Item eventKey="5">
+                                    <Accordion.Item eventKey="5" className='accordian-items'>
                                         <Accordion.Header onClick={() => handleLiClick('5')}>Away Status</Accordion.Header>
                                         <Accordion.Body>
                                             <div className='pb-4 away-status-contener border-bottom'>
@@ -437,7 +437,7 @@ const Agentaccount = () => {
                                         </Accordion.Body>
                                     </Accordion.Item>
 
-                                    <Accordion.Item eventKey="6">
+                                    <Accordion.Item eventKey="6" className='accordian-items'>
                                         <Accordion.Header onClick={() => handleLiClick('6')}>Notifications</Accordion.Header>
                                         <Accordion.Body>
                                             <div className='notification border-bottom'>
@@ -451,7 +451,7 @@ const Agentaccount = () => {
                                         </Accordion.Body>
                                     </Accordion.Item>
 
-                                    <Accordion.Item eventKey="7">
+                                    <Accordion.Item eventKey="7" className='accordian-items'>
                                         <Accordion.Header onClick={() => handleLiClick('7')}>Important Documents</Accordion.Header>
                                         <Accordion.Body>
                                             <div className='imp-doc-accordian'>

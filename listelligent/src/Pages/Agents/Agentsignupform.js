@@ -123,6 +123,9 @@ const Agentsignupform = () => {
         hp_sales_price: '',
         realtor_profile: '',
         email: '',
+        role: '1',
+        status: '0',
+        password: '',
     })
 
     const [errors, setErrors] = useState({});
@@ -255,6 +258,21 @@ const Agentsignupform = () => {
                                 <Form.Label>Email *</Form.Label>
                                 <Form.Control type="email" placeholder="name@example.com" onChange={e => setValues({ ...values, email: e.target.value })} />
                                 {errors.email && <span className='text-danger'>{errors.email}</span>}
+                            </Form.Group>
+
+                            <Form.Group className="mb-3">
+                                <Form.Label>Role *</Form.Label>
+                                <Form.Control type="text" placeholder="add a role" onChange={e => setValues({ ...values, role: e.target.value })} />
+                            </Form.Group>
+
+                            <Form.Group className="mb-3">
+                                <Form.Label>Status *</Form.Label>
+                                <Form.Control type="text" placeholder="Status" onChange={e => setValues({ ...values, status: e.target.value })} />
+                            </Form.Group>
+
+                            <Form.Group className="mb-3">
+                                <Form.Label>Password *</Form.Label>
+                                <Form.Control type="password" placeholder="Password" onChange={e => setValues({ ...values, password: e.target.value })} />
                             </Form.Group>
 
                             <Link onClick={handelSubmit}>Submit</Link>

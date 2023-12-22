@@ -11,16 +11,16 @@ import Button from 'react-bootstrap/Button';
 
 const Agentsview = () => {
 
-    // const [approvalStatus, setApprovalStatus] = useState('');
-
     const handleApproveClick = (row) => {
         const agentEmail = row.email;
-        axios.post('http://localhost:3001/approveAgent', { email: agentEmail })
+        const agentId = row.id;
+
+        axios.post('http://localhost:3001/approveAgent', { id: agentId, email: agentEmail })
             .then(res => {
                 if (res.data.Message === "Email Sent Successfully") {
                     alert("Account approval successful!");
-                    // setApprovalStatus('success');
                 }
+                // console.log("id :-" + res.data.id +"...."+"email :-" + res.data.email);
             })
             .catch(err => { console.error(err) });
     };
@@ -37,18 +37,16 @@ const Agentsview = () => {
             sortable: true,
         },
         {
-            name: 'zip_code',
-            selector: row => row.zip_code,
-        },
-        {
-            name: 'email',
+            name: 'Email',
             selector: row => row.email,
         },
         {
+            name: 'Status',
+            selector: row => (row.status == 0 ? 'Unapproved' : 'Approved'),
+        },
+        {
             name: 'Action',
-            cell: row => (
-                <Button variant="primary" size="sm" onClick={() => handleApproveClick(row)}>Aproove</Button>
-            ),
+            cell: row => (row.status == 0 ? <Button variant="primary" size="sm" onClick={() => handleApproveClick(row)}>Aproove</Button> : <Button variant="primary" size="sm" disabled>Aprooved</Button>),
         },
     ];
 
