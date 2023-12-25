@@ -28,9 +28,10 @@ const Home = () => {
                                         placeholder="Enter Address"
                                         aria-label="Recipient's username"
                                         aria-describedby="basic-addon2"
+                                        className='shadow-none'
                                     />
                                     {/* <Button className='zip-code-btn'><BsGeoAltFill />Zip Code</Button> */}
-                                    <BsGeoAltFill /><Form.Control type="text" placeholder="Zip Code" />
+                                    <BsGeoAltFill /><Form.Control type="text" placeholder="Zip Code" className='shadow-none'/>
                                     <Button className='find-btn'>Find A Pro</Button>
                                 </InputGroup>
                             </div>

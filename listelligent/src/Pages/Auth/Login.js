@@ -42,6 +42,7 @@ const Login = () => {
 
     const navigate = useNavigate();
     axios.defaults.withCredentials = true;
+    
     const handelSubmit = (event) => {
         event.preventDefault();
         setErrors(Validation(values));
@@ -49,12 +50,18 @@ const Login = () => {
         if (errors.email === "" && errors.password === "") {
             axios.post('http://localhost:3001/login', values)
                 .then(res => {
-                    if (res.data.Status === "Success") {
+                    if (res.data.Status === "Success" && res.data.Role === "0") {
                         navigate('/admin/dashboard');
+                    }
+                    if (res.data.Status === "Success" && res.data.Role === "1") {
+                        navigate('/agentDashboard');
                     }
                     else {
                         alert(res.data.Error);
+                        console.log();
                     }
+
+                    // console.log("Status : " + res.data.Status +"        "+"role :-" + res.data.Role);
                 })
                 .then(err => console.log(err));
         }

@@ -2,8 +2,8 @@ import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 
-const Protectedrout = (props) => {
-    
+const AgentProtectedR = (props) => {
+
     const { Component } = props;
     // const [auth, setAuth] = useState(false);
     const navigate = useNavigate();
@@ -13,9 +13,9 @@ const Protectedrout = (props) => {
     useEffect(() => {
         axios.get('http://localhost:3001')
             .then(res => {
-                if (res.data.Status === "Success" && res.data.role === "0") {
+                if (res.data.Status === "Success" && res.data.role === "1") {
                     // setAuth(true)
-                    navigate('/admin/dashboard');
+                    navigate('/agentDashboard');
                 }
                 else {
                     // setAuth(false)
@@ -31,4 +31,4 @@ const Protectedrout = (props) => {
     )
 }
 
-export default Protectedrout;
+export default AgentProtectedR;

@@ -1,0 +1,36 @@
+.zip-header {
+    font-family: Montserrat;
+    text-align: center;
+    font-size: 25px;
+    margin: 20px 0px;
+}
+.zip-submit-btn button{
+    background-color: #FF6C2C;
+    font-family: Montserrat;
+    border: 0px;
+}
+.zip-submit-btn button:hover{
+    background-color: #e05519;
+}
+
+.dataTableHeader {
+    background-color: #FF6C2C;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 8px 20px;
+    margin: 30px 0px 0px 0px;
+}
+.dataTableHeader h2{
+    font-family: Montserrat;
+    font-size: 20px;
+    margin: 0;
+    color: #fff;
+}
+.dataTableHeader input{
+    width: 75%;
+}
+.dataTableHeader button{
+    font-family: Montserrat;
+    border-radius: 4px;
+}

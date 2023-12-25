@@ -260,17 +260,17 @@ const Agentsignupform = () => {
                                 {errors.email && <span className='text-danger'>{errors.email}</span>}
                             </Form.Group>
 
-                            <Form.Group className="mb-3">
+                            <Form.Group className="mb-3 d-none">
                                 <Form.Label>Role *</Form.Label>
                                 <Form.Control type="text" placeholder="add a role" onChange={e => setValues({ ...values, role: e.target.value })} />
                             </Form.Group>
 
-                            <Form.Group className="mb-3">
+                            <Form.Group className="mb-3 d-none">
                                 <Form.Label>Status *</Form.Label>
                                 <Form.Control type="text" placeholder="Status" onChange={e => setValues({ ...values, status: e.target.value })} />
                             </Form.Group>
 
-                            <Form.Group className="mb-3">
+                            <Form.Group className="mb-3 d-none">
                                 <Form.Label>Password *</Form.Label>
                                 <Form.Control type="password" placeholder="Password" onChange={e => setValues({ ...values, password: e.target.value })} />
                             </Form.Group>

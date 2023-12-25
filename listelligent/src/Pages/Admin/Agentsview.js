@@ -46,7 +46,7 @@ const Agentsview = () => {
         },
         {
             name: 'Action',
-            cell: row => (row.status == 0 ? <Button variant="primary" size="sm" onClick={() => handleApproveClick(row)}>Aproove</Button> : <Button variant="primary" size="sm" disabled>Aprooved</Button>),
+            cell: row => (row.status == 0 ? <Button variant="success" size="sm" onClick={() => handleApproveClick(row)}>Aproove</Button> : <Button variant="warning" size="sm" disabled>Aprooved</Button>),
         },
     ];
 
@@ -75,12 +75,12 @@ const Agentsview = () => {
         <Dashboardlayout>
             <Container fluid>
                 <Row>
-                    <Col md={1}></Col>
-                    <Col md={10}>
+                    {/* <Col md={1}></Col> */}
+                    <Col md={12}>
                         <div className='dataTable'>
                             <div className='search-input'>
                                 <h2>Agents List</h2>
-                                <Form.Control type="text" id="inputtext5" placeholder='Search...' onChange={handlefilter} />
+                                <Form.Control className='' type="text" id="inputtext5" placeholder='Search...' onChange={handlefilter} />
                             </div>
                             <DataTable
                                 columns={columns}
@@ -91,7 +91,7 @@ const Agentsview = () => {
                             />
                         </div>
                     </Col>
-                    <Col md={1}></Col>
+                    {/* <Col md={1}></Col> */}
                 </Row>
             </Container>
         </Dashboardlayout>

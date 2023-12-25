@@ -34,9 +34,11 @@
     background-color: #fff;
     box-shadow: 0 6px 12px rgba(0,0,0,.175);
 }
-.dropdown-menu a{
+.dropdown-menu a {
     color: #555 !important;
     padding: 7px 10px;
+    width: 100%;
+    display: block;
 }
 .dropdown-menu a:hover{
     color: #555 !important;

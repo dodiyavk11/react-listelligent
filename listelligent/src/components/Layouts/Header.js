@@ -38,6 +38,7 @@ const Header = () => {
                 window.location.reload(true);
             }).catch(err => console.log(err));
     }
+    
     return (
         <>
             {['xl'].map((expand) => (

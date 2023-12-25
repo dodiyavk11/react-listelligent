@@ -36,6 +36,7 @@ const verifyUser = (req, res, next) => {
             }
             else {
                 req.name = decoded.name;
+                req.role = decoded.role;
                 next();
             }
         })
@@ -43,7 +44,7 @@ const verifyUser = (req, res, next) => {
 }
 
 app.get('/', verifyUser, (req, res) => {
-    return res.json({ Status: "Success", name: req.name });
+    return res.json({ Status: "Success", name: req.name, role: req.role });
 })
 
 app.post('/signup', (req, res) => {
@@ -63,30 +64,35 @@ app.post('/signup', (req, res) => {
     })
 })
 
+
 app.post('/login', (req, res) => {
-    const sql = "SELECT * FROM admin_register WHERE email = ?";
+    const sql = "SELECT * FROM users WHERE email = ?";
+
     db.query(sql, [req.body.email], (err, data) => {
         if (err) return res.json({ Error: "Login error in server" });
+
         if (data.length > 0) {
             bcrypt.compare(req.body.password.toString(), data[0].password, (err, response) => {
                 if (err) return res.json({ Error: "Password Compare Error" });
 
                 if (response) {
                     const name = data[0].name;
-                    const token = jwt.sign({ name }, "jwt-secret-key", { expiresIn: '1d' });
+                    const role = data[0].role;
+
+                    const token = jwt.sign({ name, role }, "jwt-secret-key", { expiresIn: '1d' });
                     res.cookie('token', token);
-                    return res.json({ Status: "Success" });
-                }
-                else {
+
+                    return res.json({ Status: "Success", Role: role });
+                } else {
                     return res.json({ Error: "Password Not Matched!" });
                 }
-            })
-        }
-        else {
+            });
+        } else {
             return res.json({ Error: "Email not exist!" });
         }
-    })
-})
+    });
+});
+
 
 app.get('/logout', (req, res) => {
     res.clearCookie('token');
@@ -125,12 +131,15 @@ app.post('/agentsignupform', (req, res) => {
 
 
 app.get('/agentsview', (req, res) => {
-    const sql = "SELECT * FROM users";
-    db.query(sql, (err, result) => {
+    const role = 1;
+
+    const sql = "SELECT * FROM users WHERE role = ?";
+    
+    db.query(sql, [role], (err, result) => {
         if (err) return res.json({ Message: "Error inside agents register server" });
         return res.json(result);
-    })
-})
+    });
+});
 
 
 
@@ -146,42 +155,81 @@ const transporter = nodemailer.createTransport({
 });
 
 
-// app.post('/approveAgent', (req, res) => {
+app.post('/approveAgent', (req, res) => {
 
-//     let genrate_pass = Math.random().toString(36).substring(2, 10);
+    const id = req.body.id;
+    const email = req.body.email;
+    const status = 1;
 
-//     var mailOptions = {
-//         from: "vishal.besticoder@gmail.com",
-//         to: req.body.email,
-//         subject: "Your Account",
-//         text: `User Name:- ${req.body.email} \n
-//         Password:- ${genrate_pass}`
-//     }
+    // return res.json({ id: id, email: email });
 
-//     transporter.sendMail(mailOptions, function (error, info) {
-//         if (error) {
-//             console.log(error);
-//             return res.status(500).json({ Message: "Error sending email" });
-//         } else {
+    let genrate_pass = Math.random().toString(36).substring(2, 10);
 
-//             const sql = "INSERT INTO aprooved_agents (`user_name`, `password`) VALUES (?)";
-//             bcrypt.hash(genrate_pass.toString(), salt, (err, agent_pass) => {
-//                 if (err) return res.json({ Error: "Error for hassing password" });
-//                 const values = [
-//                     req.body.email,
-//                     agent_pass
-//                 ]
+    var mailOptions = {
+        from: "vishal.besticoder@gmail.com",
+        to: email,
+        subject: "Your Account",
+        text: `User Name:- ${email} \n
+        Password:- ${genrate_pass}`
+    }
 
-//                 db.query(sql, [values], (err, result) => {
-//                     if (err) return res.json({ Error: "Inserting data Error in server" });
-//                     return res.json({ Status: "Success" });
-//                 })
-//             })
+    transporter.sendMail(mailOptions, function (error, info) {
+        if (error) {
+            console.log(error);
+            return res.status(500).json({ Message: "Error sending email" });
+        } else {
 
-//             return res.json({ Message: "Email Sent Successfully" });
-//         }
-//     });
-// })
+            bcrypt.hash(genrate_pass.toString(), salt, (err, agent_pass) => {
+                if (err) return res.json({ Error: "Error for hashing password" });
+
+                const sql = "UPDATE users SET status = ?, password = ? WHERE id = ?";
+
+                const values = [
+                    status,
+                    agent_pass,
+                    id
+                ];
+
+                db.query(sql, values, (err, result) => {
+                    if (err) {
+                        console.error(err);
+                        return res.json({ Error: "Updating data error in server" });
+                    }
+                    return res.json({ Status: "Success" });
+                });
+            });
+
+            return res.json({ Message: "Email Sent Successfully" });
+        }
+    });
+});
+
+
+// ZipCode Submit
+app.post('/submitzip', (req, res) => {
+    const sql = "INSERT INTO zip_codes (`zip_code`, `prize`, `status`) VALUES (?)";
+
+    const values = [
+        req.body.zip,
+        req.body.prize,
+        req.body.status,
+    ]
+
+    db.query(sql, [values], (err, result) => {
+        if (err) return res.json({ Error: "Inserting data Error in server" });
+        return res.json({ Status: "Success" });
+    })
+})
+
+// Zip-Code View
+app.get('/viewzip', (req, res) => {
+    const sql = "SELECT * FROM zip_codes";
+    
+    db.query(sql, (err, result) => {
+        if (err) return res.json({ Message: "Error inside agents register server" });
+        return res.json(result);
+    });
+});
 
 
 app.listen(3001, () => {
