@@ -1,0 +1,271 @@
+{
+	"info": {
+		"_postman_id": "1b7cc253-02cb-42e3-a81d-811e53359625",
+		"name": "listelligent",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "8905890"
+	},
+	"item": [
+		{
+			"name": "Agent sign up",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"name\": \"Jayesh Naghera\",\r\n  \"license\": \"ABC123\",\r\n  \"license_date\": \"2023-01-01\",\r\n  \"mls_id\": \"MLS123\",\r\n  \"brokerage\": \"XYZ Realty\",\r\n  \"office_address\": \"123 Main St\",\r\n  \"building\": \"Building A\",\r\n  \"zip_code\": \"12345\",\r\n  \"hp_address\": \"456 Side St\",\r\n  \"hp_zip_code\": \"67890\",\r\n  \"hp_sales_price\": 500000,\r\n  \"realtor_profile\": \"Lorem ipsum...\",\r\n  \"email\": \"jayesh.besticoder@gmail.com\",\r\n  \"role\": \"1\",\r\n  \"password\": \"123456\"\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3001/agentSignUp",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3001",
+					"path": [
+						"agentSignUp"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Login ",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{  \r\n  \"email\": \"admin@gmail.com\",\r\n  \"password\": \"123456\"\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3001/login",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3001",
+					"path": [
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Admin agent approve",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjMsImlhdCI6MTcwMzU4OTU5NiwiZXhwIjoxNzAzNTkzMTk2fQ.HD7rUt-PPDb4uG1o95xTPj5wUbCWWvnKsGvjy7tmWTc",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3001/admin/approveAgent/8/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3001",
+					"path": [
+						"admin",
+						"approveAgent",
+						"8",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get All agent list",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjMsImlhdCI6MTcwMzU5NzM2MCwiZXhwIjoxNzAzNjAwOTYwfQ.L8RxVNf5c9otYR4AmjZ8-wg63gGJYKEADcSUYcrOHlw",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3001/agent/list",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3001",
+					"path": [
+						"agent",
+						"list"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Admin add zip code api",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjMsImlhdCI6MTcwMzU5MTMxMywiZXhwIjoxNzAzNTk0OTEzfQ.f1OnISq58Tg75CDFmvV-UYZLOAV2kvpi81R524El0Jw",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"city\":\"Junagadh\",\r\n    \"zip\":362001,\r\n    \"prize\":1800,\r\n    \"status\":1\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3001/admin/add/zipcode",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3001",
+					"path": [
+						"admin",
+						"add",
+						"zipcode"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Admin get all zip code",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjMsImlhdCI6MTcwMzU5MTMxMywiZXhwIjoxNzAzNTk0OTEzfQ.f1OnISq58Tg75CDFmvV-UYZLOAV2kvpi81R524El0Jw",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3001/admin/zipcode",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3001",
+					"path": [
+						"admin",
+						"zipcode"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Admin update zip code status",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjMsImlhdCI6MTcwMzU5MTMxMywiZXhwIjoxNzAzNTk0OTEzfQ.f1OnISq58Tg75CDFmvV-UYZLOAV2kvpi81R524El0Jw",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3001/admin/zipcode/4/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3001",
+					"path": [
+						"admin",
+						"zipcode",
+						"4",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Admin csv to add zip code",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjMsImlhdCI6MTcwMzU5NTI1NCwiZXhwIjoxNzAzNTk4ODU0fQ.v32b-I0Gh-0a2bVF9UQAYUhWS-FscY4RURB4b7ltkYU",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "csvFile",
+							"type": "file",
+							"src": []
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost:3001/admin/excelZipCode/add",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3001",
+					"path": [
+						"admin",
+						"excelZipCode",
+						"add"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
