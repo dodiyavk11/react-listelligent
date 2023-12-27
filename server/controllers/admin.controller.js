@@ -56,3 +56,67 @@ exports.adminApproveAgent = async (req, res) => {
     });
   }
 };
+
+exports.viewUserLead = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const getData = await Models.lead.findOne({ where: { id } });
+    if (getData) {
+      return res.status(200).send({
+        status: true,
+        message: "User lead fetched success.",
+        data: getData,
+      });
+    }
+    return res.status(404).send({
+      status: false,
+      message: "Lead not found or something went to wrong.",
+      data: [],
+    });
+  } catch (err) {
+    res
+      .status(500)
+      .send({
+        status: false,
+        message: "User lead cannot get, an error occured",
+        error: err.message,
+      });
+  }
+};
+
+exports.userLeadList = async (req, res) => {
+  try {
+    const getData = await Models.lead.findAll();
+    res
+      .status(200)
+      .send({
+        status: true,
+        message: "User lead get successfully.",
+        data: getData,
+      });
+  } catch (err) {
+    res
+      .status(500)
+      .send({
+        status: false,
+        message: "User lead cannot get, an error occured.",
+        error: err.message,
+        data: [],
+      });
+  }
+};
+
+exports.viewAgentByAdmin = async(req, res) => {
+  try{
+    const { id } = req.params;
+    const agentData = await Models.Users.findOne({ where:{ id } });
+    if(agentData)
+    {
+      return res.status(200).send({ status: true, message: "Agent data get successfully.", data: agentData });
+    }
+    return res.status(404).send({ status: false, message: "Agent cannot found or something went to wrong", data: [] })
+  }catch(err)
+  {
+    res.status(500).send({ status: false, message: "Agent cannot view, an error occured.", error: err.message });
+  }
+}

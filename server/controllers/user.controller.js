@@ -78,7 +78,16 @@ exports.signIn = async (req, res) => {
   try {
     const { email, password } = req.body;
 
-    const getUser = await Models.Users.findOne({ where: { email } });
+    // const getUser = await Models.Users.findOne({ where: { email } });
+    const getUser = await Models.Users.findOne({
+      include: [
+        {
+          model: Models.agentActiveZipcode,
+          as: "activeZipcode",
+        },
+      ],
+      where: { email },
+    });
     if (!getUser)
       return res.status(401).send({
         status: false,
@@ -115,6 +124,28 @@ exports.signIn = async (req, res) => {
       message: "Login refused, something went wrong",
       data: [],
       error: err.message,
+    });
+  }
+};
+
+exports.userAddLead = async (req, res) => {
+  try {
+    const { name, phone, email, address, zip_code } = req.body;
+    const leadData = { name, phone, email, address, zip_code, status: 0 };
+    const addLead = await Models.lead.create(leadData);
+    res
+      .status(200)
+      .send({
+        status: true,
+        message: "Data saved successfully.",
+        data: addLead,
+      });
+  } catch (err) {
+    res.status(500).send({
+      status: false,
+      message: "Lead can not save, an error occured",
+      error: err.message,
+      data: [],
     });
   }
 };

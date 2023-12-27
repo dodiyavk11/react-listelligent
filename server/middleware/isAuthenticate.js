@@ -16,10 +16,10 @@ exports.isLogin = (req, res, next) => {
     req.userId = decodeToken.userId;
     next();
   } catch (err) {
-    console.log(err);
+    // console.log(err);
     res
       .status(401)
-      .send({ status: false, message: "Invalid or expired token", data: [] });
+      .send({ status: false, message: "Invalid or expired token", data: [], error: err.message });
   }
 };
 
@@ -41,13 +41,14 @@ exports.isAdmin = async (req, res, next) => {
         });
     next();
   } catch (err) {
-    console.log(err);
+    // console.log(err);
     res
       .status(401)
       .send({
         status: false,
         message: "Administrator authentication error",
         data: [],
+        error: err.message
       });
   }
 };
@@ -72,13 +73,14 @@ exports.isAgent = async (req, res, next) => {
 
     next();
   } catch (err) {
-    console.error(err);
+    // console.error(err);
     res
       .status(401)
       .send({
         status: false,
         message: "Administrator authentication error",
         data: [],
+        error:err.message
       });
   }
 };
