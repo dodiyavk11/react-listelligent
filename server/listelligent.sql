@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 26, 2023 at 02:30 PM
+-- Generation Time: Dec 27, 2023 at 02:41 PM
 -- Server version: 10.4.27-MariaDB
 -- PHP Version: 7.4.33
 
@@ -20,6 +20,74 @@ SET time_zone = "+00:00";
 --
 -- Database: `listelligent`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `agent_active_zipcode`
+--
+
+CREATE TABLE `agent_active_zipcode` (
+  `id` int(11) NOT NULL,
+  `user_id` int(11) NOT NULL,
+  `zip_id` int(11) NOT NULL,
+  `start_date` datetime NOT NULL DEFAULT current_timestamp(),
+  `end_date` datetime NOT NULL,
+  `transaction_id` varchar(255) NOT NULL,
+  `status` int(1) NOT NULL DEFAULT 0,
+  `created_at` datetime NOT NULL DEFAULT current_timestamp(),
+  `updated_at` datetime NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `cart`
+--
+
+CREATE TABLE `cart` (
+  `id` int(11) NOT NULL,
+  `user_id` int(11) NOT NULL,
+  `price` decimal(10,2) NOT NULL,
+  `validity` int(1) NOT NULL DEFAULT 0,
+  `zip_id` int(11) NOT NULL,
+  `created_at` datetime DEFAULT current_timestamp(),
+  `updated_at` datetime NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `cart`
+--
+
+INSERT INTO `cart` (`id`, `user_id`, `price`, `validity`, `zip_id`, `created_at`, `updated_at`) VALUES
+(2, 8, '1500.00', 0, 1, '2023-12-27 16:44:51', '2023-12-27 17:07:40'),
+(3, 8, '850.00', 0, 2, '2023-12-27 16:46:17', '2023-12-27 16:46:17');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `lead`
+--
+
+CREATE TABLE `lead` (
+  `id` int(11) NOT NULL,
+  `name` varchar(155) DEFAULT NULL,
+  `phone` varchar(15) DEFAULT NULL,
+  `email` varchar(100) DEFAULT NULL,
+  `address` varchar(155) DEFAULT NULL,
+  `zip_code` int(11) NOT NULL,
+  `status` int(1) NOT NULL DEFAULT 0,
+  `created_at` datetime NOT NULL DEFAULT current_timestamp(),
+  `updated_at` datetime NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `lead`
+--
+
+INSERT INTO `lead` (`id`, `name`, `phone`, `email`, `address`, `zip_code`, `status`, `created_at`, `updated_at`) VALUES
+(1, 'test user', '123547', '6cmbgrndmx@skygazerhub.com', '232, parlk avenue road', 362268, 0, '2023-12-27 13:31:04', '2023-12-27 13:31:04'),
+(2, 'test user', '123547', '6cmbgrndmx@skygazerhub.com', '232, parlk avenue road', 362268, 0, '2023-12-27 13:42:33', '2023-12-27 13:42:33');
 
 -- --------------------------------------------------------
 
@@ -59,7 +127,7 @@ INSERT INTO `users` (`id`, `name`, `license`, `license_date`, `mls_id`, `brokera
 (3, 'admin', '', '0000-00-00', '', '', '', '', 0, '', '', '', '', 'admin@gmail.com', 0, 0, '$2a$11$RV2U2FZxI2y1W8CYD/IjC.RVvyhMoAOk9A70xX3c.dqsOo5fDSCLy', '2023-12-26 13:14:42', '2023-12-26 15:45:47'),
 (4, 'Vijay Dodiya', '15243634', '2023-12-06', '13675', 'Testing Perposer', 'Address 1', 'Street Road', 235796, 'Address 2', '135546', '1204', 'Testing Link', 'vishal.besticoder@gmail.com', 1, 0, '', '2023-12-26 13:14:42', '0000-00-00 00:00:00'),
 (5, 'fsdf', 'sfsf', '2023-12-22', 'adad', 'adad', 'adad', 'adad', 0, 'daad', 'adad', 'adad', 'adad', 'vishal.besticoder@gmail.com', 1, 0, '', '2023-12-26 13:14:42', '0000-00-00 00:00:00'),
-(8, 'Jayesh Naghera', 'ABC123', '2023-01-01', 'MLS123', 'XYZ Realty', '123 Main St', 'Building A', 12345, '456 Side St', '67890', '500000', 'Lorem ipsum...', 'jayesh.besticoder@gmail.com', 1, 1, '$2a$11$RV2U2FZxI2y1W8CYD/IjC.RVvyhMoAOk9A70xX3c.dqsOo5fDSCLy', '2023-12-26 15:16:46', '2023-12-26 18:59:29');
+(8, 'Jayesh Naghera', 'ABC123', '2023-01-01', 'MLS123', 'XYZ Realty', '123 Main St', 'Building A', 12345, '456 Side St', '67890', '500000', 'Lorem ipsum...', 'jayesh.besticoder@gmail.com', 1, 1, '$2a$11$RV2U2FZxI2y1W8CYD/IjC.RVvyhMoAOk9A70xX3c.dqsOo5fDSCLy', '2023-12-26 15:16:46', '2023-12-27 09:45:35');
 
 -- --------------------------------------------------------
 
@@ -84,7 +152,6 @@ INSERT INTO `zip_codes` (`id`, `city`, `zip_code`, `prize`, `status`) VALUES
 (2, 'Patan', 362266, '850.00', 1),
 (3, 'Bhalpara', 362268, '850.00', 1),
 (4, 'Junagadh', 362001, '1800.00', 1),
-(5, 'Talala', 123456, '555.00', 0),
 (8, 'Kodinar', 456789, '1111.00', 1),
 (9, 'Ahmedabad', 38001, '1500.00', 1),
 (10, 'Amreli', 362730, '850.00', 0),
@@ -93,6 +160,24 @@ INSERT INTO `zip_codes` (`id`, `city`, `zip_code`, `prize`, `status`) VALUES
 --
 -- Indexes for dumped tables
 --
+
+--
+-- Indexes for table `agent_active_zipcode`
+--
+ALTER TABLE `agent_active_zipcode`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `cart`
+--
+ALTER TABLE `cart`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `lead`
+--
+ALTER TABLE `lead`
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indexes for table `users`
@@ -109,6 +194,24 @@ ALTER TABLE `zip_codes`
 --
 -- AUTO_INCREMENT for dumped tables
 --
+
+--
+-- AUTO_INCREMENT for table `agent_active_zipcode`
+--
+ALTER TABLE `agent_active_zipcode`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `cart`
+--
+ALTER TABLE `cart`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
+-- AUTO_INCREMENT for table `lead`
+--
+ALTER TABLE `lead`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `users`

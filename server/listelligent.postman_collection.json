@@ -41,7 +41,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{  \r\n  \"email\": \"admin@gmail.com\",\r\n  \"password\": \"123456\"\r\n}\r\n",
+					"raw": "{  \r\n  \"email\": \"jayesh.besticoder@gmail.com\",\r\n  \"password\": \"123456\"\r\n}\r\n",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -262,6 +262,289 @@
 						"admin",
 						"excelZipCode",
 						"add"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Admin update zip code",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjMsImlhdCI6MTcwMzY1MDUyNSwiZXhwIjoxNzAzNjU0MTI1fQ.Go6V8kRrHz0FG63AESWGr4DVgH1Q-RzJf0PcI48chhY",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PATCH",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"city\":\"Talala\",\r\n    \"zip\":123456,\r\n    \"prize\":555,\r\n    \"status\":1\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3001/admin/zipcode/5",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3001",
+					"path": [
+						"admin",
+						"zipcode",
+						"5"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Admin delete zip code",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjMsImlhdCI6MTcwMzY1MDUyNSwiZXhwIjoxNzAzNjU0MTI1fQ.Go6V8kRrHz0FG63AESWGr4DVgH1Q-RzJf0PcI48chhY",
+							"type": "string"
+						}
+					]
+				},
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3001/admin/zipcode/delete/5",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3001",
+					"path": [
+						"admin",
+						"zipcode",
+						"delete",
+						"5"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Search zip code by zip code or city",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3001/zipcode/search?q=amr",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3001",
+					"path": [
+						"zipcode",
+						"search"
+					],
+					"query": [
+						{
+							"key": "q",
+							"value": "amr"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "User add lead (submit form)",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\":\"test user\",\r\n    \"phone\":\"123547\",\r\n    \"email\":\"6cmbgrndmx@skygazerhub.com\",\r\n    \"address\":\"232, parlk avenue road\",\r\n    \"zip_code\":362268\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3001/user/addLead",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3001",
+					"path": [
+						"user",
+						"addLead"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Admin view single  user lead",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjMsImlhdCI6MTcwMzY2OTUwMCwiZXhwIjoxNzAzNjczMTAwfQ.Y-WY4GPnfLHiQKf-i62fa_7dQGb76lYbiCcCWHaruqc",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3001/lead/view/2",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3001",
+					"path": [
+						"lead",
+						"view",
+						"2"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Admin get all lead",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjMsImlhdCI6MTcwMzY2OTUwMCwiZXhwIjoxNzAzNjczMTAwfQ.Y-WY4GPnfLHiQKf-i62fa_7dQGb76lYbiCcCWHaruqc",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3001/admin/lead/list",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3001",
+					"path": [
+						"admin",
+						"lead",
+						"list"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Admin view single agent",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjMsImlhdCI6MTcwMzY2OTUwMCwiZXhwIjoxNzAzNjczMTAwfQ.Y-WY4GPnfLHiQKf-i62fa_7dQGb76lYbiCcCWHaruqc",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3001/admin/view/agent/2",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3001",
+					"path": [
+						"admin",
+						"view",
+						"agent",
+						"2"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Agent add to cart zip code",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjgsImlhdCI6MTcwMzY3MzcwNywiZXhwIjoxNzAzNjc3MzA3fQ.LlQ8JaI-YrOihWfv_JYpKOUQqvJzZvIRYETBUr3xGEg",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3001/agent/zip/addtocart/2",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3001",
+					"path": [
+						"agent",
+						"zip",
+						"addtocart",
+						"2"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Agent get cart item list",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjgsImlhdCI6MTcwMzY3NzkzMCwiZXhwIjoxNzAzNjgxNTMwfQ.Rk2KrzBe3sSI1OtAM3sf97u21qRDayM54vUkT7oi5Ec",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3001/agent/getCart",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3001",
+					"path": [
+						"agent",
+						"getCart"
 					]
 				}
 			},
