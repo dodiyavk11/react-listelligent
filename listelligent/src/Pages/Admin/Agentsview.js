@@ -17,10 +17,17 @@ const Agentsview = () => {
 
         axios.post('http://localhost:3001/approveAgent', { id: agentId, email: agentEmail })
             .then(res => {
-                if (res.data.Message === "Email Sent Successfully") {
+                if (res.data.Message === "Agent Aprooved") {
                     alert("Account approval successful!");
+
+                    axios.get('http://localhost:3001/agentsview')
+                        .then(res => {
+                            setData(res.data);
+                            setRecords(res.data);
+                        })
+                        .catch(err => console.log(err));
                 }
-                // console.log("id :-" + res.data.id +"...."+"email :-" + res.data.email);
+                // console.log(res);
             })
             .catch(err => { console.error(err) });
     };

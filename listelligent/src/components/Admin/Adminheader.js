@@ -3,13 +3,15 @@ import Container from 'react-bootstrap/Container';
 import Form from 'react-bootstrap/Form';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
-import { Link } from 'react-router-dom';
+import { Link,useNavigate } from 'react-router-dom';
 import axios from 'axios';
 
 const Adminheader = () => {
-
+    const navigate = useNavigate();
     const handleDelete = () => {
-        axios.get('http://localhost:3001/logout').then(res => {}).catch(err => console.log(err));
+        // axios.get('http://localhost:3001/logout').then(res => {}).catch(err => console.log(err));
+        localStorage.clear();
+        navigate('/login');
     }
 
     return (

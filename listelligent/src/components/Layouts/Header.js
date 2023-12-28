@@ -18,25 +18,33 @@ const Header = () => {
     axios.defaults.withCredentials = true;
 
     useEffect(() => {
-        axios.get('http://localhost:3001')
-            .then(res => {
-                if (res.data.Status === "Success") {
-                    setAuth(true)
-                    setName(res.data.name)
-                }
-                else {
-                    setAuth(false)
-                    // setMessage(res.data.Error)
-                }
-            })
-            .then(err => console.log(err));
+        const token = localStorage.getItem("token");
+        const userData = JSON.parse(localStorage.getItem("userData"));
+        if(userData && userData.name && token)
+        {
+            setAuth(true)
+        }
+        // axios.get('http://localhost:3001')
+        //     .then(res => {
+        //         if (res.data.Status === "Success") {
+        //             setAuth(true)
+        //             setName(res.data.name)
+        //         }
+        //         else {
+        //             setAuth(false)
+        //             // setMessage(res.data.Error)
+        //         }
+        //     })
+        //     .then(err => console.log(err));
     }, [])
 
     const handleDelete = () => {
-        axios.get('http://localhost:3001/logout')
-            .then(res => {
-                window.location.reload(true);
-            }).catch(err => console.log(err));
+        // axios.get('http://localhost:3001/logout')
+        //     .then(res => {
+        //         window.location.reload(true);
+        //     }).catch(err => console.log(err));
+        localStorage.clear();
+        navigate('/login');
     }
     
     return (

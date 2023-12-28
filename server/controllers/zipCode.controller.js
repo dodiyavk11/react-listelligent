@@ -177,7 +177,6 @@ exports.deleteZipCode = async (req, res) => {
 exports.searchZipCode = async (req, res) => {
   try {
     const { q } = req.query;
-    console.log(q)
     const searchResult = await Models.zipCode.findAll({
       where: {
         [Sequelize.Op.or]: [

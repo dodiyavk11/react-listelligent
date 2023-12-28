@@ -1,43 +1,139 @@
-.agentform-container{
-    position: relative;
-}
-.agentform-box {
-    width: 900px;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, 25%);
-    border: 1px solid;
-    border-radius: 10px;
-    padding: 50px 35px;
-    right: calc(-50% + 200px);
-}
-.agentform-box h1{
-    text-align: center;
-    font-family: Montserrat;
-    font-weight: 500;
-}
-.agentform-box p{
-    font-family: Montserrat;
-    font-weight: 500;
-}
-.agentform-box .form-label {
-    margin-bottom: .5rem;
-    font-weight: 500;
-    font-family: Montserrat;
-}
-.agentform-box #formDate {
+.page-content {
     width: 100%;
-    border: 1px solid #dee2e6;
-    padding: 6px;
-    border-radius: 6px;
+    margin: 0 auto;
+    background: #75e2e9;
+    display: flex;
+    display: -webkit-flex;
+    justify-content: center;
+    -o-justify-content: center;
+    -ms-justify-content: center;
+    -moz-justify-content: center;
+    -webkit-justify-content: center;
+    align-items: center;
+    -o-align-items: center;
+    -ms-align-items: center;
+    -moz-align-items: center;
+    /* height: 100vh; */
+    -webkit-align-items: center;
+    background-image: linear-gradient(136deg, rgb(149, 153, 226) 0%, rgb(139, 198, 236) 100%);
 }
-.agentform-box a {
-    background: linear-gradient(180deg,#f57f17 0,#f27e17 100%);
-    padding: 5px 25px;
-    border-radius: 5px;
+
+.form-v10-content {
+    background: #fff;
+    width: 1100px;
+    border-radius: 10px;
+    -o-border-radius: 10px;
+    -ms-border-radius: 10px;
+    -moz-border-radius: 10px;
+    -webkit-border-radius: 10px;
+    box-shadow: 0 8px 20px 0 rgba(0, 0, 0, .15);
+    -o-box-shadow: 0 8px 20px 0 rgba(0, 0, 0, .15);
+    -ms-box-shadow: 0 8px 20px 0 rgba(0, 0, 0, .15);
+    -moz-box-shadow: 0 8px 20px 0 rgba(0, 0, 0, .15);
+    -webkit-box-shadow: 0 8px 20px 0 rgba(0, 0, 0, .15);
+    /* margin: 95px 0; */
+    margin: 20px 0;
+    position: relative;
+    font-family: montserrat, sans-serif;
+}
+
+.form-v10-content .form-detail .form-left {
+    border-top-left-radius: 10px;
+    border-bottom-left-radius: 10px;
+    width: 100%;
+}
+
+.form-v10-content .form-detail .form-right {
+    width: 100%;
+    background: #4835d4;
+    border-top-right-radius: 10px;
+    border-bottom-right-radius: 10px;
+}
+
+.form-v10-content .form-detail .form-left h2 {
+    color: #2271dd;
+}
+
+.form-v10-content .form-detail h2 {
+    font-weight: 500;
+    font-size: 25px;
+    margin-bottom: 34px;
+    padding: 33px 50px 0 60px;
+}
+
+.form-v10-content .form-detail .form-right h2 {
     color: #fff;
-    font-family: Montserrat;
+}
+
+.form-v10-content .form-detail h2 {
+    font-weight: 500;
+    font-size: 25px;
+    margin-bottom: 34px;
+    padding: 33px 50px 0 60px;
+}
+
+.form-v10-content .form-detail .form-right h2 {
+    font-weight: 500;
+    font-size: 25px;
+    margin-bottom: 10px;
+    padding: 33px 50px 0 60px;
+}
+
+.form-v10-content .form-detail .form-right p {
+    color: #fff;
+}
+
+.form-v10-content .form-detail p {
+    font-weight: 400;
+    font-size: 16px;
+    margin-bottom: 34px;
+    padding: 0px 50px 0 60px;
+}
+
+.form-v10-content .form-detail .form-row {
+    position: relative;
+    /* margin-bottom: 24px; */
+    margin-bottom: 10px;
+    padding-left: 60px;
+    padding-right: 50px;
+}
+
+.form-row .form-label {
+    margin: 0px 25px 0px 0px;
+}
+
+.form-row input {
+    border: 0px;
+    border-bottom: 1px solid #a5a5a5;
+    border-radius: 0;
+    background: transparent;
+}
+
+.form-right .form-row input {
+    border: 0px;
+    border-bottom: 1px solid #a5a5a5;
+    border-radius: 0;
+    background: transparent;
+    color: #fff;
+}
+
+.form-right .form-row input::placeholder {
+    color: #ececec !important;
+    opacity: 1;
+}
+
+.submit-btn-container {
+    padding: 15px 0px 35px 55px;
+}
+
+.submit-btn-container a {
     text-decoration: none;
-    text-align: center;
+    color: #fff;
+    background: #2271dd;
+    padding: 10px 30px;
+    border-radius: 21px;
+}
+
+.submit-btn-container a:hover {
+    background: #1667d8;
 }

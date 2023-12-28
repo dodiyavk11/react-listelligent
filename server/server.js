@@ -11,8 +11,10 @@ const PORT = process.env.PORT || 3001;
 const router = express.Router();
 
 const corsOpts = {
-  origin: '*',
+  origin: [process.env.FRONT_URL],
   methods: ['GET', 'POST', 'PATCH','DELETE'],
+  credentials: true,
+  exposedHeaders: ['Authorization'],
 };
 
 

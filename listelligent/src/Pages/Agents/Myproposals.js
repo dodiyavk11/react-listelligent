@@ -367,14 +367,21 @@ const Myproposals = () => {
                 <Box sx={{ width: '100%' }}>
                     <Box sx={{ borderBottom: 1, borderColor: 'divider' }} className="proposel-header">
                         <Container>
-                            <Row>
-                                <Col>
+                            <Row className='d-flex align-items-center'>
+                                <Col lg={6}>
                                     <Tabs className='proposal-header-tabs align-items-center' variant="scrollable" value={value} onChange={handleChange} aria-label="basic tabs example">
                                         <Tab className='seller-tab' label="SELLERS" {...a11yProps(0)} />
                                         <Tab className='buyer-tab' label="BUYERS" {...a11yProps(1)} />
                                         <Tab className='seller-archive-tab' label="SELLERS ARCHIVE" {...a11yProps(2)} />
                                         <Tab className='buyer-archive-tab' label="BUYERS ARCHIVE" {...a11yProps(3)} />
                                     </Tabs>
+                                </Col>
+                                <Col lg={6}>
+                                    <div className='proposal_search_form'>
+                                        <span className='text-white'>Proposals</span>
+                                        <input type='text' placeholder='Search for a Name, Phone #, Email or Address' className='ps-4 pt-1 pb-1'></input>
+                                        <button>Go</button>
+                                    </div>
                                 </Col>
                             </Row>
                         </Container>
@@ -383,7 +390,7 @@ const Myproposals = () => {
                         <Row>
                             <Col>
                                 <CustomTabPanel value={value} index={0}>
-                                    <div>
+                                    {/* <div>
                                         <Container>
                                             <Row>
                                                 <Col>
@@ -403,7 +410,7 @@ const Myproposals = () => {
                                                 </Col>
                                             </Row>
                                         </Container>
-                                    </div>
+                                    </div> */}
 
 
                                     <div className='filters-container'>
@@ -661,7 +668,7 @@ const Myproposals = () => {
                                 </CustomTabPanel>
 
                                 <CustomTabPanel value={value} index={1}>
-                                    <div>
+                                    {/* <div>
                                         <Container>
                                             <Row>
                                                 <Col>
@@ -677,7 +684,7 @@ const Myproposals = () => {
                                                 </Col>
                                             </Row>
                                         </Container>
-                                    </div>
+                                    </div> */}
 
 
                                     <div className='filters-container'>

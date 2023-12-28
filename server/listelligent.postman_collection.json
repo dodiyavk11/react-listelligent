@@ -549,6 +549,37 @@
 				}
 			},
 			"response": []
+		},
+		{
+			"name": "agent Delete cart item",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjgsImlhdCI6MTcwMzc2NDMzOCwiZXhwIjoxNzAzNzY3OTM4fQ.pEyJvN_TkVYZC1TAbq4bua3sZ0ivYSwj8m6OTwV_ju8",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3001/agent/item-remove/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3001",
+					"path": [
+						"agent",
+						"item-remove",
+						"1"
+					]
+				}
+			},
+			"response": []
 		}
 	]
 }

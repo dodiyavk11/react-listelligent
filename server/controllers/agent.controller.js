@@ -37,7 +37,15 @@ exports.addToCartZip = async (req, res) => {
         };
         await Models.Cart.create(cartItem);
       }
-      const getCart = await Models.Cart.findAll({ where: { user_id } });
+      const getCart = await Models.Cart.findAll({
+        include: [
+          {
+            model: Models.zipCode,
+            as: "zipCode",
+          },
+        ],
+        where: { user_id },
+      });
       return res.status(200).send({
         status: true,
         message: "Zip code add to cart success",
@@ -68,18 +76,51 @@ exports.getAgentCart = async (req, res) => {
       ],
       where: { user_id },
     });
-    res
-      .status(200)
-      .send({
-        status: true,
-        message: "Cart data get successfully.",
-        data: getCart,
-      });
+    res.status(200).send({
+      status: true,
+      message: "Cart data get successfully.",
+      data: getCart,
+    });
   } catch (err) {
     res.status(500).send({
       status: false,
       message: "Cart cannot get, an error occured.",
       error: err.message,
     });
+  }
+};
+
+exports.removeCartItem = async (req, res) => {
+  try {
+    const user_id = req.userId;
+    const { cart_id } = req.params;
+    const hasData = await Models.Cart.findOne({ where: { id:cart_id, user_id } });
+    if (hasData) {
+      await hasData.destroy();
+      const getCart = await Models.Cart.findAll({
+        include: [
+          {
+            model: Models.zipCode,
+            as: "zipCode",
+          },
+        ],
+        where: { user_id },
+      });
+      return res
+        .status(200)
+        .send({ status: true, message: "Success.", data: getCart });
+    } else {
+      return res
+        .status(422)
+        .send({ status: false, message: "Cart item not found." });
+    }
+  } catch (err) {
+    res
+      .status(500)
+      .send({
+        status: false,
+        message: "Something went to wrong.",
+        error: err.message,
+      });
   }
 };

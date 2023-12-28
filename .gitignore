@@ -2,6 +2,7 @@
 
 # dependencies
 /listelligent/node_modules
+/listelligent/build
 /server/node_modules
 /.pnp
 .pnp.js

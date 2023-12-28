@@ -45,6 +45,19 @@ const ZipCode = () => {
 
     const [modalShow, setModalShow] = React.useState(false);
 
+    // UpdateZip Function Start
+    const updateZip = (row) => {
+        const zipid = row.id;
+        const zipcode = row.zip_code;
+        const zipprize = row.prize;
+        const zipstatus = row.status;
+        setModalShow(true);
+
+        console.log("id:- " + zipid +"/"+ "zip_code:- " + zipcode +"/"+ "zipprize:- " + zipprize +"/"+ "zipstatus:- " + zipstatus);
+    }
+    // UpdateZip Function Start
+
+
     function ZipCodeModel(props) {
 
         const [values, setValues] = useState({
@@ -67,6 +80,12 @@ const ZipCode = () => {
                     .then(res => {
                         if (res.data.Status === "Success") {
                             setModalShow(false);
+                            axios.get('http://localhost:3001/viewzip')
+                                .then(res => {
+                                    setData(res.data);
+                                    setRecords(res.data);
+                                })
+                                .catch(err => console.log(err));
                         }
                     })
                     .then(err => console.log(err));
@@ -104,6 +123,25 @@ const ZipCode = () => {
     }
 
 
+    // DeleteZip Function Start
+    const deleteZip = (row) => {
+        const zipId = row.id;
+
+        axios.post('http://localhost:3001/zipdelete', { id: zipId })
+            .then(res => {
+
+                axios.get('http://localhost:3001/viewzip')
+                    .then(res => {
+                        setData(res.data);
+                        setRecords(res.data);
+                    })
+                    .catch(err => console.log(err));
+
+            })
+            .catch(err => { console.error(err) });
+    }
+    // DeleteZip Function End
+
     const columns = [
         {
             name: 'Id',
@@ -126,9 +164,9 @@ const ZipCode = () => {
         {
             name: 'Action',
             cell: row => (
-                <div style={{ width: '50%' }} className='d-flex justify-content-between w-50%'>
-                    <Button variant="warning" size="sm" className="mr-2">Update</Button>
-                    <Button variant="danger" size="sm">Delete</Button>
+                <div style={{ width: '50%' }} className='d-flex justify-content-between'>
+                    <Button variant="warning" size="sm" onClick={() => updateZip(row)}>Update</Button>
+                    <Button variant="danger" size="sm" onClick={() => deleteZip(row)}>Delete</Button>
                 </div>
             ),
         },
@@ -163,7 +201,7 @@ const ZipCode = () => {
                         <div className='zip-code-datatable'>
                             <div className='dataTableHeader'>
                                 <h2>Zip-Code List</h2>
-                                <Form.Control className='' type="text" id="inputtext5" placeholder='Search...' onChange={handlefilter} />
+                                <Form.Control className='shadow-none' type="text" id="inputtext5" placeholder='Search...' onChange={handlefilter} />
                                 <Button variant="success" onClick={() => setModalShow(true)}>Add Zip Code</Button>
                                 <ZipCodeModel show={modalShow} onHide={() => setModalShow(false)} />
                             </div>

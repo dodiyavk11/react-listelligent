@@ -3,6 +3,12 @@ const bcrypt = require("bcryptjs");
 const { generateJWTToken, decodeJWTToken } = require("../utils/jwtUtils");
 
 exports.signUp = async (req, res) => {
+  if(req.body.email === "" || req.body.password === "")
+  {
+    return res
+        .status(409)
+        .send({ status: false, message: "Please fill all field ", data: [] });
+  }
   try {
     const {
       name,
@@ -101,14 +107,14 @@ exports.signIn = async (req, res) => {
         .status(401)
         .send({ status: false, message: "Invalid credentials", data: [] });
 
-    if (!getUser.status && getUser.role !== 0) {
-      return res.status(401).send({
-        status: false,
-        message:
-          "Your account under reivew Admin approve your account then after you can access.",
-        data: [],
-      });
-    }
+    // if (!getUser.status && getUser.role !== 0) {
+    //   return res.status(401).send({
+    //     status: false,
+    //     message:
+    //       "Your account under reivew Admin approve your account then after you can access.",
+    //     data: [],
+    //   });
+    // }
     const token = generateJWTToken({ userId: getUser.id }, "1h");
     delete getUser.dataValues.password;
     res.status(200).send({
