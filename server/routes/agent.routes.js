@@ -3,6 +3,9 @@ const {
   addToCartZip,
   getAgentCart,
   removeCartItem,
+  cartPlaceOrder,
+  getAgentActiveZipCode,
+  getAgentLeads,
 } = require("../controllers/agent.controller");
 const { isLogin, isAdmin, isAgent } = require("../middleware/isAuthenticate");
 
@@ -11,4 +14,7 @@ module.exports = (app) => {
   app.get("/agent/zip/addtocart/:id", [isLogin, isAgent], addToCartZip);
   app.get("/agent/getcart", [isLogin, isAgent], getAgentCart);
   app.get("/agent/item-remove/:cart_id", [isLogin, isAgent], removeCartItem);
+  app.get("/agent/cart/placeOrder", [isLogin, isAgent], cartPlaceOrder);
+  app.get("/agent/active/zipCode", [isLogin, isAgent], getAgentActiveZipCode);
+  app.get("/agent/leads", [isLogin, isAgent], getAgentLeads);
 };

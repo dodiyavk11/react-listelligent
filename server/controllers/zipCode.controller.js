@@ -2,6 +2,7 @@ const Models = require("../models");
 const multer = require("multer");
 const csvParser = require("csv-parser");
 const { Sequelize } = require("sequelize");
+const { Op } = require("sequelize");
 const fs = require("fs");
 const path = require("path");
 const storage = multer.memoryStorage();
@@ -185,7 +186,38 @@ exports.searchZipCode = async (req, res) => {
         ],
       },
     });
-    return res.status(200).send({ status: true, message: "Search result", data: searchResult });
+    const zipIds = searchResult.map((result) => result.id);
+    const orderZipCodeResult = await Models.orderZipCode.findAll({
+      attributes: [
+        "zip_id",
+        [
+          Sequelize.literal(`COUNT(CASE WHEN status = 1 THEN 1 END)`),
+          "orderCount",
+        ],
+        [
+          Sequelize.literal(`COUNT(CASE WHEN status = 1 THEN 1 END) > 2`),
+          "isSold",
+        ],
+      ],
+      group: ["zip_id"],
+      where: {
+        zip_id: { [Op.in]: zipIds },
+      },
+      raw: true,
+    });
+
+    const finalResult = searchResult.map((zip) => {
+      const orderZipCodeData = orderZipCodeResult.find(
+        (order) => order.zip_id === zip.id
+      );
+      return {
+        ...zip.toJSON(),
+        isSold: orderZipCodeData ? orderZipCodeData.isSold : 0,
+      };
+    });
+    return res
+      .status(200)
+      .send({ status: true, message: "Search result", data: finalResult });
   } catch (err) {
     res.status(500).send({
       status: false,

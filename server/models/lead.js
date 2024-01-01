@@ -21,6 +21,7 @@ module.exports = (sequelize, DataTypes) => {
       updatedAt: "updated_at",
       paranoid: false,
       tableName: "lead",
+      modelName:"Lead"
     }
   );
   return lead;

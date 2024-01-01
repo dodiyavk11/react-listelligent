@@ -1,4 +1,7 @@
 const Models = require("../models");
+const moment = require("moment");
+const Sequelize = require("sequelize");
+const { Op } = require("sequelize");
 
 exports.getAllAgentsList = async (req, res) => {
   try {
@@ -34,6 +37,8 @@ exports.addToCartZip = async (req, res) => {
           user_id,
           zip_id: checkZip.id,
           price: checkZip.prize,
+          zip_code: checkZip.zip_code,
+          city: checkZip.city,
         };
         await Models.Cart.create(cartItem);
       }
@@ -94,7 +99,9 @@ exports.removeCartItem = async (req, res) => {
   try {
     const user_id = req.userId;
     const { cart_id } = req.params;
-    const hasData = await Models.Cart.findOne({ where: { id:cart_id, user_id } });
+    const hasData = await Models.Cart.findOne({
+      where: { id: cart_id, user_id },
+    });
     if (hasData) {
       await hasData.destroy();
       const getCart = await Models.Cart.findAll({
@@ -115,11 +122,129 @@ exports.removeCartItem = async (req, res) => {
         .send({ status: false, message: "Cart item not found." });
     }
   } catch (err) {
+    res.status(500).send({
+      status: false,
+      message: "Something went to wrong.",
+      error: err.message,
+    });
+  }
+};
+
+exports.cartPlaceOrder = async (req, res) => {
+  try {
+    const user_id = req.userId;
+    const getCart = await Models.Cart.findAll({
+      where: { user_id },
+    });
+    const cartTotal = await calculateCartTotal(getCart);
+    if (cartTotal > 0) {
+      const newOrder = await Models.Orders.create({
+        user_id,
+        total: cartTotal,
+        transaction_id: "just test",
+      });
+      const { startDate, endDate } = getAgoDate();
+      const orderZipCodeItems = getCart.map((cartItem) => ({
+        order_id: newOrder.id,
+        zip_id: cartItem.zip_id,
+        user_id,
+        zip_code: cartItem.zip_code,
+        city: cartItem.city,
+        price: cartItem.price,
+        start_date: startDate,
+        end_date: endDate,
+        status: 1,
+      }));
+      const orderZipCode = await Models.orderZipCode.bulkCreate(
+        orderZipCodeItems
+      );
+
+      await Models.Cart.destroy({
+        where: { user_id },
+      });
+      res.status(200).send({
+        status: true,
+        message: "Your order placed successfully.",
+        data: newOrder,
+      });
+    } else {
+      return res.status(400).send({
+        status: false,
+        message: "Order amount cannot be zero",
+        data: [],
+      });
+    }
+  } catch (err) {
+    res.status(500).send({
+      status: false,
+      message: "Your order cannot place, an error occured.",
+      error: err.message,
+    });
+  }
+};
+
+async function calculateCartTotal(cart) {
+  try {
+    return cart.reduce((total, item) => {
+      return total + parseFloat(item.price);
+    }, 0);
+  } catch (err) {
+    return false;
+  }
+}
+
+function getAgoDate() {
+  const currentDate = moment();
+  const agoDate = moment(currentDate).add(1, "months");
+  const startDate = currentDate.format("DD-MM-YYYY");
+  const endDate = agoDate.format("DD-MM-YYYY");
+  return { startDate, endDate };
+}
+
+exports.getAgentActiveZipCode = async (req, res) => {
+  try {
+    const user_id = req.userId;
+    const activeZipCodes = await Models.orderZipCode.findAll({
+      where: {
+        start_date: { [Sequelize.Op.lte]: moment().format("YYYY-MM-DD") },
+        end_date: { [Sequelize.Op.gte]: moment().format("YYYY-MM-DD") },
+        user_id,
+      },
+    });
+    return res.status(200).send({
+      status: true,
+      message: "Active zip code fetched success.",
+      data: activeZipCodes,
+    });
+  } catch (err) {
+    res.status(500).send({
+      status: false,
+      message: "Something went to wrong",
+      data: [],
+      error: err.message,
+    });
+  }
+};
+
+exports.getAgentLeads = async (req, res) => {
+  try {
+    const user_id = req.userId;
+    const activeZipCode = await Models.orderZipCode.findAll({
+      where: { user_id },
+    });
+    const zipCodes = activeZipCode.map((result) => result.zip_code);
+    const leadData = await Models.Lead.findAll({
+      where: {
+        zip_code: { [Op.in]: zipCodes },
+      },
+    });
+    res.status(200).send({ status: true, data: leadData });
+  } catch (err) {
     res
       .status(500)
       .send({
         status: false,
-        message: "Something went to wrong.",
+        message: "Leads cannot fetched, an error occured",
         error: err.message,
       });
   }

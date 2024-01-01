@@ -16,12 +16,11 @@ const Protectedrout = (props) => {
     if (token && isAdmin) {
       navigate("/");
       if (isAdmin === "agent") {
-        // navigate("/agentDashboard");
-        if (userData.status === 0) {
-          navigate("/agent/purchase-zip");
-        } else {
+        // if (userData.activeZipcode === 0 || userData.activeZipcode > 0) {
+        //   navigate("/agent/purchase-zip");
+        // } else {
           navigate("/agentDashboard");
-        }
+        // }
       } else if (isAdmin === "admin") {
         navigate("/admin/dashboard");
       } else {

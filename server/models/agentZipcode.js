@@ -2,7 +2,7 @@
 const { Model } = require("sequelize");
 
 module.exports = (sequelize, DataTypes) => {
-  class agentActiveZipcode extends Model {
+  class agentZipcode extends Model {
     static associate(models) {
         // this.belongsTo(models.Users, {
         //     foreignKey: 'user_id',
@@ -10,7 +10,7 @@ module.exports = (sequelize, DataTypes) => {
         // });
     }
   }
-  agentActiveZipcode.init(
+  agentZipcode.init(
     {
       user_id: DataTypes.INTEGER,
       zip_id: DataTypes.INTEGER,
@@ -24,10 +24,10 @@ module.exports = (sequelize, DataTypes) => {
       timestamps:true,
       createdAt:"created_at",
       updatedAt:"updated_at",
-      modelName: "agentActiveZipcode",
+      modelName: "agentZipcode",
       paranoid: false,
-      tableName: "agent_active_zipcode",
+      tableName: "agent_zipcode",
     }
   );
-  return agentActiveZipcode;
+  return agentZipcode;
 };

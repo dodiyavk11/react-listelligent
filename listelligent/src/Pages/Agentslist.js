@@ -143,7 +143,7 @@ const Agentslist = () => {
                                 <div className='agent-profile'>
                                     <Row className='d-flex align-items-center'>
                                         <Col md={3} className='agent-img'>
-                                            <img src='https://storage.googleapis.com/upnest1/upload/realtor/1505730803_2621ec1e-d519-49f6-84bc-7197ada234d7.jpeg'></img>
+                                            <img alt="agent" src='https://storage.googleapis.com/upnest1/upload/realtor/1505730803_2621ec1e-d519-49f6-84bc-7197ada234d7.jpeg'></img>
                                         </Col>
                                         <Col md={9}>
                                             <h4>Jeff Rossa</h4>
@@ -159,7 +159,7 @@ const Agentslist = () => {
                                 <div className='agent-profile'>
                                     <Row className='d-flex align-items-center'>
                                         <Col md={3} className='agent-img'>
-                                            <img src='https://storage.googleapis.com/upnest1/upload/realtor/1469387760_4e54bb70-f2eb-426e-b6d2-e9a0a7b47ce2.jpeg'></img>
+                                            <img alt="agent" src='https://storage.googleapis.com/upnest1/upload/realtor/1469387760_4e54bb70-f2eb-426e-b6d2-e9a0a7b47ce2.jpeg'></img>
                                         </Col>
                                         <Col md={9}>
                                             <h4>Robin Barron</h4>
@@ -174,7 +174,7 @@ const Agentslist = () => {
                                 </div><div className='agent-profile'>
                                     <Row className='d-flex align-items-center'>
                                         <Col md={3} className='agent-img'>
-                                            <img src='https://storage.googleapis.com/upnest1/upload/realtor/672158992_abd6408e-e3d6-4ce7-a7c4-4cf1df8b0497.jpeg'></img>
+                                            <img alt="agent" src='https://storage.googleapis.com/upnest1/upload/realtor/672158992_abd6408e-e3d6-4ce7-a7c4-4cf1df8b0497.jpeg'></img>
                                         </Col>
                                         <Col md={9}>
                                             <h4>Melissa Goldstein Tucci</h4>

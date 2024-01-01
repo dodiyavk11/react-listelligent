@@ -1,13 +1,14 @@
 const Models = require("../models");
 const bcrypt = require("bcryptjs");
+const moment = require("moment");
+const Sequelize = require("sequelize");
 const { generateJWTToken, decodeJWTToken } = require("../utils/jwtUtils");
 
 exports.signUp = async (req, res) => {
-  if(req.body.email === "" || req.body.password === "")
-  {
+  if (req.body.email === "" || req.body.password === "") {
     return res
-        .status(409)
-        .send({ status: false, message: "Please fill all field ", data: [] });
+      .status(409)
+      .send({ status: false, message: "Please fill all field ", data: [] });
   }
   try {
     const {
@@ -83,15 +84,7 @@ exports.signUp = async (req, res) => {
 exports.signIn = async (req, res) => {
   try {
     const { email, password } = req.body;
-
-    // const getUser = await Models.Users.findOne({ where: { email } });
     const getUser = await Models.Users.findOne({
-      include: [
-        {
-          model: Models.agentActiveZipcode,
-          as: "activeZipcode",
-        },
-      ],
       where: { email },
     });
     if (!getUser)
@@ -107,16 +100,24 @@ exports.signIn = async (req, res) => {
         .status(401)
         .send({ status: false, message: "Invalid credentials", data: [] });
 
-    // if (!getUser.status && getUser.role !== 0) {
-    //   return res.status(401).send({
-    //     status: false,
-    //     message:
-    //       "Your account under reivew Admin approve your account then after you can access.",
-    //     data: [],
-    //   });
-    // }
+    if (!getUser.status && getUser.role !== 0) {
+      return res.status(401).send({
+        status: false,
+        message:
+          "Your account under reivew Admin approve your account then after you can access.",
+        data: [],
+      });
+    }
     const token = generateJWTToken({ userId: getUser.id }, "1h");
     delete getUser.dataValues.password;
+    const activeZipCodes = await Models.orderZipCode.count({
+      where: {
+        start_date: { [Sequelize.Op.lte]: moment().format("YYYY-MM-DD") },
+        end_date: { [Sequelize.Op.gte]: moment().format("YYYY-MM-DD") },
+        user_id: getUser.dataValues.id,
+      },
+    });
+    getUser.dataValues.activeZipcode = activeZipCodes;
     res.status(200).send({
       status: true,
       message: "Login Successful",
@@ -139,13 +140,11 @@ exports.userAddLead = async (req, res) => {
     const { name, phone, email, address, zip_code } = req.body;
     const leadData = { name, phone, email, address, zip_code, status: 0 };
     const addLead = await Models.lead.create(leadData);
-    res
-      .status(200)
-      .send({
-        status: true,
-        message: "Data saved successfully.",
-        data: addLead,
-      });
+    res.status(200).send({
+      status: true,
+      message: "Data saved successfully.",
+      data: addLead,
+    });
   } catch (err) {
     res.status(500).send({
       status: false,
