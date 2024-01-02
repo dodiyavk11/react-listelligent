@@ -237,6 +237,7 @@ exports.getAgentLeads = async (req, res) => {
       where: {
         zip_code: { [Op.in]: zipCodes },
       },
+      order: [['id', 'DESC']],
     });
     res.status(200).send({ status: true, data: leadData });
   } catch (err) {
@@ -249,3 +250,62 @@ exports.getAgentLeads = async (req, res) => {
       });
   }
 };
+
+exports.showUserAgentList = async(req, res) => {
+  try
+  {
+    const user_id = req.user_id;
+    const { zipcode } = req.params;
+    if(zipcode)
+    {
+      const agentList = await Models.Users.findAll({
+      include: [
+          {
+            model: Models.orderZipCode,
+            as: "activeZipcode",
+            where: { zip_code: zipcode },
+          },
+        ]        
+      })
+      return res.status(200).send({ status: true, data: agentList });
+    }    
+    return res.status(500).send({ status: false, message: "Something went to wrong", data:[] });
+  }catch(err)
+  {
+    res.status(500).send({ status: false, message: "Agent list cannot get, an error occured", error: err.message });
+  }
+}
+
+exports.viewAgentByUser = async(req, res) => {
+  try{
+    const { id } = req.params;
+    const agentData = await Models.Users.findOne({ where:{ id } });
+    if(agentData)
+    {
+      return res.status(200).send({ status: true, message: "Agent data get successfully.", data: agentData });
+    }
+    return res.status(404).send({ status: false, message: "Agent cannot found or something went to wrong", data: [] })
+  }catch(err)
+  {
+    res.status(500).send({ status: false, message: "Agent cannot view, an error occured.", error: err.message });
+  }
+}
+
+exports.getAgentOrdersList = async(req, res) => {
+  try{
+    const user_id = req.userId;
+    const getOrders = await Models.Orders.findAll({
+      include:[
+        {
+          model: Models.orderZipCode,
+          as: "orderProduct",
+        }
+      ],
+      where: { user_id },
+      order: [['id', 'DESC']],
+    })
+    res.status(200).send({ status: true, message: "Order get successfully", data: getOrders })
+  }catch(err){
+    res.status(500).send({ status: false, message: "Agnet order can not get, an error occured.", error: err.message });
+  }
+}

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 01, 2024 at 02:32 PM
+-- Generation Time: Jan 02, 2024 at 02:37 PM
 -- Server version: 10.4.27-MariaDB
 -- PHP Version: 7.4.33
 
@@ -57,13 +57,6 @@ CREATE TABLE `cart` (
   `updated_at` datetime NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
---
--- Dumping data for table `cart`
---
-
-INSERT INTO `cart` (`id`, `user_id`, `price`, `zip_code`, `city`, `validity`, `zip_id`, `created_at`, `updated_at`) VALUES
-(35, 18, '850.00', 362266, 'Patan', 0, 2, '2024-01-01 19:02:12', '2024-01-01 19:02:12');
-
 -- --------------------------------------------------------
 
 --
@@ -88,7 +81,25 @@ CREATE TABLE `lead` (
 
 INSERT INTO `lead` (`id`, `name`, `phone`, `email`, `address`, `zip_code`, `status`, `created_at`, `updated_at`) VALUES
 (1, 'test user', '123547', '6cmbgrndmx@skygazerhub.com', '232, parlk avenue road', 362265, 0, '2023-12-27 13:31:04', '2024-01-01 18:26:39'),
-(2, 'test user', '123547', '6cmbgrndmx@skygazerhub.com', '232, parlk avenue road', 362265, 0, '2023-12-27 13:42:33', '2024-01-01 18:15:52');
+(2, 'test user', '123547', '6cmbgrndmx@skygazerhub.com', '232, parlk avenue road', 362265, 0, '2023-12-27 13:42:33', '2024-01-01 18:15:52'),
+(3, 'User from front side', '14565445   ', '6cmbgrndmx@skygazerhub.com', '232, Junagadh Raod', 362265, 0, '2024-01-02 10:48:01', '2024-01-02 11:15:36'),
+(4, 'Jayesh Naghera', '14565445   ', 'jayesh@skygazerhub.com', '232, Junagadh Raod', 362001, 0, '2024-01-02 12:25:28', '2024-01-02 12:25:28'),
+(5, 'Jayesh Naghera', '09033389733', 'rjnaghera@gmail.com', 'Test', 0, 0, '2024-01-02 13:31:23', '2024-01-02 13:31:23'),
+(6, 'Jayesh Naghera', '9033389733', 'rjnaghera@gmail.com', 'Test', 0, 0, '2024-01-02 13:34:15', '2024-01-02 13:34:15'),
+(7, 'Jayesh Naghera', '09033389733', 'rjnaghera@gmail.com', 'Test', 362268, 0, '2024-01-02 13:44:53', '2024-01-02 13:44:53'),
+(8, 'Jayesh Naghera', '09033389733', 'rjnaghera@gmail.com', 'Test', 362001, 0, '2024-01-02 15:29:06', '2024-01-02 15:29:06'),
+(9, 'Jayesh Naghera', '09033389733', 'rjnaghera@gmail.com', 'Test', 362001, 0, '2024-01-02 15:33:07', '2024-01-02 15:33:07'),
+(10, 'Jayesh Naghera', '09033389733', 'rjnaghera@gmail.com', 'Test', 362001, 0, '2024-01-02 15:34:21', '2024-01-02 15:34:21'),
+(11, 'Jayesh Naghera', '09033389733', 'rjnaghera@gmail.com', 'Test', 362001, 0, '2024-01-02 15:36:56', '2024-01-02 15:36:56'),
+(12, 'Jayesh Naghera', '09033389733', 'rjnaghera@gmail.com', 'Test', 362268, 0, '2024-01-02 15:43:28', '2024-01-02 15:43:28'),
+(13, 'Jayesh Naghera', '09033389733', 'rjnaghera@gmail.com', 'Test', 362268, 0, '2024-01-02 15:44:45', '2024-01-02 15:44:45'),
+(14, 'Jayesh Naghera', '09033389733', 'rjnaghera@gmail.com', 'Test', 362001, 0, '2024-01-02 15:57:20', '2024-01-02 15:57:20'),
+(15, 'Jayesh Naghera', '09033389733', 'rjnaghera@gmail.com', 'Test', 362268, 0, '2024-01-02 16:24:24', '2024-01-02 16:24:24'),
+(16, 'Jayesh Naghera', '09033389733', 'rjnaghera@gmail.com', 'Test', 362268, 0, '2024-01-02 16:26:24', '2024-01-02 16:26:24'),
+(17, 'Jayesh Naghera', '09033389733', 'rjnaghera@gmail.com', 'Test', 362268, 0, '2024-01-02 16:28:18', '2024-01-02 16:28:18'),
+(18, 'User test form', '1236549870', 'test@mail.com', 'Testing address', 362730, 0, '2024-01-02 18:22:02', '2024-01-02 18:22:02'),
+(19, 'Dev', '12328554', 'jayesh@besticoder.com', 'Test', 362268, 0, '2024-01-02 18:58:48', '2024-01-02 18:58:48'),
+(20, 'Jayesh Naghera', '09033389733', 'rjnaghera@gmail.com', 'Test', 362268, 0, '2024-01-02 19:03:50', '2024-01-02 19:03:50');
 
 -- --------------------------------------------------------
 
@@ -129,7 +140,8 @@ INSERT INTO `users` (`id`, `name`, `license`, `license_date`, `mls_id`, `brokera
 (4, 'Vijay Dodiya', '15243634', '2023-12-06', '13675', 'Testing Perposer', 'Address 1', 'Street Road', 235796, 'Address 2', '135546', '1204', 'Testing Link', 'vishal.besticoder@gmail.com', 1, 0, '', '2023-12-26 13:14:42', '0000-00-00 00:00:00'),
 (5, 'fsdf', 'sfsf', '2023-12-22', 'adad', 'adad', 'adad', 'adad', 0, 'daad', 'adad', 'adad', 'adad', 'vishal.besticoder@gmail.com', 1, 0, '', '2023-12-26 13:14:42', '0000-00-00 00:00:00'),
 (8, 'Jayesh Naghera', 'ABC123', '2023-01-01', 'MLS123', 'XYZ Realty', '123 Main St', 'Building A', 12345, '456 Side St', '67890', '500000', 'Lorem ipsum...', 'jayesh.besticoder@gmail.com', 1, 1, '$2a$11$RV2U2FZxI2y1W8CYD/IjC.RVvyhMoAOk9A70xX3c.dqsOo5fDSCLy', '2023-12-26 15:16:46', '2023-12-27 09:45:35'),
-(18, 'Test agent', '123456', '2025-12-12', '1232', '4546545', '12232', '4545', 212121, '12121', '21212', '212121', '1212', '6cmbgrndmx@skygazerhub.com', 1, 1, '$2a$11$3rIZvvL3IC7OR5OwHC/5Ou2Z.3ZEvxXzkBKrALP6uoCQWIIk0VMAO', '2023-12-28 15:14:17', '2024-01-01 13:42:05');
+(18, 'Test agent', '123456', '2025-12-12', '1232', '4546545', '12232', '4545', 212121, '12121', '21212', '212121', '1212', '6cmbgrndmx@skygazerhub.com', 1, 1, '$2a$11$3rIZvvL3IC7OR5OwHC/5Ou2Z.3ZEvxXzkBKrALP6uoCQWIIk0VMAO', '2023-12-28 15:14:17', '2024-01-01 13:42:05'),
+(19, 'Agent test 2', '12345', '2024-12-12', '123', '12123', '123', '113', 362001, '3662', '362001', '122', '155', 'ziylgchhs7@sfolkar.com', 1, 1, '$2a$11$XGZ5QFLLUUAYSWOZLEwvCOpfpkQkK9RSimA6FO4CuI9hJYzWWx8lq', '2024-01-02 12:12:21', '2024-01-02 12:12:51');
 
 -- --------------------------------------------------------
 
@@ -183,7 +195,9 @@ INSERT INTO `zip_orders` (`id`, `user_id`, `total`, `transaction_id`, `created_a
 (1, 18, '1500.00', 'just test', '2024-01-01 18:03:00', '2024-01-01 18:03:00'),
 (2, 18, '1500.00', 'just test', '2024-01-01 18:03:16', '2024-01-01 18:03:16'),
 (5, 18, '1500.00', 'just test', '2024-01-01 18:06:22', '2024-01-01 18:06:22'),
-(6, 18, '850.00', 'just test', '2024-01-01 18:39:07', '2024-01-01 18:39:07');
+(6, 18, '850.00', 'just test', '2024-01-01 18:39:07', '2024-01-01 18:39:07'),
+(7, 19, '1800.00', 'just test', '2024-01-02 12:23:41', '2024-01-02 12:23:41'),
+(8, 18, '4350.00', 'just test', '2024-01-02 13:48:06', '2024-01-02 13:48:06');
 
 -- --------------------------------------------------------
 
@@ -212,7 +226,12 @@ INSERT INTO `zip_orders_product` (`id`, `order_id`, `zip_id`, `user_id`, `zip_co
 (1, 1, 1, 18, 362265, 'Veraval', '1500.00', '2024-01-01', '2024-02-01', 1),
 (2, 2, 1, 18, 362265, 'Veraval', '1500.00', '2024-01-01', '2024-02-01', 1),
 (5, 5, 1, 18, 362265, 'Veraval', '1500.00', '2024-01-01', '2024-02-01', 1),
-(6, 6, 2, 18, 362266, 'Patan', '850.00', '2024-01-01', '2024-02-01', 1);
+(6, 6, 2, 18, 362266, 'Patan', '850.00', '2024-01-01', '2024-02-01', 1),
+(7, 7, 4, 19, 362001, 'Junagadh', '1800.00', '2024-01-02', '2024-02-02', 1),
+(8, 8, 3, 18, 362268, 'Bhalpara', '850.00', '2024-01-02', '2024-02-02', 1),
+(9, 8, 2, 18, 362266, 'Patan', '850.00', '2024-01-02', '2024-02-02', 1),
+(10, 8, 4, 18, 362001, 'Junagadh', '1800.00', '2024-01-02', '2024-02-02', 1),
+(11, 8, 10, 18, 362730, 'Amreli', '850.00', '2024-01-02', '2024-02-02', 1);
 
 --
 -- Indexes for dumped tables
@@ -274,19 +293,19 @@ ALTER TABLE `agent_zipcode`
 -- AUTO_INCREMENT for table `cart`
 --
 ALTER TABLE `cart`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=36;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=47;
 
 --
 -- AUTO_INCREMENT for table `lead`
 --
 ALTER TABLE `lead`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
 
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
 
 --
 -- AUTO_INCREMENT for table `zip_codes`
@@ -298,13 +317,13 @@ ALTER TABLE `zip_codes`
 -- AUTO_INCREMENT for table `zip_orders`
 --
 ALTER TABLE `zip_orders`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT for table `zip_orders_product`
 --
 ALTER TABLE `zip_orders_product`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

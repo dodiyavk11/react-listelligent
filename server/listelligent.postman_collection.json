@@ -672,6 +672,78 @@
 				}
 			},
 			"response": []
+		},
+		{
+			"name": "User get agent list base on filled form zip",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3001/agent/list/362001",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3001",
+					"path": [
+						"agent",
+						"list",
+						"362001"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "User view agent profile api",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3001/agent/view/19",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3001",
+					"path": [
+						"agent",
+						"view",
+						"19"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Agent order list ",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjE4LCJpYXQiOjE3MDQxOTUzNjYsImV4cCI6MTcwNDE5ODk2Nn0.9pYrQC8BlMvRBto1ucOB9AZNjY3Qeh1LqoPCFZzI7bY",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3001/agent/orders",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3001",
+					"path": [
+						"agent",
+						"orders"
+					]
+				}
+			},
+			"response": []
 		}
 	]
 }

@@ -6,6 +6,9 @@ const {
   cartPlaceOrder,
   getAgentActiveZipCode,
   getAgentLeads,
+  showUserAgentList,
+  viewAgentByUser,
+  getAgentOrdersList
 } = require("../controllers/agent.controller");
 const { isLogin, isAdmin, isAgent } = require("../middleware/isAuthenticate");
 
@@ -17,4 +20,7 @@ module.exports = (app) => {
   app.get("/agent/cart/placeOrder", [isLogin, isAgent], cartPlaceOrder);
   app.get("/agent/active/zipCode", [isLogin, isAgent], getAgentActiveZipCode);
   app.get("/agent/leads", [isLogin, isAgent], getAgentLeads);
+  app.get("/agent/list/:zipcode",showUserAgentList)
+  app.get("/agent/view/:id", viewAgentByUser);
+  app.get("/agent/orders", [isLogin, isAgent], getAgentOrdersList)
 };

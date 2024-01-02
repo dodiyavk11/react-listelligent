@@ -19,8 +19,10 @@ import Protectedrout from "./Pages/Admin/Protectedrout";
 import Agentsview from "./Pages/Admin/Agentsview";
 import Agentdashboard from "./Pages/Agents/Agentdashboard";
 import Myproposals from "./Pages/Agents/Myproposals";
+import agentLeads from "./Pages/Agents/agentLeads";
 import Agentperformance from "./Pages/Agents/Agentperformance";
 import Agentaccount from "./Pages/Agents/Agentaccount";
+import AgentOrders from "./Pages/Agents/AgentOrders";
 import Agentsfaq from "./Pages/Agents/Agentsfaq";
 // import AgentProtectedR from "./Pages/Agents/AgentProtectedR";
 import ZipCode from "./Pages/Admin/ZipCode";
@@ -37,7 +39,7 @@ function App() {
             <Route path="singlepost" element={<Singlepost />} />
             <Route path="howitwork" element={<Howitwork />} />
             <Route path="agentslist" element={<Agentslist />} />
-            <Route path="agentprofile" element={<Agentprofile />} />
+            <Route path="agentprofile/:id" element={<Agentprofile />} />
             <Route path="agentsignup" element={<Agentsignup />} />
             <Route path="agentsignupform" element={<Agentsignupform />} />
             <Route path="howagentswork" element={<Howagentswork />} />
@@ -71,6 +73,10 @@ function App() {
               element={<Protectedrout Component={Myproposals} />}
             />
             <Route
+              path="leads"
+              element={<Protectedrout Component={agentLeads} />}
+            />
+            <Route
               path="agentPerformance"
               element={<Protectedrout Component={Agentperformance} />}
             />
@@ -83,10 +89,14 @@ function App() {
               element={<Protectedrout Component={Agentaccount} />}
             />
             <Route
+              path="agent/orders"
+              element={<Protectedrout Component={AgentOrders} />}
+            />
+            <Route
               path="agentsFAQ"
               element={<Protectedrout Component={Agentsfaq} />}
             />
-            
+
             <Route
               path="agent/purchase-zip"
               element={<Protectedrout Component={PurchaseZip} />}

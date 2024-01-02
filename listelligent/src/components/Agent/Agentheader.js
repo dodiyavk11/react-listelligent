@@ -31,7 +31,7 @@ const Agentheader = () => {
   };
 
   return (
-    <>
+    <div>
       {["xl"].map((expand) => (
         <Navbar key={expand} expand={expand} className="bg-body-tertiary">
           <Container>
@@ -50,6 +50,8 @@ const Agentheader = () => {
               <Offcanvas.Body>
                 <Nav className="justify-content-end flex-grow-1 pe-3 nav-links">
                   <Link to={"/agentDashboard"}>Dashboard</Link>
+                  <Link to={"/leads"}>Leads</Link>
+                  <Link to={"/agent/orders"}>Orders</Link>
                   <Link to={"/myProposal"}>My Proposals</Link>
                   <NavDropdown
                     className="dropdownmenu"
@@ -57,12 +59,12 @@ const Agentheader = () => {
                     id={`offcanvasNavbarDropdown-expand-${expand}`}
                   >
                     <Link to={"/agentDashboard"}>Dashboard</Link>
-                    <Link to={"/myProposal"}>My Proposals</Link>
+                    <Link to={"/myProposal"}>My Proposals</Link>                    
                     <Link to={"/agentPerformance"}>My Performance</Link>
                     <Link to={"/myAgentProfile"}>My Profile</Link>
                     <Link to={"/agentsAccount"}>Account</Link>
                     <Link to={"/agentsFAQ"}>Agent FAQ</Link>
-                    <Link onClick={handleLogout}>Logout</Link>
+                    <Link to={'/'} onClick={handleLogout}>Logout</Link>
                   </NavDropdown>
                 </Nav>
               </Offcanvas.Body>
@@ -70,7 +72,7 @@ const Agentheader = () => {
           </Container>
         </Navbar>
       ))}
-    </>
+    </div>
   );
 };
 

@@ -77,11 +77,11 @@ const Header = () => {
                                     auth
                                         ?
                                         <>
-                                            <Link to={'/'} variant="outline-light" className='header-logout-btn' onClick={handleDelete}>LOGGED OUT</Link>
+                                            <Link to={'/'} variant="outline-light" className='header-logout-btn' onClick={handleDelete}>Log out</Link>
                                         </>
                                         :
                                         <>
-                                            <Link to={'/login'} variant="outline-light" className='header-login-btn'>LOGIN</Link>
+                                            <Link to={'/login'} variant="outline-light" className='header-login-btn'>Login</Link>
                                         </>
                                 }
                             </Offcanvas.Body>

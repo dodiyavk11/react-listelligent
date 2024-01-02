@@ -139,7 +139,7 @@ exports.userAddLead = async (req, res) => {
   try {
     const { name, phone, email, address, zip_code } = req.body;
     const leadData = { name, phone, email, address, zip_code, status: 0 };
-    const addLead = await Models.lead.create(leadData);
+    const addLead = await Models.Lead.create(leadData);
     res.status(200).send({
       status: true,
       message: "Data saved successfully.",

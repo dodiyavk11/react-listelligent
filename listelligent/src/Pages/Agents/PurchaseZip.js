@@ -227,7 +227,7 @@ const PurchaseZip = () => {
                 {searchResults.map((result, index) => (
                   <Col key={index} xs={2} md={2} lg={2}>
                     {/* Bootstrap Card for each product */}
-                    <Card className="mb-4">
+                    <Card className="mb-4" key={index}>
                       <Card.Body className="text-center">
                         <Card.Title>{result.city}</Card.Title>
                         <Card.Text>
@@ -252,7 +252,7 @@ const PurchaseZip = () => {
                         )}
                       </Card.Body>
                     </Card>
-                  </Col>                  
+                  </Col>
                 ))}
               </Row>
             </div>
@@ -265,33 +265,27 @@ const PurchaseZip = () => {
                 <Col md={8}>
                   <h3>Your cart items</h3>
                   <hr />
-                  {cartItems.map((result, index) => (
-                    <Row key={result.id} className="p-2">
-                      <Row key={result.id} className="p-2">
-                        <Col md={12}>
-                          <Row>
-                            <Col md={3}>
-                              <p>{result.zipCode.city}</p>
-                            </Col>
-                            <Col md={3}>
-                              <p>{result.zipCode.zip_code}</p>
-                            </Col>
-                            <Col md={3}>
-                              <p>{result.zipCode.prize}</p>
-                            </Col>
-                            <Col md={3}>
-                              <Button
-                                className="find-btn"
-                                onClick={() => handleRemoveItem(result.id)}
-                              >
-                                <BsTrash />
-                              </Button>
-                            </Col>
-                          </Row>
-                        </Col>
-                      </Row>
-                    </Row>
-                  ))}
+                  <Row>
+                    {cartItems.map((result, index) => (                      
+                      <Col md={3} key={index}>
+                        <Card className="mb-4">
+                          <Card.Body className="text-center">
+                            <Card.Title>{result.zipCode.city}</Card.Title>
+                            <Card.Text>
+                              <b>${result.zipCode.prize}</b>
+                            </Card.Text>
+                            <Card.Text>{result.zipCode.zip_code}</Card.Text>
+                            <Button
+                              className="find-btn"
+                              onClick={() => handleRemoveItem(result.id)}
+                            >
+                              <BsTrash />
+                            </Button>
+                          </Card.Body>
+                        </Card>
+                      </Col>
+                    ))}
+                  </Row>
                 </Col>
                 <Col md={4}>
                   <h3>Order summary</h3>
