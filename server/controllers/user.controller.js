@@ -14,16 +14,9 @@ exports.signUp = async (req, res) => {
     const {
       name,
       license,
-      license_date,
-      mls_id,
       brokerage,
       office_address,
-      building,
       zip_code,
-      hp_address,
-      hp_zip_code,
-      hp_sales_price,
-      realtor_profile,
       email,
       role,
       password,
@@ -45,17 +38,10 @@ exports.signUp = async (req, res) => {
     const hashedPassword = await bcrypt.hash(password, 11);
     const userInfo = {
       name,
-      license,
-      license_date,
-      mls_id,
+      license,      
       brokerage,
       office_address,
-      building,
-      zip_code,
-      hp_address,
-      hp_zip_code,
-      hp_sales_price,
-      realtor_profile,
+      zip_code,      
       email,
       role,
       password: hashedPassword,
@@ -137,16 +123,16 @@ exports.signIn = async (req, res) => {
 
 exports.userAddLead = async (req, res) => {
   try {
-    const { name, phone, email, address, zip_code } = req.body;
-    const leadData = { name, phone, email, address, zip_code, status: 0 };
+    const { name, phone, email, address, zip_code, agent_zip_code } = req.body;
+    const leadData = { name, phone, email, address, zip_code, agent_zip_code, status: 0 };
     const addLead = await Models.Lead.create(leadData);
-    res.status(200).send({
+    return res.status(200).send({
       status: true,
       message: "Data saved successfully.",
       data: addLead,
     });
   } catch (err) {
-    res.status(500).send({
+    return res.status(500).send({
       status: false,
       message: "Lead can not save, an error occured",
       error: err.message,

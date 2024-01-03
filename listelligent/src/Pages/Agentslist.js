@@ -14,7 +14,7 @@ import StepContent from "@mui/material/StepContent";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import ProgressBar from "react-bootstrap/ProgressBar";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import {
   NotificationContainer,
@@ -38,6 +38,7 @@ const steps = [
 ];
 
 const Agentslist = () => {
+  const navigate = useNavigate();
   const authToken = localStorage.getItem("token");
   const storedFormDataString = localStorage.getItem("formData");
   const storedFormData = storedFormDataString
@@ -51,6 +52,7 @@ const Agentslist = () => {
     email: "",
     address: "",
     zip_code: "",
+    agent_zip_code: "",
   });
 
   useEffect(() => {
@@ -117,7 +119,7 @@ const Agentslist = () => {
 
   const getAgentList = async () => {
     try {
-      const zipCodes = cookies ? cookies["zip_code"] : formData.zip_code;
+      const zipCodes = cookies ? cookies["agent_zip_code"] : formData.agent_zip_code;
       const response = await axios.get(
         `${process.env.REACT_APP_BASE_URL}agent/list/${zipCodes}`,
         {
@@ -134,6 +136,10 @@ const Agentslist = () => {
     }
   };
 
+  const resetSearch = () => {
+    localStorage.removeItem('formData');
+    navigate("/");
+  };
   return (
     <Layout>
       <div
@@ -275,11 +281,16 @@ const Agentslist = () => {
         <div className="agents-container">
           <Container>
             <Row>
-              <Col md={12}>
+              <Col md={9}>
                 <h3>
                   {agentList.length} Real Estate Agents Serving{" "}
-                  {cookies ? cookies["zip_code"] : formData.zip_code}
+                  {cookies ? cookies["agent_zip_code"] : formData.agent_zip_code}
                 </h3>
+              </Col>
+              <Col md={3} className="text-end">                
+                <button className="btn btn-danger" onClick={resetSearch}>
+                  Reset
+                </button>
               </Col>
             </Row>
           </Container>

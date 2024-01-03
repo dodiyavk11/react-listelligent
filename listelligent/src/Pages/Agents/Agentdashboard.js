@@ -1,10 +1,7 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import Agentlayout from "../../components/Agent/Agentlayout";
-import Container from "react-bootstrap/Container";
-import Row from "react-bootstrap/Row";
-import Col from "react-bootstrap/Col";
 import "../../Style/Agents/agentdashboard.css";
-import { Link } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import { FaChalkboardUser } from "react-icons/fa6";
 import { MdOutlineShoppingCart } from "react-icons/md";
 import { IoArchiveOutline } from "react-icons/io5";
@@ -17,14 +14,28 @@ import Tabs from "@mui/material/Tabs";
 import Tab from "@mui/material/Tab";
 import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
-import Button from "react-bootstrap/Button";
-import ProgressBar from "react-bootstrap/ProgressBar";
 import { FaAngleDown } from "react-icons/fa6";
 import { LuPhoneIncoming } from "react-icons/lu";
 import { MdOutlineSettingsPhone } from "react-icons/md";
 import { IoIosMore } from "react-icons/io";
 import { GoArrowRight } from "react-icons/go";
 import CircularProgress from "@mui/material/CircularProgress";
+import TimeAgo from "react-timeago";
+import axios from "axios";
+import {
+  NotificationContainer,
+  NotificationManager,
+} from "react-notifications";
+import "react-notifications/lib/notifications.css";
+import {
+  Dropdown,
+  DropdownButton,
+  Button,
+  ProgressBar,
+  Col,
+  Row,
+  Container,
+} from "react-bootstrap";
 
 function CustomTabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -94,11 +105,43 @@ CircularProgressWithLabel.propTypes = {
 };
 
 const Agentdashboard = () => {
+  const navigate = useNavigate();
+  const authToken = localStorage.getItem("token");
   const [value, setValue] = React.useState(0);
+  const [data, setData] = useState([]);
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
+
+  const getAgentLeads = async () => {
+    try {
+      const response = await axios.get(
+        `${process.env.REACT_APP_BASE_URL}agent/leads`,
+        {
+          headers: { Authorization: `Bearer ${authToken}` },
+          withCredentials: true,
+        }
+      );
+
+      if (response.status) {
+        // NotificationManager.success("Success", response.data.message, 3000);
+        setData(response.data.data);
+      } else {
+        NotificationManager.error("Error", response.data.message, 3000);
+      }
+    } catch (error) {
+      if (error.response && error.response.status === 401) {
+        localStorage.clear();
+        navigate("/login");
+      } else {
+        NotificationManager.error("Error", error.response.data.message, 3000);
+      }
+    }
+  };
+  useEffect(() => {
+    getAgentLeads();
+  }, []);
 
   // Progress-bar-code
   const [progress, setProgress] = React.useState(10);
@@ -113,15 +156,43 @@ const Agentdashboard = () => {
       clearInterval(timer);
     };
   }, []);
+  const handleStatusUpdate = async (id, status) => {
+    try {
+      const response = await axios.get(
+        `${process.env.REACT_APP_BASE_URL}agent/lead/update/${id}/${status}`,
+        {
+          headers: { Authorization: `Bearer ${authToken}` },
+          withCredentials: true,
+        }
+      );
+
+      if (response.status) {
+        NotificationManager.success("Success", response.data.message, 3000);
+      } else {
+        NotificationManager.error("Error", response.data.message, 3000);
+      }
+    } catch (error) {
+      if (error.response && error.response.status === 401) {
+        localStorage.clear();
+        navigate("/login");
+      } else {
+        NotificationManager.error("Error", error.response.data.message, 3000);
+      }
+    }
+  };
 
   return (
     <Agentlayout>
       <div className="proposal_search_form_container mt-4">
         <Container>
+          <NotificationContainer/>
           <Row className="mb-3">
             <Col lg={6}>
-              <div className="proposal_search_form">
-                <span>Proposals</span>
+              <div
+                className="proposal_search_form"
+                style={{ justifyContent: "left" }}
+              >
+                {/* <span>Proposals</span> */}
                 <input
                   type="text"
                   placeholder="Search for a Name, Phone #, Email or Address"
@@ -131,7 +202,7 @@ const Agentdashboard = () => {
               </div>
             </Col>
             <Col lg={6}>
-              <div className="filters-menu-container">
+              {/* <div className="filters-menu-container">
                 <span className="filters-menu">
                   <FaChalkboardUser />
                   <Link>All Sellers</Link>
@@ -148,7 +219,7 @@ const Agentdashboard = () => {
                   <MdOutlineRemoveRedEye />
                   <Link>Clients' Activities</Link>
                 </span>
-              </div>
+              </div> */}
             </Col>
           </Row>
           <hr />
@@ -160,7 +231,7 @@ const Agentdashboard = () => {
           <Row>
             <Col md={12}>
               <Box sx={{ width: "100%" }}>
-                <Box>
+                {/* <Box>
                   <Tabs
                     className="dashboard-tabs"
                     value={value}
@@ -178,80 +249,79 @@ const Agentdashboard = () => {
                       {...a11yProps(1)}
                     />
                   </Tabs>
-                </Box>
+                </Box> */}
 
                 <CustomTabPanel value={value} index={0}>
                   <Container>
                     <Row>
-                      <Col md={4}>
-                        <div className="seller-proposals">
-                          <div className="d-flex justify-content-between align-items-center">
-                            <span className="status-span">Submited</span>
-                            <span className="icon-span">
+                      {data.slice(0, 3).map((result, index) => (
+                        <Col md={4} key={index}>
+                          <div className="seller-proposals">
+                            <div className="d-flex justify-content-between align-items-center">
+                              <span className="status-span">
+                                <TimeAgo date={result.created_at} />
+                              </span>
+                              <span>
+                                <DropdownButton
+                                  id="dropdown-basic-button"
+                                  variant="light"
+                                  split
+                                >
+                                  <Dropdown.Item
+                                    disabled={result.status === 1}
+                                    onClick={() =>
+                                      handleStatusUpdate(result.id, 1)
+                                    }
+                                  >
+                                    Complete
+                                  </Dropdown.Item>
+                                  <Dropdown.Item
+                                    disabled={result.status === 2}
+                                    onClick={() =>
+                                      handleStatusUpdate(result.id, 2)
+                                    }
+                                  >
+                                    Accept
+                                  </Dropdown.Item>
+                                  <Dropdown.Item
+                                    disabled={result.status === 3}
+                                    onClick={() =>
+                                      handleStatusUpdate(result.id, 3)
+                                    }
+                                  >
+                                    Decline
+                                  </Dropdown.Item>
+                                </DropdownButton>
+                              </span>
+                              {/* <span className="icon-span">
                               <RiDeleteBin6Line />
-                            </span>
-                          </div>
-                          <div>
-                            <h5>Dalton Hacker</h5>
-                            <p>14283 Mariana Dr, Poway, CA 92064</p>
-                            <p>Estimate $637K - $792K</p>
-                            <p>Submitted on 10/09/2023 12:14 PM</p>
-                          </div>
-                          <div className="card-btn">
+                            </span> */}
+                            </div>
+                            <div>
+                              <h5>{result.name}</h5>
+                              <p>{result.address}</p>
+                              <p>
+                                <b>{result.phone}</b>
+                              </p>
+                              <p>
+                                <b>{result.email}</b>
+                              </p>
+                              <p>Submitted on {result.created_at}</p>
+                            </div>
+                            {/* <div className="card-btn">
                             <Button className="leave-btn">Leave Update</Button>
                             <Button className="view-proposal">
                               View Proposal
                             </Button>
+                          </div> */}
                           </div>
-                        </div>
-                      </Col>
-                      <Col md={4}>
-                        <div className="seller-proposals">
-                          <div className="d-flex justify-content-between align-items-center">
-                            <span className="status-span">Submited</span>
-                            <span className="icon-span">
-                              <RiDeleteBin6Line />
-                            </span>
-                          </div>
-                          <div>
-                            <h5>Svetlana Pritsker</h5>
-                            <p>9838 Apple Tree Dr, San Diego, CA 92124</p>
-                            <p>Estimate $660K - $819K</p>
-                            <p>Submitted on 10/03/2023 10:38 AM</p>
-                          </div>
-                          <div className="card-btn">
-                            <Button className="leave-btn">Leave Update</Button>
-                            <Button className="view-proposal">
-                              View Proposal
-                            </Button>
-                          </div>
-                        </div>
-                      </Col>
-                      <Col md={4}>
-                        <div className="seller-proposals">
-                          <div className="d-flex justify-content-between align-items-center">
-                            <span className="status-span">Submited</span>
-                            <span className="icon-span">
-                              <RiDeleteBin6Line />
-                            </span>
-                          </div>
-                          <div>
-                            <h5>Bruce, Michelle Enigenburg</h5>
-                            <p>3444 Don Lorenzo Dr, Carlsbad, CA 92010</p>
-                            <p>Estimate $501K - $800K</p>
-                            <p>Submitted on 09/28/2023 12:39 PM</p>
-                          </div>
-                          <div className="card-btn">
-                            <Button className="leave-btn">Leave Update</Button>
-                            <Button className="view-proposal">
-                              View Proposal
-                            </Button>
-                          </div>
-                        </div>
-                      </Col>
+                        </Col>
+                      ))}
                     </Row>
 
-                    <Button className="load-more-btn">+ Load More</Button>
+                    <Button className="load-more-btn">
+                      <Link to={"/leads"}>View all</Link>
+                    </Button>
                   </Container>
                 </CustomTabPanel>
 
@@ -338,7 +408,7 @@ const Agentdashboard = () => {
         </Container>
       </div>
 
-      <div className="template-container">
+      {/* <div className="template-container">
         <Container>
           <Row className="box-shadow">
             <Col md={6} className="border1">
@@ -380,9 +450,9 @@ const Agentdashboard = () => {
             </Col>
           </Row>
         </Container>
-      </div>
+      </div> */}
 
-      <div className="performance-container">
+      {/* <div className="performance-container">
         <Container>
           <Row>
             <Col>
@@ -467,9 +537,9 @@ const Agentdashboard = () => {
             </Col>
           </Row>
         </Container>
-      </div>
+      </div> */}
 
-      <div className="profile">
+      {/* <div className="profile">
         <Container>
           <Row>
             <Col>
@@ -508,7 +578,7 @@ const Agentdashboard = () => {
             </Col>
           </Row>
         </Container>
-      </div>
+      </div> */}
     </Agentlayout>
   );
 };

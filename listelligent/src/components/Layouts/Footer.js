@@ -1,17 +1,18 @@
-import React from 'react';
-import '../../Style/footer.css';
-import Container from 'react-bootstrap/Container';
-import Row from 'react-bootstrap/Row';
-import Col from 'react-bootstrap/Col';
+import React from "react";
+import "../../Style/footer.css";
+import Container from "react-bootstrap/Container";
+import Row from "react-bootstrap/Row";
+import Col from "react-bootstrap/Col";
 
 const Footer = () => {
   return (
-    <div className='footer'>
+    <div className="footer">
       <Container>
         <Row>
-          <Col md={3}>
+          <Col md={9}>
             <h4>Listelligent</h4>
-            <p>2173 Salk Ave #250 Carlsbad CA 92008</p>
+            <p>PO Box 12345</p>
+            <p>San Diego, CA 92119</p>
           </Col>
           <Col md={3}>
             <h4>Company</h4>
@@ -27,7 +28,7 @@ const Footer = () => {
         </Row>
       </Container>
     </div>
-  )
-}
+  );
+};
 
 export default Footer;

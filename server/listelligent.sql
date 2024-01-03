@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 02, 2024 at 02:37 PM
+-- Generation Time: Jan 03, 2024 at 01:56 PM
 -- Server version: 10.4.27-MariaDB
 -- PHP Version: 7.4.33
 
@@ -70,6 +70,7 @@ CREATE TABLE `lead` (
   `email` varchar(100) DEFAULT NULL,
   `address` varchar(155) DEFAULT NULL,
   `zip_code` int(11) NOT NULL,
+  `agent_zip_code` int(15) NOT NULL,
   `status` int(1) NOT NULL DEFAULT 0,
   `created_at` datetime NOT NULL DEFAULT current_timestamp(),
   `updated_at` datetime NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
@@ -79,27 +80,36 @@ CREATE TABLE `lead` (
 -- Dumping data for table `lead`
 --
 
-INSERT INTO `lead` (`id`, `name`, `phone`, `email`, `address`, `zip_code`, `status`, `created_at`, `updated_at`) VALUES
-(1, 'test user', '123547', '6cmbgrndmx@skygazerhub.com', '232, parlk avenue road', 362265, 0, '2023-12-27 13:31:04', '2024-01-01 18:26:39'),
-(2, 'test user', '123547', '6cmbgrndmx@skygazerhub.com', '232, parlk avenue road', 362265, 0, '2023-12-27 13:42:33', '2024-01-01 18:15:52'),
-(3, 'User from front side', '14565445   ', '6cmbgrndmx@skygazerhub.com', '232, Junagadh Raod', 362265, 0, '2024-01-02 10:48:01', '2024-01-02 11:15:36'),
-(4, 'Jayesh Naghera', '14565445   ', 'jayesh@skygazerhub.com', '232, Junagadh Raod', 362001, 0, '2024-01-02 12:25:28', '2024-01-02 12:25:28'),
-(5, 'Jayesh Naghera', '09033389733', 'rjnaghera@gmail.com', 'Test', 0, 0, '2024-01-02 13:31:23', '2024-01-02 13:31:23'),
-(6, 'Jayesh Naghera', '9033389733', 'rjnaghera@gmail.com', 'Test', 0, 0, '2024-01-02 13:34:15', '2024-01-02 13:34:15'),
-(7, 'Jayesh Naghera', '09033389733', 'rjnaghera@gmail.com', 'Test', 362268, 0, '2024-01-02 13:44:53', '2024-01-02 13:44:53'),
-(8, 'Jayesh Naghera', '09033389733', 'rjnaghera@gmail.com', 'Test', 362001, 0, '2024-01-02 15:29:06', '2024-01-02 15:29:06'),
-(9, 'Jayesh Naghera', '09033389733', 'rjnaghera@gmail.com', 'Test', 362001, 0, '2024-01-02 15:33:07', '2024-01-02 15:33:07'),
-(10, 'Jayesh Naghera', '09033389733', 'rjnaghera@gmail.com', 'Test', 362001, 0, '2024-01-02 15:34:21', '2024-01-02 15:34:21'),
-(11, 'Jayesh Naghera', '09033389733', 'rjnaghera@gmail.com', 'Test', 362001, 0, '2024-01-02 15:36:56', '2024-01-02 15:36:56'),
-(12, 'Jayesh Naghera', '09033389733', 'rjnaghera@gmail.com', 'Test', 362268, 0, '2024-01-02 15:43:28', '2024-01-02 15:43:28'),
-(13, 'Jayesh Naghera', '09033389733', 'rjnaghera@gmail.com', 'Test', 362268, 0, '2024-01-02 15:44:45', '2024-01-02 15:44:45'),
-(14, 'Jayesh Naghera', '09033389733', 'rjnaghera@gmail.com', 'Test', 362001, 0, '2024-01-02 15:57:20', '2024-01-02 15:57:20'),
-(15, 'Jayesh Naghera', '09033389733', 'rjnaghera@gmail.com', 'Test', 362268, 0, '2024-01-02 16:24:24', '2024-01-02 16:24:24'),
-(16, 'Jayesh Naghera', '09033389733', 'rjnaghera@gmail.com', 'Test', 362268, 0, '2024-01-02 16:26:24', '2024-01-02 16:26:24'),
-(17, 'Jayesh Naghera', '09033389733', 'rjnaghera@gmail.com', 'Test', 362268, 0, '2024-01-02 16:28:18', '2024-01-02 16:28:18'),
-(18, 'User test form', '1236549870', 'test@mail.com', 'Testing address', 362730, 0, '2024-01-02 18:22:02', '2024-01-02 18:22:02'),
-(19, 'Dev', '12328554', 'jayesh@besticoder.com', 'Test', 362268, 0, '2024-01-02 18:58:48', '2024-01-02 18:58:48'),
-(20, 'Jayesh Naghera', '09033389733', 'rjnaghera@gmail.com', 'Test', 362268, 0, '2024-01-02 19:03:50', '2024-01-02 19:03:50');
+INSERT INTO `lead` (`id`, `name`, `phone`, `email`, `address`, `zip_code`, `agent_zip_code`, `status`, `created_at`, `updated_at`) VALUES
+(1, 'test user', '123547', '6cmbgrndmx@skygazerhub.com', '232, parlk avenue road', 362265, 362265, 0, '2023-12-27 13:31:04', '2024-01-03 12:24:28'),
+(2, 'test user', '123547', '6cmbgrndmx@skygazerhub.com', '232, parlk avenue road', 362265, 362265, 0, '2023-12-27 13:42:33', '2024-01-03 12:24:26'),
+(3, 'User from front side', '14565445   ', '6cmbgrndmx@skygazerhub.com', '232, Junagadh Raod', 362265, 362265, 0, '2024-01-02 10:48:01', '2024-01-03 12:24:23'),
+(4, 'Jayesh Naghera', '14565445   ', 'jayesh@skygazerhub.com', '232, Junagadh Raod', 362001, 362001, 0, '2024-01-02 12:25:28', '2024-01-03 12:24:14'),
+(5, 'Jayesh Naghera', '09033389733', 'rjnaghera@gmail.com', 'Test', 362268, 362268, 0, '2024-01-02 13:31:23', '2024-01-03 12:24:11'),
+(6, 'Jayesh Naghera', '9033389733', 'rjnaghera@gmail.com', 'Test', 362268, 362268, 0, '2024-01-02 13:34:15', '2024-01-03 12:24:08'),
+(7, 'Jayesh Naghera', '09033389733', 'rjnaghera@gmail.com', 'Test', 362268, 362268, 0, '2024-01-02 13:44:53', '2024-01-03 12:24:04'),
+(8, 'Jayesh Naghera', '09033389733', 'rjnaghera@gmail.com', 'Test', 362001, 362001, 0, '2024-01-02 15:29:06', '2024-01-03 12:24:02'),
+(9, 'Jayesh Naghera', '09033389733', 'rjnaghera@gmail.com', 'Test', 362001, 362001, 0, '2024-01-02 15:33:07', '2024-01-03 12:23:59'),
+(10, 'Jayesh Naghera', '09033389733', 'rjnaghera@gmail.com', 'Test', 362001, 362001, 0, '2024-01-02 15:34:21', '2024-01-03 12:23:56'),
+(11, 'Jayesh Naghera', '09033389733', 'rjnaghera@gmail.com', 'Test', 362001, 362001, 0, '2024-01-02 15:36:56', '2024-01-03 12:23:51'),
+(12, 'Jayesh Naghera', '09033389733', 'rjnaghera@gmail.com', 'Test', 362268, 362268, 0, '2024-01-02 15:43:28', '2024-01-03 12:23:48'),
+(13, 'Jayesh Naghera', '09033389733', 'rjnaghera@gmail.com', 'Test', 362268, 362268, 0, '2024-01-02 15:44:45', '2024-01-03 12:23:44'),
+(14, 'Jayesh Naghera', '09033389733', 'rjnaghera@gmail.com', 'Test', 362001, 362001, 0, '2024-01-02 15:57:20', '2024-01-03 12:23:42'),
+(15, 'Jayesh Naghera', '09033389733', 'rjnaghera@gmail.com', 'Test', 362268, 362268, 0, '2024-01-02 16:24:24', '2024-01-03 12:23:39'),
+(16, 'Jayesh Naghera', '09033389733', 'rjnaghera@gmail.com', 'Test', 362268, 362268, 0, '2024-01-02 16:26:24', '2024-01-03 12:23:37'),
+(17, 'Jayesh Naghera', '09033389733', 'rjnaghera@gmail.com', 'Test', 362268, 362268, 0, '2024-01-02 16:28:18', '2024-01-03 12:23:34'),
+(18, 'User test form', '1236549870', 'test@mail.com', 'Testing address', 362730, 362730, 0, '2024-01-02 18:22:02', '2024-01-03 12:23:30'),
+(19, 'Dev', '12328554', 'jayesh@besticoder.com', 'Test', 362268, 362268, 0, '2024-01-02 18:58:48', '2024-01-03 12:23:28'),
+(20, 'Jayesh Naghera', '09033389733', 'rjnaghera@gmail.com', 'Test', 362268, 362268, 0, '2024-01-02 19:03:50', '2024-01-03 12:23:24'),
+(21, 'Jayesh Naghera', '09033389733', 'rjnaghera@gmail.com', 'Test', 362268, 362268, 0, '2024-01-03 10:58:54', '2024-01-03 16:32:29'),
+(22, 'Tesing oddodj  mddskd ', '14565445', '6cmbgrndmx@skygazerhub.com', '232, parlk avenue road', 362268, 362268, 0, '2024-01-03 11:35:42', '2024-01-03 12:23:17'),
+(23, 'Tesing oddodj  mddskd ', '14565445', '6cmbgrndmx@skygazerhub.com', '232, parlk avenue road', 362268, 362268, 0, '2024-01-03 11:35:55', '2024-01-03 12:23:15'),
+(24, 'Hello from jerry tom', '1234565885', '12345654888565454@gmail.com', 'ats kd djsdskj kdksjdk ksdksdks', 362001, 362001, 0, '2024-01-03 11:37:02', '2024-01-03 12:23:11'),
+(25, 'Tom cook', '45621654', 'tomtomtotmtottotmtmtmtm@gmail.com', 'Talala', 362268, 362268, 0, '2024-01-03 11:40:15', '2024-01-03 12:23:08'),
+(26, 'Ab dav', '12545', 'abvsdakskkdkdskdk@gmail.com', 'Talala', 362265, 362265, 0, '2024-01-03 11:42:31', '2024-01-03 12:23:05'),
+(27, 'JJ Naghera', '6644612231', 'jjnaghera@gmail.com', '15, dkdk dksdk ndsd sdksdk ', 362730, 362730, 0, '2024-01-03 11:44:28', '2024-01-03 12:23:02'),
+(28, 'Jayesh Naghera', '09033389733', 'rjnaghera@gmail.com', 'Bhalpara', 362268, 362268, 0, '2024-01-03 12:06:25', '2024-01-03 12:22:57'),
+(31, 'Away from Saving', '4789554622', '156454545@gmail.com', 'Bhalpara', 362268, 362001, 0, '2024-01-03 12:35:21', '2024-01-03 16:42:14');
 
 -- --------------------------------------------------------
 
@@ -141,7 +151,9 @@ INSERT INTO `users` (`id`, `name`, `license`, `license_date`, `mls_id`, `brokera
 (5, 'fsdf', 'sfsf', '2023-12-22', 'adad', 'adad', 'adad', 'adad', 0, 'daad', 'adad', 'adad', 'adad', 'vishal.besticoder@gmail.com', 1, 0, '', '2023-12-26 13:14:42', '0000-00-00 00:00:00'),
 (8, 'Jayesh Naghera', 'ABC123', '2023-01-01', 'MLS123', 'XYZ Realty', '123 Main St', 'Building A', 12345, '456 Side St', '67890', '500000', 'Lorem ipsum...', 'jayesh.besticoder@gmail.com', 1, 1, '$2a$11$RV2U2FZxI2y1W8CYD/IjC.RVvyhMoAOk9A70xX3c.dqsOo5fDSCLy', '2023-12-26 15:16:46', '2023-12-27 09:45:35'),
 (18, 'Test agent', '123456', '2025-12-12', '1232', '4546545', '12232', '4545', 212121, '12121', '21212', '212121', '1212', '6cmbgrndmx@skygazerhub.com', 1, 1, '$2a$11$3rIZvvL3IC7OR5OwHC/5Ou2Z.3ZEvxXzkBKrALP6uoCQWIIk0VMAO', '2023-12-28 15:14:17', '2024-01-01 13:42:05'),
-(19, 'Agent test 2', '12345', '2024-12-12', '123', '12123', '123', '113', 362001, '3662', '362001', '122', '155', 'ziylgchhs7@sfolkar.com', 1, 1, '$2a$11$XGZ5QFLLUUAYSWOZLEwvCOpfpkQkK9RSimA6FO4CuI9hJYzWWx8lq', '2024-01-02 12:12:21', '2024-01-02 12:12:51');
+(19, 'Agent test 2', '12345', '2024-12-12', '123', '12123', '123', '113', 362001, '3662', '362001', '122', '155', 'ziylgchhs7@sfolkar.com', 1, 1, '$2a$11$XGZ5QFLLUUAYSWOZLEwvCOpfpkQkK9RSimA6FO4CuI9hJYzWWx8lq', '2024-01-02 12:12:21', '2024-01-02 12:12:51'),
+(20, 'Afetr kdd', '1221', '2025-02-02', '212', '212121', '21212', '21212', 2121, '2121', '1212', '2121', '2121212', '123@gmail.com', 1, 0, '$2a$11$qFvbNmcYm5T9mOs896hL/O9qzYfv.D9z47QQJO0K.z97E.0KDj0XG', '2024-01-03 13:24:01', '2024-01-03 13:24:01'),
+(24, 'Your agent is here', 'dsdsd', '0000-00-00', '', 'sdsds', 'sdsds', '', 362268, '', '', '', '', 'youragentishere@gmail.com', 1, 0, '$2a$11$NKxFHrOxdrFqllgOW6dwfOcNi104RZZAt/7r/WSbif0c6VAjednhG', '2024-01-03 15:55:01', '2024-01-03 15:55:01');
 
 -- --------------------------------------------------------
 
@@ -299,13 +311,13 @@ ALTER TABLE `cart`
 -- AUTO_INCREMENT for table `lead`
 --
 ALTER TABLE `lead`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=32;
 
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
 
 --
 -- AUTO_INCREMENT for table `zip_codes`

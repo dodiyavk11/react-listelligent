@@ -1,10 +1,10 @@
-import React from 'react';
-import '../../Style/Agents/agentperformance.css';
-import Container from 'react-bootstrap/Container';
-import Row from 'react-bootstrap/Row';
-import Col from 'react-bootstrap/Col';
-import Agentlayout from '../../components/Agent/Agentlayout';
-import Button from 'react-bootstrap/Button';
+import React from "react";
+import "../../Style/Agents/agentperformance.css";
+import Container from "react-bootstrap/Container";
+import Row from "react-bootstrap/Row";
+import Col from "react-bootstrap/Col";
+import Agentlayout from "../../components/Agent/Agentlayout";
+import Button from "react-bootstrap/Button";
 import { FcCancel } from "react-icons/fc";
 import { TbBulb } from "react-icons/tb";
 import { BsFillQuestionCircleFill } from "react-icons/bs";
@@ -12,24 +12,25 @@ import { IoCheckmarkCircleOutline } from "react-icons/io5";
 import { MdLock } from "react-icons/md";
 
 const Agentperformance = () => {
-    return (
-        <Agentlayout>
+  return (
+    <Agentlayout>
+      <div>
+        <Container>
+          <Row className="mt-4">
+            <Col md={12}>
+              <div className="performance">
+                <h3>Performance</h3>
+                <p>
+                  These metrics affect your ranking in our matching algorithm
+                </p>
+              </div>
+            </Col>
+            <hr></hr>
+          </Row>
+        </Container>
+      </div>
 
-            <div>
-                <Container>
-                    <Row className='mt-4'>
-                        <Col md={12}>
-                            <div className='performance'>
-                                <h3>Performance</h3>
-                                <p>These metrics affect your ranking in our matching algorithm</p>
-                            </div>
-                        </Col>
-                        <hr></hr>
-                    </Row>
-                </Container>
-            </div>
-
-            <div className='needs-attention'>
+      {/* <div className='needs-attention'>
                 <Container>
                     <Row>
                         <h3>Needs attention</h3>
@@ -287,9 +288,9 @@ const Agentperformance = () => {
                         </Col>
                     </Row>
                 </Container>
-            </div>
-        </Agentlayout>
-    )
-}
+            </div> */}
+    </Agentlayout>
+  );
+};
 
 export default Agentperformance;

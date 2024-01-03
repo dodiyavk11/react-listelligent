@@ -156,9 +156,9 @@ const Agentaccount = () => {
                     onClick={() => handleLiClick("8")}
                     className={activeTab === "8" ? "active" : ""}
                   >
-                    Active Zip code
+                    Purchased Zip code
                   </li>
-                  <li
+                  {/* <li
                     type="button"
                     onClick={() => handleLiClick("0")}
                     className={activeTab === "0" ? "active" : ""}
@@ -213,7 +213,7 @@ const Agentaccount = () => {
                     className={activeTab === "7" ? "active" : ""}
                   >
                     Important Documents
-                  </li>
+                  </li> */}
                 </ul>
               </div>
             </Col>
@@ -222,7 +222,7 @@ const Agentaccount = () => {
                 <Accordion activeKey={activeTab}>
                   <Accordion.Item eventKey="8" className="accordian-items">
                     <Accordion.Header onClick={() => handleLiClick("8")}>
-                      Active Zip code &nbsp;&nbsp;
+                      Purchased Zip code &nbsp;&nbsp;
                       <Link to={"/agent/purchase-zip"}>Buy more</Link>
                     </Accordion.Header>
                     <Accordion.Body>
@@ -277,7 +277,7 @@ const Agentaccount = () => {
                       </div>
                     </Accordion.Body>
                   </Accordion.Item>
-                  <Accordion.Item eventKey="0" className="accordian-items">
+                  {/* <Accordion.Item eventKey="0" className="accordian-items">
                     <Accordion.Header onClick={() => handleLiClick("0")}>
                       Client Preferences
                     </Accordion.Header>
@@ -417,7 +417,7 @@ const Agentaccount = () => {
                               Don't work in these cities
                             </p>
                             <select
-                              class="form-select mb-4"
+                              className="form-select mb-4"
                               aria-label="Default select example"
                             >
                               <option selected>Select...</option>
@@ -673,14 +673,14 @@ const Agentaccount = () => {
                           You can turn on away status and set a date range if
                           you are not able to service the referrals.
                         </p>
-                        <label class="toggler-wrapper style-1">
+                        <label className="toggler-wrapper style-1">
                           <input
                             type="checkbox"
                             checked={isChecked}
                             onChange={handleCheckboxChange}
                           />
-                          <div class="toggler-slider">
-                            <div class="toggler-knob"></div>
+                          <div className="toggler-slider">
+                            <div className="toggler-knob"></div>
                           </div>
                         </label>
 
@@ -811,7 +811,7 @@ const Agentaccount = () => {
                         </Row>
                       </div>
                     </Accordion.Body>
-                  </Accordion.Item>
+                  </Accordion.Item> */}
                 </Accordion>
               </div>
             </Col>

@@ -8,7 +8,8 @@ const {
   getAgentLeads,
   showUserAgentList,
   viewAgentByUser,
-  getAgentOrdersList
+  getAgentOrdersList,
+  agentUpdateLeadStatus
 } = require("../controllers/agent.controller");
 const { isLogin, isAdmin, isAgent } = require("../middleware/isAuthenticate");
 
@@ -23,4 +24,5 @@ module.exports = (app) => {
   app.get("/agent/list/:zipcode",showUserAgentList)
   app.get("/agent/view/:id", viewAgentByUser);
   app.get("/agent/orders", [isLogin, isAgent], getAgentOrdersList)
+  app.get("/agent/lead/update/:id/:status",[isLogin, isAgent], agentUpdateLeadStatus);
 };

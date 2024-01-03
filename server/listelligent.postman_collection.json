@@ -744,6 +744,39 @@
 				}
 			},
 			"response": []
+		},
+		{
+			"name": "Agent update lead status",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjE4LCJpYXQiOjE3MDQyNzc3MzgsImV4cCI6MTcwNDI4MTMzOH0.M6baiuJuzes8vvlnJlPg7WItvfJIZJJYs8Ghdaek4lY",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3001/agent/lead/update/31/0",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3001",
+					"path": [
+						"agent",
+						"lead",
+						"update",
+						"31",
+						"0"
+					]
+				}
+			},
+			"response": []
 		}
 	]
 }

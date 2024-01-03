@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react";
 import Agentlayout from "../../components/Agent/Agentlayout";
 import {
+  Dropdown,
+  DropdownButton,
   Row,
   Card,
   Container,
@@ -22,7 +24,7 @@ import {
 } from "react-notifications";
 import "react-notifications/lib/notifications.css";
 import axios from "axios";
-import { useNavigate,Link } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import TimeAgo from "react-timeago";
 
 // Header-Tabs
@@ -109,6 +111,31 @@ const AgentLeads = () => {
     getAgentLeads();
   }, []);
 
+  const handleStatusUpdate = async (id, status) => {
+    try {
+      const response = await axios.get(
+        `${process.env.REACT_APP_BASE_URL}agent/lead/update/${id}/${status}`,
+        {
+          headers: { Authorization: `Bearer ${authToken}` },
+          withCredentials: true,
+        }
+      );
+
+      if (response.status) {
+        NotificationManager.success("Success", response.data.message, 3000);
+      } else {
+        NotificationManager.error("Error", response.data.message, 3000);
+      }
+    } catch (error) {
+      if (error.response && error.response.status === 401) {
+        localStorage.clear();
+        navigate("/login");
+      } else {
+        NotificationManager.error("Error", error.response.data.message, 3000);
+      }
+    }
+  };
+
   const [modalShow, setModalShow] = React.useState(false);
 
   const renderCards_list = () => {
@@ -184,7 +211,7 @@ const AgentLeads = () => {
                   label="Lead info"
                   {...a11yProps(0)}
                 />
-                <Tab
+                {/* <Tab
                   className="ProposalOver-tab"
                   label="Tab"
                   {...a11yProps(1)}
@@ -194,7 +221,7 @@ const AgentLeads = () => {
                   label="Tab"
                   {...a11yProps(2)}
                 />
-                <Tab className="Documents-tab" label="Tab" {...a11yProps(3)} />
+                <Tab className="Documents-tab" label="Tab" {...a11yProps(3)} /> */}
               </Tabs>
             </Box>
             <CustomTabPanel value={tabvalue} index={0} className="p-3">
@@ -232,7 +259,38 @@ const AgentLeads = () => {
                           <Card.Text>
                             <b>Created at : </b>
                             {sellerSelectedCard.created_at}
-                          </Card.Text>
+                          </Card.Text>                          
+                          <DropdownButton
+                            id="dropdown-basic-button"
+                            variant="light"
+                            title="Update Status"
+                            split
+                          >
+                            <Dropdown.Item
+                              disabled={sellerSelectedCard.status === 1}
+                              onClick={() =>
+                                handleStatusUpdate(sellerSelectedCard.id, 1)
+                              }
+                            >
+                              Complete
+                            </Dropdown.Item>
+                            <Dropdown.Item
+                              disabled={sellerSelectedCard.status === 2}
+                              onClick={() =>
+                                handleStatusUpdate(sellerSelectedCard.id, 2)
+                              }
+                            >
+                              Accept
+                            </Dropdown.Item>
+                            <Dropdown.Item
+                              disabled={sellerSelectedCard.status === 3}
+                              onClick={() =>
+                                handleStatusUpdate(sellerSelectedCard.id, 3)
+                              }
+                            >
+                              Decline
+                            </Dropdown.Item>
+                          </DropdownButton>
                         </Card.Body>
                       </Card>
                     </Col>
@@ -425,7 +483,7 @@ const AgentLeads = () => {
           </Box>
         </div>
       );
-    } else if(data.length > 0) {
+    } else if (data.length > 0) {
       return (
         <div className="proposal-list-content">
           <div className="client-details">
@@ -435,20 +493,23 @@ const AgentLeads = () => {
           </div>
         </div>
       );
-    }
-    else{
-        return (
-            <div className="proposal-list-content">
-              <div className="client-details">
-                <div className="client-details-heading">
-                <p>You dont have any purchased zip code leads {" "}
+    } else {
+      return (
+        <div className="proposal-list-content">
+          <div className="client-details">
+            <div className="client-details-heading">
+              <p>
+                You dont have any purchased zip code leads{" "}
                 <Button className="find-btn">
-                    <Link to={"/agent/purchase-zip"} className="text-white">Buy zip code</Link>
-                </Button></p>
-                </div>
-              </div>
+                  <Link to={"/agent/purchase-zip"} className="text-white">
+                    Buy zip code
+                  </Link>
+                </Button>
+              </p>
             </div>
-          );
+          </div>
+        </div>
+      );
     }
     return null;
   };
@@ -541,27 +602,27 @@ const AgentLeads = () => {
                                 onHide={() => setModalShow(false)}
                               />
                             </div>
-                            {data.length > 0 &&
-                            <div id="pagination-controls">
-                              <button
-                                className="pagination-prev"
-                                onClick={previousPage}
-                                disabled={currentPage === 0}
-                              >
-                                Previous
-                              </button>
-                              <button
-                                className="pagination-next"
-                                onClick={nextPage}
-                                disabled={
-                                  (currentPage + 1) * cardsPerPage >=
-                                  data.length
-                                }
-                              >
-                                Next
-                              </button>
-                            </div>
-                            }
+                            {data.length > 0 && (
+                              <div id="pagination-controls">
+                                <button
+                                  className="pagination-prev"
+                                  onClick={previousPage}
+                                  disabled={currentPage === 0}
+                                >
+                                  Previous
+                                </button>
+                                <button
+                                  className="pagination-next"
+                                  onClick={nextPage}
+                                  disabled={
+                                    (currentPage + 1) * cardsPerPage >=
+                                    data.length
+                                  }
+                                >
+                                  Next
+                                </button>
+                              </div>
+                            )}
                           </div>
                         </Col>
                         <Col md={9} className="p-0">

@@ -13,6 +13,7 @@ module.exports = (sequelize, DataTypes) => {
       email: DataTypes.STRING,
       address: DataTypes.STRING,
       zip_code: DataTypes.INTEGER,
+      agent_zip_code:DataTypes.INTEGER,
       status: DataTypes.INTEGER,
       created_at: {
           type: DataTypes.DATE,

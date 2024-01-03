@@ -235,9 +235,9 @@ exports.getAgentLeads = async (req, res) => {
     const zipCodes = activeZipCode.map((result) => result.zip_code);
     const leadData = await Models.Lead.findAll({
       where: {
-        zip_code: { [Op.in]: zipCodes },
+        agent_zip_code: { [Op.in]: zipCodes },
       },
-      order: [['id', 'DESC']],
+      order: [['status', 'ASC']],
     });
     res.status(200).send({ status: true, data: leadData });
   } catch (err) {
@@ -307,5 +307,20 @@ exports.getAgentOrdersList = async(req, res) => {
     res.status(200).send({ status: true, message: "Order get successfully", data: getOrders })
   }catch(err){
     res.status(500).send({ status: false, message: "Agnet order can not get, an error occured.", error: err.message });
+  }
+}
+
+exports.agentUpdateLeadStatus = async(req, res) => {
+  try{
+    const { id, status } = req.params;
+    const user_id =req.userId;
+    const updateStatus = await Models.Lead.update(
+      { status },
+      { where: { id } }
+    );
+    return res.status(200).send({ status: true, message: "Status update successfully.", data: updateStatus });
+  }catch(err)
+  {
+    return res.status(500).send({ status: false, message: "Status cannot update, an error occured", error: err.message });
   }
 }

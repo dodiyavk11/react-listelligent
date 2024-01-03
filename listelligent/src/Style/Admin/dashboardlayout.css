@@ -2,16 +2,14 @@
     display: flex;
 }
 .sidebar {
-    width: 12%;
+    width: 15%;
     height: 100vh;
-    background: #66615B;
-    padding: 0px 30px;
+    background: #222;
     position: fixed;
     left: 0;
 }
 .main-content {
-    width: 88%;
-    background-color: #f4f3ef;
+    width: 85%;
     position: absolute;
     right: 0;
     height: 100vh;
@@ -20,7 +18,7 @@
 
 /* Header */
 .dashboad-navbar {
-    background-color: #f4f3ef !important;
+    background-color: #fff !important;
     border-bottom: 1px solid #ddd;
     padding: 10px 0px;
 }
@@ -67,8 +65,17 @@
     margin: 0px 10px 0px 0px;
 }
 .sidebar-content ul li a {
-    color: #c1c1c1;
+    color: #fff;
     text-decoration: none;
     font-family: Montserrat;
     font-weight: 500;
+}
+.sidebarMenuList
+{
+    padding: 0px 30px !important;
+}
+.dropdown-menu[data-bs-popper]
+{
+    right: 10px !important;
+    left: auto !important;
 }

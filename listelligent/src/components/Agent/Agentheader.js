@@ -52,15 +52,17 @@ const Agentheader = () => {
                   <Link to={"/agentDashboard"}>Dashboard</Link>
                   <Link to={"/leads"}>Leads</Link>
                   <Link to={"/agent/orders"}>Orders</Link>
-                  <Link to={"/myProposal"}>My Proposals</Link>
+                  {/* <Link to={"/myProposal"}>My Proposals</Link> */}
                   <NavDropdown
                     className="dropdownmenu"
                     title={name}
                     id={`offcanvasNavbarDropdown-expand-${expand}`}
                   >
                     <Link to={"/agentDashboard"}>Dashboard</Link>
-                    <Link to={"/myProposal"}>My Proposals</Link>                    
-                    <Link to={"/agentPerformance"}>My Performance</Link>
+                    <Link to={"/leads"}>Leads</Link>
+                    <Link to={"/agent/orders"}>Orders</Link>
+                    {/* <Link to={"/myProposal"}>My Proposals</Link>                    
+                    <Link to={"/agentPerformance"}>My Performance</Link> */}
                     <Link to={"/myAgentProfile"}>My Profile</Link>
                     <Link to={"/agentsAccount"}>Account</Link>
                     <Link to={"/agentsFAQ"}>Agent FAQ</Link>
