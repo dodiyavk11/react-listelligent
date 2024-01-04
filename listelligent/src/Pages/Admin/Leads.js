@@ -3,47 +3,37 @@ import Dashboardlayout from "../../components/Admin/Dashboardlayout";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import DataTable from "react-data-table-component";
-import "../../Style/Admin/agentview.css";
 import Form from "react-bootstrap/Form";
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import Button from "react-bootstrap/Button";
 import "react-notifications/lib/notifications.css";
-import { FaBan, FaCheck } from "react-icons/fa";
+import Badge from "react-bootstrap/Badge";
 import {
   NotificationContainer,
   NotificationManager,
 } from "react-notifications";
+import Accordion from "react-bootstrap/Accordion";
+import TimeAgo from "react-timeago";
 
-const Agentsview = () => {
+const Leads = () => {
   const authToken = localStorage.getItem("token");
   const navigate = useNavigate();
-  const handleApproveClick = async (id, status) => {
-    try {
-      const response = await axios.get(
-        `${process.env.REACT_APP_BASE_URL}admin/approveAgent/${id}/${status}`,
-        {
-          headers: { Authorization: `Bearer ${authToken}` },
-          withCredentials: true,
-        }
-      );
-      if (response.status) {
-        NotificationManager.success("Success", response.data.message, 3000);
-        fetchAgentList();
-      } else {
-        NotificationManager.error("Error", response.data.message, 3000);
-      }
-    } catch (error) {
-      if (error.response && error.response.status === 401) {
-        localStorage.clear();
-        navigate("/login");
-      } else {
-        NotificationManager.error("Error", error.response.data.message, 3000);
-      }
+  const getStatusDivStyle = (status) => {
+    switch (status) {
+      case 0:
+        return { backgroundColor: "#6c757d", color: "#fff" }; // New
+      case 1:
+        return { backgroundColor: "#28a745", color: "#fff" }; // Complete
+      case 2:
+        return { backgroundColor: "#17a2b8", color: "#fff" }; // Accept
+      case 3:
+        return { backgroundColor: "#dc3545", color: "#fff" }; // Decline
+      default:
+        return { backgroundColor: "#6c757d", color: "#fff" }; // Unknown
     }
   };
-
   const columns = [
     {
       name: "Id",
@@ -53,57 +43,78 @@ const Agentsview = () => {
     {
       name: "Name",
       selector: (row) => row.name,
-      sortable: true,
     },
     {
       name: "Email",
       selector: (row) => row.email,
     },
     {
-      name: "Status",
-      selector: (row) => (row.status === 0 ? "Unapproved" : "Approved"),
+      name: "Phone",
+      selector: (row) => row.phone,
     },
     {
-      name: "Action",
-      cell: (row) =>
-        row.status === 0 ? (
-          <Button
-            variant="success"
-            size="sm"
-            onClick={() => handleApproveClick(row.id, 1)}
-          >
-            <FaCheck/>
-          </Button>
-        ) : (
-          <Button
-            variant="danger"
-            size="sm"
-            onClick={() => handleApproveClick(row.id, 0)}
-          >
-            <FaBan/>
-          </Button>
-        ),
+      name: "Zip code",
+      selector: (row) => row.zip_code,
+      sortable: true,
+    },
+    {
+      name: "Address",
+      selector: (row) => row.address,
+    },
+    {
+      name: "Created at",
+      selector: (row) => <TimeAgo date={row.created_at} />,
+    },
+    {
+      name: "Status",
+      selector: (row) => row.status,
+      cell: (row) => (
+        <div
+          style={{
+            padding: "4px",
+            borderRadius: "4px",
+            ...getStatusDivStyle(row.status),
+          }}
+        >
+          {row.status === 0
+            ? "New"
+            : row.status === 1
+            ? "Complete"
+            : row.status === 2
+            ? "Accept"
+            : row.status === 3
+            ? "Decline"
+            : "Unknown"}
+        </div>
+      ),
     },
   ];
 
   const [data, setData] = useState([]);
-
   const [records, setRecords] = useState(data);
 
-  useEffect(() => {
-    setRecords(data);
-  }, [data]);
-
   function handlefilter(event) {
+    const searchTerm = event.target.value.toLowerCase();
+
     const newData = data.filter((row) => {
-      return row.name.toLowerCase().includes(event.target.value.toLowerCase());
+      const rowValues = [
+        ...Object.values(row),
+        ...row.orderProduct.map((product) => Object.values(product)),
+        Object.values(row.user),
+      ].flat();
+
+      return rowValues
+        .filter((value) => value !== undefined && value !== null)
+        .some((value) => value.toString().toLowerCase().includes(searchTerm));
     });
+
     setRecords(newData);
   }
-  const fetchAgentList = async () => {
+
+  const getAdminLeadsList = async () => {
     try {
       const response = await axios.get(
-        `${process.env.REACT_APP_BASE_URL}agent/list`,
+        `${process.env.REACT_APP_BASE_URL}admin/leads`,
         {
           headers: { Authorization: `Bearer ${authToken}` },
           withCredentials: true,
@@ -111,6 +122,7 @@ const Agentsview = () => {
       );
 
       setData(response.data.data);
+      setRecords(response.data.data);
     } catch (error) {
       if (error.response && error.response.status === 401) {
         localStorage.clear();
@@ -120,20 +132,22 @@ const Agentsview = () => {
       }
     }
   };
-  useEffect(() => {
-    fetchAgentList();
-  }, []);
 
+  useEffect(() => {
+    getAdminLeadsList();
+  }, []);
+  const styles = {
+    border: "1px solid #2222225c",
+  };
   return (
     <Dashboardlayout>
-      <Container fluid>
+      <Container>
         <NotificationContainer />
         <Row>
-          {/* <Col md={1}></Col> */}
           <Col md={12}>
             <div className="dataTable" style={{ margin: "13px 0px" }}>
               <div className="search-input">
-                <h2>Agents List</h2>
+                <h2>Leads</h2>
                 <Form.Control
                   className=""
                   type="text"
@@ -145,7 +159,7 @@ const Agentsview = () => {
               <DataTable
                 columns={columns}
                 data={records}
-                selectableRows
+                // selectableRows
                 pagination
                 highlightOnHover
                 customStyles={{
@@ -164,11 +178,10 @@ const Agentsview = () => {
               />
             </div>
           </Col>
-          {/* <Col md={1}></Col> */}
         </Row>
       </Container>
     </Dashboardlayout>
   );
 };
 
-export default Agentsview;
+export default Leads;

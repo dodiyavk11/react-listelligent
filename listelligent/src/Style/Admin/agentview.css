@@ -9,7 +9,7 @@
     padding: 8px 20px;
     align-items: center;
 }
-.search-input h2{
+.search-input h2, .dataTableHeader h2{
     font-size: 25px;
     font-weight: 600;
     font-family: Montserrat;

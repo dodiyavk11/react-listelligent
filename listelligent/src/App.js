@@ -28,7 +28,8 @@ import Agentsfaq from "./Pages/Agents/Agentsfaq";
 import ZipCode from "./Pages/Admin/ZipCode";
 import { AuthProvider } from "./AuthContext";
 import PurchaseZip from "./Pages/Agents/PurchaseZip";
-
+import Orders from "./Pages/Admin/Orders";
+import Leads from "./Pages/Admin/Leads";
 function App() {
   return (
     <div>
@@ -52,8 +53,12 @@ function App() {
               element={<Protectedrout Component={Dashboard} />}
             />
             <Route
-              path="admin/icons"
-              element={<Protectedrout Component={Icons} />}
+              path="admin/Orders"
+              element={<Protectedrout Component={Orders} />}
+            />
+            <Route
+              path="admin/leads"
+              element={<Protectedrout Component={Leads} />}
             />
             <Route
               path="admin/agentsview"

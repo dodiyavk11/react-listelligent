@@ -6,3 +6,11 @@
     border-radius: 10px;
     border: 3px solid transparent;
 }
+.dataTableHeader {
+    background-color:unset !important;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 5px 0px !important;
+    margin: 30px 0px 0px 0px;
+}

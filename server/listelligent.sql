@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 03, 2024 at 01:56 PM
+-- Generation Time: Jan 04, 2024 at 08:50 AM
 -- Server version: 10.4.27-MariaDB
 -- PHP Version: 7.4.33
 
@@ -109,7 +109,7 @@ INSERT INTO `lead` (`id`, `name`, `phone`, `email`, `address`, `zip_code`, `agen
 (26, 'Ab dav', '12545', 'abvsdakskkdkdskdk@gmail.com', 'Talala', 362265, 362265, 0, '2024-01-03 11:42:31', '2024-01-03 12:23:05'),
 (27, 'JJ Naghera', '6644612231', 'jjnaghera@gmail.com', '15, dkdk dksdk ndsd sdksdk ', 362730, 362730, 0, '2024-01-03 11:44:28', '2024-01-03 12:23:02'),
 (28, 'Jayesh Naghera', '09033389733', 'rjnaghera@gmail.com', 'Bhalpara', 362268, 362268, 0, '2024-01-03 12:06:25', '2024-01-03 12:22:57'),
-(31, 'Away from Saving', '4789554622', '156454545@gmail.com', 'Bhalpara', 362268, 362001, 0, '2024-01-03 12:35:21', '2024-01-03 16:42:14');
+(31, 'Away from Saving', '4789554622', '156454545@gmail.com', 'Bhalpara', 362268, 362001, 0, '2024-01-03 12:35:21', '2024-01-04 11:48:09');
 
 -- --------------------------------------------------------
 
@@ -153,7 +153,7 @@ INSERT INTO `users` (`id`, `name`, `license`, `license_date`, `mls_id`, `brokera
 (18, 'Test agent', '123456', '2025-12-12', '1232', '4546545', '12232', '4545', 212121, '12121', '21212', '212121', '1212', '6cmbgrndmx@skygazerhub.com', 1, 1, '$2a$11$3rIZvvL3IC7OR5OwHC/5Ou2Z.3ZEvxXzkBKrALP6uoCQWIIk0VMAO', '2023-12-28 15:14:17', '2024-01-01 13:42:05'),
 (19, 'Agent test 2', '12345', '2024-12-12', '123', '12123', '123', '113', 362001, '3662', '362001', '122', '155', 'ziylgchhs7@sfolkar.com', 1, 1, '$2a$11$XGZ5QFLLUUAYSWOZLEwvCOpfpkQkK9RSimA6FO4CuI9hJYzWWx8lq', '2024-01-02 12:12:21', '2024-01-02 12:12:51'),
 (20, 'Afetr kdd', '1221', '2025-02-02', '212', '212121', '21212', '21212', 2121, '2121', '1212', '2121', '2121212', '123@gmail.com', 1, 0, '$2a$11$qFvbNmcYm5T9mOs896hL/O9qzYfv.D9z47QQJO0K.z97E.0KDj0XG', '2024-01-03 13:24:01', '2024-01-03 13:24:01'),
-(24, 'Your agent is here', 'dsdsd', '0000-00-00', '', 'sdsds', 'sdsds', '', 362268, '', '', '', '', 'youragentishere@gmail.com', 1, 0, '$2a$11$NKxFHrOxdrFqllgOW6dwfOcNi104RZZAt/7r/WSbif0c6VAjednhG', '2024-01-03 15:55:01', '2024-01-03 15:55:01');
+(24, 'Your agent is here', 'dsdsd', '0000-00-00', '', 'sdsds', 'sdsds', '', 362268, '', '', '', '', 'youragentishere@gmail.com', 1, 0, '$2a$11$NKxFHrOxdrFqllgOW6dwfOcNi104RZZAt/7r/WSbif0c6VAjednhG', '2024-01-03 15:55:01', '2024-01-04 12:01:51');
 
 -- --------------------------------------------------------
 
@@ -182,7 +182,11 @@ INSERT INTO `zip_codes` (`id`, `city`, `zip_code`, `prize`, `status`) VALUES
 (10, 'Amreli', 362730, '850.00', 0),
 (12, 'Rajokt', 356789, '2800.00', 1),
 (13, 'Baroda', 147852, '3500.00', 1),
-(14, 'Surat', 369852, '2300.00', 1);
+(14, 'Surat', 369852, '2300.00', 1),
+(19, 'Unknown', 55555, '555.00', 1),
+(20, 'Talala', 123456, '555.00', 0),
+(21, 'Ahmedabad', 38001, '1500.00', 1),
+(22, 'Anand', 387210, '1000.00', 1);
 
 -- --------------------------------------------------------
 
@@ -323,7 +327,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `zip_codes`
 --
 ALTER TABLE `zip_codes`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
 
 --
 -- AUTO_INCREMENT for table `zip_orders`

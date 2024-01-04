@@ -777,6 +777,66 @@
 				}
 			},
 			"response": []
+		},
+		{
+			"name": "Admin orders list",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjMsImlhdCI6MTcwNDMzOTMxMywiZXhwIjoxNzA0MzQyOTEzfQ.ddPIEvXcHXTgLcC9rANuq2-epbE0acqERz0lOpSDYjo",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3001/admin/orders",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3001",
+					"path": [
+						"admin",
+						"orders"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Admin leads list",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjMsImlhdCI6MTcwNDM0NjY5OCwiZXhwIjoxNzA0MzUwMjk4fQ.blFh-UOiz6tpT5ywKlg1dyyc42LbAxFt1TuJkOgEfmw",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3001/admin/leads",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3001",
+					"path": [
+						"admin",
+						"leads"
+					]
+				}
+			},
+			"response": []
 		}
 	]
 }

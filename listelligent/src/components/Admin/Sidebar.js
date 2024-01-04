@@ -1,38 +1,41 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link,useLocation } from "react-router-dom";
 import { AiOutlineDashboard } from "react-icons/ai";
-import { IoDiamondOutline } from "react-icons/io5";
 import { FiMapPin } from "react-icons/fi";
-import { FaRegBell } from "react-icons/fa";
 import { FaRegUser } from "react-icons/fa";
 import { FaShoppingCart } from "react-icons/fa";
 import { FaHandshake } from "react-icons/fa";
 
 const Sidebar = () => {
+  const location = useLocation();
+
+  const isActive = (path) => {
+    return location.pathname === path;
+  };
   return (
     <div className="sidebar-content">
-      <h1 className="p-2">
+      <h2 className="p-2 headTitle">
         <Link to={"/"}>Listelligent</Link>
-      </h1>
+      </h2>
       <hr />
       <ul className="sidebarMenuList">
-        <li>
+        <li className={isActive("/admin/dashboard") ? "active" : ""}>
           <AiOutlineDashboard />
           <Link to={"/admin/dashboard"}>DASHBOARD</Link>
         </li>
-        <li>
+        <li className={isActive("/admin/orders") ? "active" : ""}>
           <FaShoppingCart />
-          <Link to={"/admin/icons"}>Orders</Link>
+          <Link to={"/admin/orders"}>Orders</Link>
         </li>
-        <li>
+        <li className={isActive("/admin/leads") ? "active" : ""}>
           <FaHandshake />
-          <Link to={"/admin/icons"}>Leads</Link>
+          <Link to={"/admin/leads"}>Leads</Link>
         </li>
-        <li>
+        <li className={isActive("/admin/agentsview") ? "active" : ""}>
           <FaRegUser />
           <Link to={"/admin/agentsview"}>Agents</Link>
         </li>
-        <li>
+        <li className={isActive("/admin/zipcode") ? "active" : ""}>
           <FiMapPin />
           <Link to={"/admin/zipcode"}>Zip Code</Link>
         </li>        

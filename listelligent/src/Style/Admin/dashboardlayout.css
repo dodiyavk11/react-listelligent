@@ -4,7 +4,7 @@
 .sidebar {
     width: 15%;
     height: 100vh;
-    background: #222;
+    background-color:#343a40;
     position: fixed;
     left: 0;
 }
@@ -20,7 +20,7 @@
 .dashboad-navbar {
     background-color: #fff !important;
     border-bottom: 1px solid #ddd;
-    padding: 10px 0px;
+    padding: 3px 0px;
 }
 .dashboad-navbar .navbar-brand {
     color: #66615B;
@@ -39,14 +39,14 @@
 
 
 /* Sidebar */
-.sidebar-content h1 {
+.sidebar-content h2 {
     text-align: center;
 }
-.sidebar-content h1 a {
+.sidebar-content h2 a {
     text-decoration: none;
     color: #fff;
     font-family: Montserrat;
-    font-weight: 500;
+    font-weight: 300;
     font-size: 30px;
     margin-top: 10px;
 }
@@ -55,12 +55,14 @@
 }
 .sidebar-content ul li {
     list-style-type: none;
-    padding: 20px 0px;
+    padding: 10px;
     display: flex;
     align-items: end;
+    border-radius:5px;
+    margin-bottom: 3px;
 }
 .sidebar-content ul li svg {
-    font-size: 28px;
+    font-size: 17px;
     color: #c1c1c1;
     margin: 0px 10px 0px 0px;
 }
@@ -68,14 +70,24 @@
     color: #fff;
     text-decoration: none;
     font-family: Montserrat;
-    font-weight: 500;
+    font-weight: 400;
+    font-size: 14px;
 }
 .sidebarMenuList
 {
-    padding: 0px 30px !important;
+    /* padding: 0px 30px !important; */
+    padding-left: 15px !important;
+    padding-right: 10px !important;
 }
 .dropdown-menu[data-bs-popper]
 {
     right: 10px !important;
     left: auto !important;
+}
+.sidebarMenuList li:hover {
+   background-color: rgba(255,255,255,.1);
+}
+.sidebarMenuList li.active
+{
+    background-color:rgba(255,255,255,.1);
 }

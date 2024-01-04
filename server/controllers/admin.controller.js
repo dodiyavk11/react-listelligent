@@ -120,3 +120,38 @@ exports.viewAgentByAdmin = async(req, res) => {
     res.status(500).send({ status: false, message: "Agent cannot view, an error occured.", error: err.message });
   }
 }
+
+exports.getAdminOrders = async(req, res) => {
+  try
+  {
+    const getOrders = await Models.Orders.findAll({
+      include:[
+        {
+          model: Models.orderZipCode,
+          as: "orderProduct",
+        },
+        {
+          model: Models.Users,
+          as: "user",
+          attributes: ["name", "email"],
+        }
+      ],
+      order: [['id', 'DESC']],
+    })
+    res.status(200).send({ status: true, message: "Order get successfully", data: getOrders })
+  }catch(err)
+  {
+    res.status(500).send({ status: false, message: "Admin order cannot get, an error occured.", error: err.message });
+  }
+}
+
+exports.getAdminLeads = async(req, res) => {
+  try{
+    const getLeads = await Models.Lead.findAll({
+      order: [['id', 'DESC']],
+    });
+    return res.status(200).send({ status: true, message: "Leads get successfully.", data: getLeads });
+  }catch(err){
+    return res.status(500).send({ status: false, message: "Admin Leads cannot get, an error occured.", data:[], error: err.message });
+  }
+}

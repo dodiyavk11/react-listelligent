@@ -12,60 +12,33 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import "react-notifications/lib/notifications.css";
 import {
+  FaPencilAlt,
+  FaTrash,
+  FaCloudUploadAlt,
+  FaPlus,
+  FaBan,
+  FaCheck,
+} from "react-icons/fa";
+import {
   NotificationContainer,
   NotificationManager,
 } from "react-notifications";
-
-function Validation(values) {
-  let error = {};
-
-  if (values.zip === "") {
-    error.zip = "Zip should not be empty";
-  } else {
-    error.zip = "";
-  }
-
-  if (values.prize === "") {
-    error.prize = "Prize should not be empty";
-  } else {
-    error.prize = "";
-  }
-
-  if (values.status === "") {
-    error.status = "Status should not be empty";
-  } else {
-    error.status = "";
-  }
-
-  return error;
-}
+import { Card } from "react-bootstrap";
+import "../../Style/custom.css";
 
 const ZipCode = () => {
   const authToken = localStorage.getItem("token");
   const navigate = useNavigate();
   const [modalShow, setModalShow] = React.useState(false);
-
+  const [csvFile, setCsvFile] = useState(null);
   // UpdateZip Function Start
   const updateZip = (row) => {
     const zipid = row.id;
     const zipcode = row.zip_code;
     const zipprize = row.prize;
     const zipstatus = row.status;
+    const zipcity = row.city;
     setModalShow(true);
-
-    console.log(
-      "id:- " +
-        zipid +
-        "/" +
-        "zip_code:- " +
-        zipcode +
-        "/" +
-        "zipprize:- " +
-        zipprize +
-        "/" +
-        "zipstatus:- " +
-        zipstatus
-    );
   };
   // UpdateZip Function Start
 
@@ -74,36 +47,42 @@ const ZipCode = () => {
       zip: "",
       prize: "",
       status: "",
+      city: "",
     });
 
-    const [errors, setErrors] = useState({});
     const handelInput = (event) => {
       setValues((prev) => ({
         ...prev,
-        [event.target.name]: [event.target.value],
+        [event.target.name]: event.target.value,
       }));
     };
 
-    const handelSubmit = (event) => {
+    const handelSubmit = async (event) => {
       event.preventDefault();
-      setErrors(Validation(values));
-
-      if (errors.zip === "" && errors.prize === "" && errors.status === "") {
-        axios
-          .post("http://localhost:3001/submitzip", values)
-          .then((res) => {
-            if (res.data.Status === "Success") {
-              setModalShow(false);
-              axios
-                .get("http://localhost:3001/viewzip")
-                .then((res) => {
-                  setData(res.data);
-                  setRecords(res.data);
-                })
-                .catch((err) => console.log(err));
-            }
-          })
-          .then((err) => console.log(err));
+      const authToken = localStorage.getItem("token");
+      try {
+        const response = await axios.post(
+          `${process.env.REACT_APP_BASE_URL}admin/add/zipcode`,
+          {
+            city: values.city,
+            zip: values.zip,
+            prize: values.prize,
+            status: values.status,
+          },
+          {
+            headers: { Authorization: `Bearer ${authToken}` },
+            withCredentials: true,
+          }
+        );
+        if (response.status) {
+          setModalShow(false);
+          NotificationManager.success("Signup", response.data.message, 1500);
+          getZipCodeData();
+        } else {
+          NotificationManager.error("Error", response.message, 3000);
+        }
+      } catch (error) {
+        NotificationManager.error("Error", error.response.data.message, 3000);
       }
     };
 
@@ -116,47 +95,57 @@ const ZipCode = () => {
       >
         <Modal.Body>
           <h3 className="zip-header">Add Zip-Code</h3>
-          <Form>
+          <Form onSubmit={handelSubmit}>
             <Form.Group className="mb-3">
               <Form.Label>Zip Code</Form.Label>
               <Form.Control
-                type="text"
+                required
+                type="number"
                 name="zip"
                 placeholder="Enter Zip-Code"
                 className="shadow-none"
                 onChange={handelInput}
               />
-              {errors.zip && <span className="text-danger">{errors.zip}</span>}
             </Form.Group>
             <Form.Group className="mb-3">
               <Form.Label>Prize</Form.Label>
               <Form.Control
+                required
                 type="text"
                 name="prize"
                 placeholder="Enter Prize"
                 className="shadow-none"
                 onChange={handelInput}
               />
-              {errors.prize && (
-                <span className="text-danger">{errors.prize}</span>
-              )}
+            </Form.Group>
+            <Form.Group className="mb-3">
+              <Form.Label>City</Form.Label>
+              <Form.Control
+                required
+                type="text"
+                name="city"
+                placeholder="Enter City"
+                className="shadow-none"
+                onChange={handelInput}
+              />
             </Form.Group>
             <Form.Group className="mb-3">
               <Form.Label>Status</Form.Label>
               <Form.Control
-                type="text"
+                required
+                as="select"
                 name="status"
-                placeholder="Set Status"
                 className="shadow-none"
                 onChange={handelInput}
-              />
-              {errors.status && (
-                <span className="text-danger">{errors.status}</span>
-              )}
+              >
+                <option value="">Select Status</option>
+                <option value="1">Active</option>
+                <option value="0">Inactive</option>
+              </Form.Control>
             </Form.Group>
 
             <div className="zip-submit-btn d-flex justify-content-end">
-              <Button onClick={handelSubmit}>Submit</Button>
+              <Button type="submit">Submit</Button>
             </div>
           </Form>
         </Modal.Body>
@@ -198,9 +187,13 @@ const ZipCode = () => {
       sortable: true,
     },
     {
-      name: "Zip-Code",
+      name: "Zip code",
       selector: (row) => row.zip_code,
       sortable: true,
+    },
+    {
+      name: "City",
+      selector: (row) => row.city,
     },
     {
       name: "Prize",
@@ -209,6 +202,16 @@ const ZipCode = () => {
     {
       name: "Status",
       selector: (row) => row.status,
+      cell: (row) =>
+        row.status === 1 ? (
+          <Button variant="success" size="sm">
+            <FaCheck />
+          </Button>
+        ) : (
+          <Button variant="danger" size="sm">
+            <FaBan />
+          </Button>
+        ),
     },
     {
       name: "Action",
@@ -220,7 +223,7 @@ const ZipCode = () => {
             size="sm"
             onClick={() => updateZip(row)}
           >
-            Update
+            <FaPencilAlt color="white" />
           </Button>
           <Button
             variant="danger"
@@ -228,7 +231,7 @@ const ZipCode = () => {
             size="sm"
             onClick={() => deleteZip(row.id)}
           >
-            Delete
+            <FaTrash />
           </Button>
         </div>
       ),
@@ -244,11 +247,21 @@ const ZipCode = () => {
   }, [data]);
 
   function handlefilter(event) {
+    const searchQuery = event.target.value.toLowerCase();
+  
     const newData = data.filter((row) => {
-      return row.zip_code
-        .toLowerCase()
-        .includes(event.target.value.toLowerCase());
+      for (const key in row) {
+        if (row.hasOwnProperty(key)) {
+          const value = row[key];
+          const valueString = (typeof value === 'string' || typeof value === 'number') ? value.toString().toLowerCase() : '';
+          if (valueString.includes(searchQuery)) {
+            return true;
+          }
+        }
+      }
+      return false;
     });
+  
     setRecords(newData);
   }
   const getZipCodeData = async () => {
@@ -278,38 +291,112 @@ const ZipCode = () => {
     getZipCodeData();
   }, []);
 
+  const handleFileChange = async (e) => {
+    const file = e.target.files[0];
+    setCsvFile(file);
+  
+    if (file) {
+      try {
+        const formData = new FormData();
+        formData.append("csvFile", file);
+  
+        const response = await axios.post(
+          `${process.env.REACT_APP_BASE_URL}admin/excelZipCode/add`,
+          formData,
+          {
+            headers: {
+              Authorization: `Bearer ${authToken}`,
+              "Content-Type": "multipart/form-data",
+            },
+            withCredentials: true,
+          }
+        );
+  
+        if (response.status) {
+          NotificationManager.success("Success", response.data.message, 1500);
+          getZipCodeData();
+        } else {
+          NotificationManager.error("Error", response.message, 3000);
+        }
+      } catch (error) {
+        NotificationManager.error("Error", error.response.data.message, 3000);
+      }
+    }
+  };
+
   return (
     <Dashboardlayout>
       <Container fluid>
         <NotificationContainer />
         <Row>
-          <Col>
-            <div className="zip-code-datatable">
-              <div className="dataTableHeader">
-                <h2>Zip-Code List</h2>
-                <Form.Control
-                  className="shadow-none"
-                  type="text"
-                  id="inputtext5"
-                  placeholder="Search..."
-                  onChange={handlefilter}
-                />
-                <Button variant="success" onClick={() => setModalShow(true)}>
-                  Add Zip Code
-                </Button>
-                <ZipCodeModel
-                  show={modalShow}
-                  onHide={() => setModalShow(false)}
-                />
-              </div>
-              <DataTable
-                columns={columns}
-                data={records}
-                selectableRows
-                pagination
-                highlightOnHover
-              />
-            </div>
+          <Col md={12}>
+            <Card className="mt-4">
+              <Card.Header>
+                <h2>Zip codes</h2>
+              </Card.Header>
+              <Card.Body>
+                <div className="datatable">
+                  <div
+                    className="dataTableHeader"
+                    style={{ margin: "13px 0px" }}
+                  >
+                    <Form.Control
+                      className="shadow-none"
+                      type="text"
+                      id="inputtext5"
+                      placeholder="Search..."
+                      onChange={handlefilter}
+                    />
+                    <div>
+                      <Button
+                        size="sm"
+                        variant="success"
+                        onClick={() => setModalShow(true)}
+                      >
+                        <FaPlus />
+                      </Button>
+                      &nbsp;
+                      <Button size="sm" variant="warning">
+                        <label htmlFor="uploadFileInput">
+                          <FaCloudUploadAlt />
+                        </label>
+                        <input
+                          id="uploadFileInput"
+                          type="file"
+                          accept=".csv"
+                          style={{ display: "none" }}
+                          onChange={(e) => handleFileChange(e)}
+                        />
+                      </Button>
+                      <ZipCodeModel
+                        show={modalShow}
+                        onHide={() => setModalShow(false)}
+                      />
+                    </div>
+                  </div>
+                  <DataTable
+                    columns={columns}
+                    data={records}
+                    selectableRows
+                    pagination
+                    highlightOnHover
+                    customStyles={{
+                      headRow: {
+                        style: {
+                          fontSize: "18px",
+                          fontWeight: "bolder",
+                        },
+                      },
+                      rows: {
+                        style: {
+                          fontSize: "16px",
+                        },
+                      },
+                    }}
+                  />
+                </div>
+              </Card.Body>
+            </Card>
           </Col>
         </Row>
       </Container>

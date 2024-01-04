@@ -35,7 +35,9 @@ exports.addZipCode = async (req, res) => {
 
 exports.getAllZipCode = async (req, res) => {
   try {
-    const getZipCode = await Models.zipCode.findAll();
+    const getZipCode = await Models.zipCode.findAll({
+      order: [['id', 'DESC']],
+    });
     res.status(200).send({
       status: true,
       message: "Zip code get successfully",
