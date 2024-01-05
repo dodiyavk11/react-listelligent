@@ -30,128 +30,88 @@ const ZipCode = () => {
   const authToken = localStorage.getItem("token");
   const navigate = useNavigate();
   const [modalShow, setModalShow] = React.useState(false);
+  const [updateModal, setUpdateModal] = useState(false);
   const [csvFile, setCsvFile] = useState(null);
-  // UpdateZip Function Start
+  const [zipUpdateData, setZipUpdateData] = useState([]);
+
   const updateZip = (row) => {
-    const zipid = row.id;
-    const zipcode = row.zip_code;
-    const zipprize = row.prize;
-    const zipstatus = row.status;
-    const zipcity = row.city;
-    setModalShow(true);
+    setZipUpdateData(row);
+    setUpdateModal(true);
   };
-  // UpdateZip Function Start
 
-  function ZipCodeModel(props) {
-    const [values, setValues] = useState({
-      zip: "",
-      prize: "",
-      status: "",
-      city: "",
-    });
+  const [values, setValues] = useState({
+    zip: "",
+    prize: "",
+    status: "",
+    city: "",
+  });
 
-    const handelInput = (event) => {
-      setValues((prev) => ({
-        ...prev,
-        [event.target.name]: event.target.value,
-      }));
-    };
+  const handelInput = (event) => {
+    setValues((prev) => ({
+      ...prev,
+      [event.target.name]: event.target.value,
+    }));
+  };
+  const handelInputUpdate = (event) => {
+    const { name, value } = event.target;
+    setZipUpdateData((prev) => ({
+      ...prev,
+      [name]: value,
+    }));
+  };
 
-    const handelSubmit = async (event) => {
-      event.preventDefault();
-      const authToken = localStorage.getItem("token");
-      try {
-        const response = await axios.post(
-          `${process.env.REACT_APP_BASE_URL}admin/add/zipcode`,
-          {
-            city: values.city,
-            zip: values.zip,
-            prize: values.prize,
-            status: values.status,
-          },
-          {
-            headers: { Authorization: `Bearer ${authToken}` },
-            withCredentials: true,
-          }
-        );
-        if (response.status) {
-          setModalShow(false);
-          NotificationManager.success("Signup", response.data.message, 1500);
-          getZipCodeData();
-        } else {
-          NotificationManager.error("Error", response.message, 3000);
+  const handelSubmit = async (event) => {
+    event.preventDefault();
+    const authToken = localStorage.getItem("token");
+    try {
+      const response = await axios.post(
+        `${process.env.REACT_APP_BASE_URL}admin/add/zipcode`,
+        {
+          city: values.city,
+          zip: values.zip,
+          prize: values.prize,
+          status: values.status,
+        },
+        {
+          headers: { Authorization: `Bearer ${authToken}` },
+          withCredentials: true,
         }
-      } catch (error) {
-        NotificationManager.error("Error", error.response.data.message, 3000);
+      );
+      if (response.status) {
+        setModalShow(false);
+        NotificationManager.success("Zip code", response.data.message, 1500);
+        getZipCodeData();
+      } else {
+        NotificationManager.error("Error", response.message, 3000);
       }
-    };
+    } catch (error) {
+      NotificationManager.error("Error", error.response.data.message, 3000);
+    }
+  };
 
-    return (
-      <Modal
-        {...props}
-        size="lg"
-        aria-labelledby="contained-modal-title-vcenter"
-        centered
-      >
-        <Modal.Body>
-          <h3 className="zip-header">Add Zip-Code</h3>
-          <Form onSubmit={handelSubmit}>
-            <Form.Group className="mb-3">
-              <Form.Label>Zip Code</Form.Label>
-              <Form.Control
-                required
-                type="number"
-                name="zip"
-                placeholder="Enter Zip-Code"
-                className="shadow-none"
-                onChange={handelInput}
-              />
-            </Form.Group>
-            <Form.Group className="mb-3">
-              <Form.Label>Prize</Form.Label>
-              <Form.Control
-                required
-                type="text"
-                name="prize"
-                placeholder="Enter Prize"
-                className="shadow-none"
-                onChange={handelInput}
-              />
-            </Form.Group>
-            <Form.Group className="mb-3">
-              <Form.Label>City</Form.Label>
-              <Form.Control
-                required
-                type="text"
-                name="city"
-                placeholder="Enter City"
-                className="shadow-none"
-                onChange={handelInput}
-              />
-            </Form.Group>
-            <Form.Group className="mb-3">
-              <Form.Label>Status</Form.Label>
-              <Form.Control
-                required
-                as="select"
-                name="status"
-                className="shadow-none"
-                onChange={handelInput}
-              >
-                <option value="">Select Status</option>
-                <option value="1">Active</option>
-                <option value="0">Inactive</option>
-              </Form.Control>
-            </Form.Group>
-
-            <div className="zip-submit-btn d-flex justify-content-end">
-              <Button type="submit">Submit</Button>
-            </div>
-          </Form>
-        </Modal.Body>
-      </Modal>
-    );
-  }
+  const handelUpdate = async (event) => {
+    event.preventDefault();
+    const authToken = localStorage.getItem("token");
+    try {
+      const response = await axios.patch(
+        `${process.env.REACT_APP_BASE_URL}admin/zipcode/${zipUpdateData.id}`,
+        zipUpdateData,
+        {
+          headers: { Authorization: `Bearer ${authToken}` },
+          withCredentials: true,
+        }
+      );
+      if (response.status) {
+        setUpdateModal(false);
+        NotificationManager.success("Zip code", response.data.message, 1500);
+        getZipCodeData();
+      } else {
+        NotificationManager.error("Error", response.message, 3000);
+      }
+    } catch (error) {
+      NotificationManager.error("Error", error.response.data.message, 3000);
+    }
+  };
 
   // DeleteZip Function Start
   const deleteZip = async (id) => {
@@ -204,11 +164,11 @@ const ZipCode = () => {
       selector: (row) => row.status,
       cell: (row) =>
         row.status === 1 ? (
-          <Button variant="success" size="sm">
+          <Button variant="success" size="sm" title="Active">
             <FaCheck />
           </Button>
         ) : (
-          <Button variant="danger" size="sm">
+          <Button variant="danger" size="sm" title="InActive">
             <FaBan />
           </Button>
         ),
@@ -218,6 +178,7 @@ const ZipCode = () => {
       cell: (row) => (
         <div className="d-flex justify-content-between">
           <Button
+            title="Edit"
             className="m-1"
             variant="warning"
             size="sm"
@@ -226,6 +187,7 @@ const ZipCode = () => {
             <FaPencilAlt color="white" />
           </Button>
           <Button
+            title="Delete"
             variant="danger"
             className="m-1"
             size="sm"
@@ -248,12 +210,15 @@ const ZipCode = () => {
 
   function handlefilter(event) {
     const searchQuery = event.target.value.toLowerCase();
-  
+
     const newData = data.filter((row) => {
       for (const key in row) {
         if (row.hasOwnProperty(key)) {
           const value = row[key];
-          const valueString = (typeof value === 'string' || typeof value === 'number') ? value.toString().toLowerCase() : '';
+          const valueString =
+            typeof value === "string" || typeof value === "number"
+              ? value.toString().toLowerCase()
+              : "";
           if (valueString.includes(searchQuery)) {
             return true;
           }
@@ -261,7 +226,7 @@ const ZipCode = () => {
       }
       return false;
     });
-  
+
     setRecords(newData);
   }
   const getZipCodeData = async () => {
@@ -294,12 +259,12 @@ const ZipCode = () => {
   const handleFileChange = async (e) => {
     const file = e.target.files[0];
     setCsvFile(file);
-  
+
     if (file) {
       try {
         const formData = new FormData();
         formData.append("csvFile", file);
-  
+
         const response = await axios.post(
           `${process.env.REACT_APP_BASE_URL}admin/excelZipCode/add`,
           formData,
@@ -311,7 +276,7 @@ const ZipCode = () => {
             withCredentials: true,
           }
         );
-  
+
         if (response.status) {
           NotificationManager.success("Success", response.data.message, 1500);
           getZipCodeData();
@@ -330,9 +295,40 @@ const ZipCode = () => {
         <NotificationContainer />
         <Row>
           <Col md={12}>
-            <Card className="mt-4">
+            <Card className="mt-4 mb-4">
               <Card.Header>
-                <h2>Zip codes</h2>
+                <Row>
+                  <Col md={11}>
+                    <h4>Zip codes</h4>
+                  </Col>
+                  <Col md={1}>
+                    <Button
+                      title="Add zip code"
+                      size="sm"
+                      variant="success"
+                      onClick={() => setModalShow(true)}
+                    >
+                      <FaPlus />
+                    </Button>
+                    &nbsp;
+                    <Button
+                      size="sm"
+                      variant="warning"
+                      title="Upload csv file to add zip code"
+                    >
+                      <label htmlFor="uploadFileInput">
+                        <FaCloudUploadAlt />
+                      </label>
+                      <input
+                        id="uploadFileInput"
+                        type="file"
+                        accept=".csv"
+                        style={{ display: "none" }}
+                        onChange={(e) => handleFileChange(e)}
+                      />
+                    </Button>
+                  </Col>
+                </Row>
               </Card.Header>
               <Card.Body>
                 <div className="datatable">
@@ -347,32 +343,6 @@ const ZipCode = () => {
                       placeholder="Search..."
                       onChange={handlefilter}
                     />
-                    <div>
-                      <Button
-                        size="sm"
-                        variant="success"
-                        onClick={() => setModalShow(true)}
-                      >
-                        <FaPlus />
-                      </Button>
-                      &nbsp;
-                      <Button size="sm" variant="warning">
-                        <label htmlFor="uploadFileInput">
-                          <FaCloudUploadAlt />
-                        </label>
-                        <input
-                          id="uploadFileInput"
-                          type="file"
-                          accept=".csv"
-                          style={{ display: "none" }}
-                          onChange={(e) => handleFileChange(e)}
-                        />
-                      </Button>
-                      <ZipCodeModel
-                        show={modalShow}
-                        onHide={() => setModalShow(false)}
-                      />
-                    </div>
                   </div>
                   <DataTable
                     columns={columns}
@@ -399,6 +369,151 @@ const ZipCode = () => {
             </Card>
           </Col>
         </Row>
+        {/* Add zip model */}
+        <Modal
+          show={modalShow}
+          size="lg"
+          aria-labelledby="contained-modal-title-vcenter"
+          centered
+        >
+          <Modal.Body>
+            <h3 className="zip-header">Add Zip code</h3>
+            <Form onSubmit={handelSubmit}>
+              <Form.Group className="mb-3">
+                <Form.Label>Zip Code</Form.Label>
+                <Form.Control
+                  required
+                  type="number"
+                  name="zip"
+                  placeholder="Enter Zip-Code"
+                  className="shadow-none"
+                  onChange={handelInput}
+                />
+              </Form.Group>
+              <Form.Group className="mb-3">
+                <Form.Label>Prize</Form.Label>
+                <Form.Control
+                  required
+                  type="text"
+                  name="prize"
+                  placeholder="Enter Prize"
+                  className="shadow-none"
+                  onChange={handelInput}
+                />
+              </Form.Group>
+              <Form.Group className="mb-3">
+                <Form.Label>City</Form.Label>
+                <Form.Control
+                  required
+                  type="text"
+                  name="city"
+                  placeholder="Enter City"
+                  className="shadow-none"
+                  onChange={handelInput}
+                />
+              </Form.Group>
+              <Form.Group className="mb-3">
+                <Form.Label>Status</Form.Label>
+                <Form.Control
+                  required
+                  as="select"
+                  name="status"
+                  className="shadow-none"
+                  onChange={handelInput}
+                >
+                  <option value="">Select Status</option>
+                  <option value="1">Active</option>
+                  <option value="0">Inactive</option>
+                </Form.Control>
+              </Form.Group>
+
+              <div className="zip-submit-btn d-flex justify-content-end">
+                <Button type="submit">Submit</Button>&nbsp;
+                <span
+                  className="btn btn-danger"
+                  onClick={() => setModalShow(false)}
+                >
+                  Close
+                </span>
+              </div>
+            </Form>
+          </Modal.Body>
+        </Modal>
+        {/* end add zip modal */}
+        {/* update zip modal */}
+        <Modal
+          size="lg"
+          show={updateModal}
+          aria-labelledby="contained-modal-title-vcenter"
+          centered
+        >
+          <Modal.Body>
+            <h3 className="zip-header">Update Zip code</h3>
+            <Form onSubmit={handelUpdate}>
+              <Form.Group className="mb-3">
+                <Form.Label>Zip Code</Form.Label>
+                <Form.Control
+                  required
+                  type="number"
+                  name="zip_code"
+                  placeholder="Enter Zip-Code"
+                  className="shadow-none"
+                  onChange={handelInputUpdate}
+                  value={zipUpdateData.zip_code}
+                />
+              </Form.Group>
+              <Form.Group className="mb-3">
+                <Form.Label>Prize</Form.Label>
+                <Form.Control
+                  required
+                  type="text"
+                  name="prize"
+                  placeholder="Enter Prize"
+                  className="shadow-none"
+                  onChange={handelInputUpdate}
+                  value={zipUpdateData.prize}
+                />
+              </Form.Group>
+              <Form.Group className="mb-3">
+                <Form.Label>City</Form.Label>
+                <Form.Control
+                  required
+                  type="text"
+                  name="city"
+                  placeholder="Enter City"
+                  className="shadow-none"
+                  onChange={handelInputUpdate}
+                  value={zipUpdateData.city}
+                />
+              </Form.Group>
+              <Form.Group className="mb-3">
+                <Form.Label>Status</Form.Label>
+                <Form.Control
+                  required
+                  as="select"
+                  name="status"
+                  value={zipUpdateData.status}
+                  className="shadow-none"
+                  onChange={handelInputUpdate}
+                >
+                  <option value="">Select Status</option>
+                  <option value="1">Active</option>
+                  <option value="0">Inactive</option>
+                </Form.Control>
+              </Form.Group>
+
+              <div className="zip-submit-btn d-flex justify-content-end">
+                <Button type="submit">Update</Button> &nbsp;
+                <span
+                  className="btn btn-danger"
+                  onClick={() => setUpdateModal(false)}
+                >
+                  Close
+                </span>
+              </div>
+            </Form>
+          </Modal.Body>
+        </Modal>
       </Container>
     </Dashboardlayout>
   );

@@ -123,11 +123,11 @@ exports.excelZipCodeAdd = async (req, res) => {
 exports.updateZipCode = async (req, res) => {
   try {
     const { id } = req.params;
-    const { zip, city, prize, status } = req.body;
-    const newData = { zip_code: zip, city, prize, status };
+    const { zip_code, city, prize, status } = req.body;
+    const newData = { zip_code, city, prize, status };
     const isExist = await Models.zipCode.findOne({
       where: {
-        zip_code: zip,
+        zip_code,
         id: {
           [Sequelize.Op.ne]: id,
         },
@@ -186,6 +186,7 @@ exports.searchZipCode = async (req, res) => {
           { zip_code: { [Sequelize.Op.like]: `%${q}%` } },
           { city: { [Sequelize.Op.like]: `%${q}%` } },
         ],
+        status: 1
       },
     });
     const zipIds = searchResult.map((result) => result.id);

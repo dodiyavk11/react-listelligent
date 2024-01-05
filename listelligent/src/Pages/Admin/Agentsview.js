@@ -15,6 +15,7 @@ import {
   NotificationContainer,
   NotificationManager,
 } from "react-notifications";
+import { Card } from "react-bootstrap";
 
 const Agentsview = () => {
   const authToken = localStorage.getItem("token");
@@ -68,19 +69,21 @@ const Agentsview = () => {
       cell: (row) =>
         row.status === 0 ? (
           <Button
+            title="Click to approve"
             variant="success"
             size="sm"
             onClick={() => handleApproveClick(row.id, 1)}
           >
-            <FaCheck/>
+            <FaCheck />
           </Button>
         ) : (
           <Button
+            title="Click to Unapproved"
             variant="danger"
             size="sm"
             onClick={() => handleApproveClick(row.id, 0)}
           >
-            <FaBan/>
+            <FaBan />
           </Button>
         ),
     },
@@ -95,9 +98,24 @@ const Agentsview = () => {
   }, [data]);
 
   function handlefilter(event) {
+    const searchQuery = event.target.value.toLowerCase();
+
     const newData = data.filter((row) => {
-      return row.name.toLowerCase().includes(event.target.value.toLowerCase());
+      for (const key in row) {
+        if (row.hasOwnProperty(key)) {
+          const value = row[key];
+          const valueString =
+            typeof value === "string" || typeof value === "number"
+              ? value.toString().toLowerCase()
+              : "";
+          if (valueString.includes(searchQuery)) {
+            return true;
+          }
+        }
+      }
+      return false;
     });
+
     setRecords(newData);
   }
   const fetchAgentList = async () => {
@@ -129,40 +147,48 @@ const Agentsview = () => {
       <Container fluid>
         <NotificationContainer />
         <Row>
-          {/* <Col md={1}></Col> */}
           <Col md={12}>
-            <div className="dataTable" style={{ margin: "13px 0px" }}>
-              <div className="search-input">
-                <h2>Agents List</h2>
-                <Form.Control
-                  className=""
-                  type="text"
-                  id="inputtext5"
-                  placeholder="Search..."
-                  onChange={handlefilter}
-                />
-              </div>
-              <DataTable
-                columns={columns}
-                data={records}
-                selectableRows
-                pagination
-                highlightOnHover
-                customStyles={{
-                  headRow: {
-                    style: {
-                      fontSize: "18px",
-                      fontWeight: "bolder",
-                    },
-                  },
-                  rows: {
-                    style: {
-                      fontSize: "16px",
-                    },
-                  },
-                }}
-              />
-            </div>
+            <Card className="mt-4 mb-4">
+              <Card.Header>
+                <h4>Agents</h4>
+              </Card.Header>
+              <Card.Body>
+                <div className="dataTable" style={{ margin: "13px 0px" }}>
+                  <div
+                    className="dataTableHeader"
+                    style={{ margin: "13px 0px" }}
+                  >
+                    <Form.Control
+                      className="shadow-none"
+                      type="text"
+                      id="inputtext5"
+                      placeholder="Search..."
+                      onChange={handlefilter}
+                    />
+                  </div>
+                  <DataTable
+                    columns={columns}
+                    data={records}
+                    selectableRows
+                    pagination
+                    highlightOnHover
+                    customStyles={{
+                      headRow: {
+                        style: {
+                          fontSize: "18px",
+                          fontWeight: "bolder",
+                        },
+                      },
+                      rows: {
+                        style: {
+                          fontSize: "16px",
+                        },
+                      },
+                    }}
+                  />
+                </div>
+              </Card.Body>
+            </Card>
           </Col>
           {/* <Col md={1}></Col> */}
         </Row>

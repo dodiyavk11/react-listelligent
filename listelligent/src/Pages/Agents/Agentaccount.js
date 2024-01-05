@@ -66,6 +66,7 @@ function getStyles(name, personName, theme) {
 const Agentaccount = () => {
   const navigate = useNavigate();
   const [activeZip, setActiveZipCode] = useState([]);
+  const [profileData, setProfileData] = useState([]);
   const authToken = localStorage.getItem("token");
   const theme = useTheme();
   const [personName, setPersonName] = React.useState([]);
@@ -96,8 +97,62 @@ const Agentaccount = () => {
       }
     };
 
+    const userProfile = async () => {
+      try {
+        const response = await axios.get(
+          `${process.env.REACT_APP_BASE_URL}user/profile`,
+          {
+            headers: { Authorization: `Bearer ${authToken}` },
+            withCredentials: true,
+          }
+        );
+
+        if (response.status) {
+          setProfileData(response.data.data);
+        } else {
+          NotificationManager.error("Error", response.data.message, 3000);
+        }
+      } catch (error) {
+        if (error.response && error.response.status === 401) {
+          localStorage.clear();
+          navigate("/login");
+        } else {
+          NotificationManager.error("Error", error.response.data.message, 3000);
+        }
+      }
+    };
+    userProfile();
     fetchData();
   }, []);
+
+  const handelInputUpdate = (event) => {
+    const { name, value } = event.target;
+    setProfileData((prev) => ({
+      ...prev,
+      [name]: value,
+    }));
+  };
+
+  const handelSubmit = async(event) => {
+    event.preventDefault();
+    try {
+      const response = await axios.patch(
+        `${process.env.REACT_APP_BASE_URL}user/update/profile`,
+        profileData,
+        {
+          headers: { Authorization: `Bearer ${authToken}` },
+          withCredentials: true,
+        }
+      );      
+      if (response.status) {
+        NotificationManager.success("Signup", response.data.message, 1500);        
+      } else {
+        NotificationManager.error("Error", response.message, 3000);
+      }
+    } catch (error) {
+      NotificationManager.error("Error", error.response.data.message, 3000);
+    }
+  };
 
   const handleChange = (event) => {
     const {
@@ -157,6 +212,13 @@ const Agentaccount = () => {
                     className={activeTab === "8" ? "active" : ""}
                   >
                     Purchased Zip code
+                  </li>
+                  <li
+                    type="button"
+                    onClick={() => handleLiClick("0")}
+                    className={activeTab === "0" ? "active" : ""}
+                  >
+                    My profile
                   </li>
                   {/* <li
                     type="button"
@@ -274,6 +336,114 @@ const Agentaccount = () => {
                             ))}
                           </div>
                         )}
+                      </div>
+                    </Accordion.Body>
+                  </Accordion.Item>
+                  <Accordion.Item eventKey="0" className="accordian-items">
+                    <Accordion.Header onClick={() => handleLiClick("0")}>
+                      My profile
+                    </Accordion.Header>
+                    <Accordion.Body>
+                      <div className="client-preference-content">
+                        <Form  onSubmit={handelSubmit}>
+                          <Row className="border-bottom">
+                            <Col lg={4}>
+                              <div className="preferences-title">
+                                <h6>Full name</h6>
+                              </div>
+                            </Col>
+                            <Col lg={8}>
+                              <div className="preferences-checkbox mb-3">
+                                <Form.Control
+                                  type="text"
+                                  placeholder="Full name"
+                                  required
+                                  name="name"
+                                  onChange={(event) => handelInputUpdate(event)}
+                                  value={profileData.name}
+                                />
+                              </div>
+                            </Col>
+                          </Row>
+                          <Row className="border-bottom mt-3">
+                            <Col lg={4}>
+                              <div className="preferences-title">
+                                <h6>License *</h6>
+                              </div>
+                            </Col>
+                            <Col lg={8}>
+                              <div className="preferences-checkbox mb-3">
+                                <Form.Control
+                                  required
+                                  name="license"
+                                  placeholder="00000000"
+                                  onChange={(event) => handelInputUpdate(event)}
+                                  value={profileData.license}
+                                />
+                              </div>
+                            </Col>
+                          </Row>
+                          <Row className="border-bottom mt-3">
+                            <Col lg={4}>
+                              <div className="preferences-title">
+                                <h6>Brokerage *</h6>
+                              </div>
+                            </Col>
+                            <Col lg={8}>
+                              <div className="preferences-checkbox mb-3">
+                                <Form.Control
+                                  required
+                                  name="brokerage"
+                                  placeholder="Best Realty"
+                                  onChange={(event) => handelInputUpdate(event)}
+                                  value={profileData.brokerage}
+                                />
+                              </div>
+                            </Col>
+                          </Row>
+                          <Row className="border-bottom mt-3">
+                            <Col lg={4}>
+                              <div className="preferences-title">
+                                <h6>Office address *</h6>
+                              </div>
+                            </Col>
+                            <Col lg={8}>
+                              <div className="preferences-checkbox mb-3">
+                                <Form.Control
+                                  required
+                                  name="office_address"
+                                  placeholder="199 Market St, San Francisco, CA"
+                                  onChange={(event) => handelInputUpdate(event)}
+                                  value={profileData.office_address}
+                                />
+                              </div>
+                            </Col>
+                          </Row>
+                          <Row className="border-bottom mt-3">
+                            <Col lg={4}>
+                              <div className="preferences-title">
+                                <h6>Zip code *</h6>
+                              </div>
+                            </Col>
+                            <Col lg={8}>
+                              <div className="preferences-checkbox mb-3">
+                                <Form.Control
+                                  required
+                                  name="zip_code"
+                                  type="number"
+                                  placeholder="00000"
+                                  onChange={(event) => handelInputUpdate(event)}
+                                  value={profileData.zip_code}
+                                />
+                              </div>
+                            </Col>
+                          </Row>
+                          <div className="mt-3">
+                            <Button className="form-submit-btn" type="submit">
+                              Save Changes
+                            </Button>
+                          </div>
+                        </Form>
                       </div>
                     </Accordion.Body>
                   </Accordion.Item>

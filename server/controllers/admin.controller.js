@@ -155,3 +155,14 @@ exports.getAdminLeads = async(req, res) => {
     return res.status(500).send({ status: false, message: "Admin Leads cannot get, an error occured.", data:[], error: err.message });
   }
 }
+
+exports.updateOrderStatus = async(req, res) => {
+  try{
+    const { id, status } = req.params;
+    const updateOrderStatus = await Models.Orders.update({ status }, {where: { id } });
+    const updateOrderProductStatus = await Models.orderZipCode.update({ status }, {where: { order_id: id } });
+    return res.status(200).send({ status: true, message: "Order status update successfully", data: updateOrderStatus });
+  }catch(err){
+    return res.status(200).send({ status: false, message: "Order status can not update, an error occured.", error: err.message });
+  }
+}

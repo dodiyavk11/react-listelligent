@@ -140,3 +140,28 @@ exports.userAddLead = async (req, res) => {
     });
   }
 };
+
+exports.getUserProfile = async(req, res) => {
+  try{
+    const id = req.userId;
+    const getAgentProfile = await Models.Users.findOne({ 
+      where: { id }, 
+      attributes: { exclude: ['password','role'] }
+    });
+    return res.status(200).send({ status: true, message: "Profile get successfully.", data: getAgentProfile });
+  }catch(err){
+    return res.status(500).send({ status: false, message: "Profile cannot get, an error occured.", error: err.message });
+  }
+}
+
+exports.userProfileUpdate = async(req, res) => {
+  try{
+    const id = req.userId;
+    const { name, license, brokerage, office_address, zip_code } = req.body;
+    const updateInfo = { name, license, brokerage, office_address, zip_code };
+    const updateUser = await Models.Users.update(updateInfo,{ where: { id } });
+    return res.status(200).send({ status: true, message: "Profile update successfully.", data: updateUser });
+  }catch(err){
+    return res.status(500).send({ status: false, message: "Profile cannot update, an error occured.", error: err.message });
+  }
+}

@@ -7,6 +7,7 @@
     background-color:#343a40;
     position: fixed;
     left: 0;
+    box-shadow: 0 14px 28px rgba(0,0,0,.25),0 10px 10px rgba(0,0,0,.22)!important;
 }
 .main-content {
     width: 85%;
@@ -90,4 +91,8 @@
 .sidebarMenuList li.active
 {
     background-color:rgba(255,255,255,.1);
+}
+.headerBar
+{
+    box-shadow: 0 0px 15px rgba(0,0,0,.25),0 0px 1px rgba(0,0,0,.22)!important;
 }

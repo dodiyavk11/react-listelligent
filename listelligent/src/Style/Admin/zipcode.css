@@ -27,9 +27,9 @@
     margin: 0;
     color: #fff;
 }
-.dataTableHeader input{
+/* .dataTableHeader input{
     width: 75%;
-}
+} */
 .dataTableHeader button{
     font-family: Montserrat;
     border-radius: 4px;

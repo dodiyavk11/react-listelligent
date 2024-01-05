@@ -142,6 +142,7 @@ exports.cartPlaceOrder = async (req, res) => {
         user_id,
         total: cartTotal,
         transaction_id: "just test",
+        status:0
       });
       const { startDate, endDate } = getAgoDate();
       const orderZipCodeItems = getCart.map((cartItem) => ({
@@ -153,7 +154,7 @@ exports.cartPlaceOrder = async (req, res) => {
         price: cartItem.price,
         start_date: startDate,
         end_date: endDate,
-        status: 1,
+        status: 0,
       }));
       const orderZipCode = await Models.orderZipCode.bulkCreate(
         orderZipCodeItems
@@ -263,7 +264,7 @@ exports.showUserAgentList = async(req, res) => {
           {
             model: Models.orderZipCode,
             as: "activeZipcode",
-            where: { zip_code: zipcode },
+            where: { zip_code: zipcode, status: 1 },
           },
         ]        
       })

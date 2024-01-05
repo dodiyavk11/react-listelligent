@@ -16,6 +16,7 @@ import {
 } from "react-notifications";
 import Accordion from "react-bootstrap/Accordion";
 import TimeAgo from "react-timeago";
+import { Card } from "react-bootstrap";
 
 const Leads = () => {
   const authToken = localStorage.getItem("token");
@@ -94,18 +95,22 @@ const Leads = () => {
   const [records, setRecords] = useState(data);
 
   function handlefilter(event) {
-    const searchTerm = event.target.value.toLowerCase();
+    const searchQuery = event.target.value.toLowerCase();
 
     const newData = data.filter((row) => {
-      const rowValues = [
-        ...Object.values(row),
-        ...row.orderProduct.map((product) => Object.values(product)),
-        Object.values(row.user),
-      ].flat();
-
-      return rowValues
-        .filter((value) => value !== undefined && value !== null)
-        .some((value) => value.toString().toLowerCase().includes(searchTerm));
+      for (const key in row) {
+        if (row.hasOwnProperty(key)) {
+          const value = row[key];
+          const valueString =
+            typeof value === "string" || typeof value === "number"
+              ? value.toString().toLowerCase()
+              : "";
+          if (valueString.includes(searchQuery)) {
+            return true;
+          }
+        }
+      }
+      return false;
     });
 
     setRecords(newData);
@@ -141,42 +146,51 @@ const Leads = () => {
   };
   return (
     <Dashboardlayout>
-      <Container>
+      <Container fluid>
         <NotificationContainer />
         <Row>
           <Col md={12}>
-            <div className="dataTable" style={{ margin: "13px 0px" }}>
-              <div className="search-input">
-                <h2>Leads</h2>
-                <Form.Control
-                  className=""
-                  type="text"
-                  id="inputtext5"
-                  placeholder="Search..."
-                  onChange={handlefilter}
-                />
-              </div>
-              <DataTable
-                columns={columns}
-                data={records}
-                // selectableRows
-                pagination
-                highlightOnHover
-                customStyles={{
-                  headRow: {
-                    style: {
-                      fontSize: "18px",
-                      fontWeight: "bolder",
-                    },
-                  },
-                  rows: {
-                    style: {
-                      fontSize: "16px",
-                    },
-                  },
-                }}
-              />
-            </div>
+            <Card className="mt-4 mb-4">
+              <Card.Header>
+                <h4>Leads</h4>
+              </Card.Header>
+              <Card.Body>
+                <div className="dataTable" style={{ margin: "13px 0px" }}>
+                  <div
+                    className="dataTableHeader"
+                    style={{ margin: "13px 0px" }}
+                  >
+                    <Form.Control
+                      className="shadow-none"
+                      type="text"
+                      id="inputtext5"
+                      placeholder="Search..."
+                      onChange={handlefilter}
+                    />
+                  </div>
+                  <DataTable
+                    columns={columns}
+                    data={records}
+                    // selectableRows
+                    pagination
+                    highlightOnHover
+                    customStyles={{
+                      headRow: {
+                        style: {
+                          fontSize: "18px",
+                          fontWeight: "bolder",
+                        },
+                      },
+                      rows: {
+                        style: {
+                          fontSize: "16px",
+                        },
+                      },
+                    }}
+                  />
+                </div>
+              </Card.Body>
+            </Card>
           </Col>
         </Row>
       </Container>
