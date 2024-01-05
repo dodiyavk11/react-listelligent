@@ -284,7 +284,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"city\":\"Talala\",\r\n    \"zip\":123456,\r\n    \"prize\":555,\r\n    \"status\":1\r\n}",
+					"raw": "{\r\n    \"city\":\"Talala\",\r\n    \"zip_code\":123456,\r\n    \"prize\":555,\r\n    \"status\":1\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -833,6 +833,109 @@
 					"path": [
 						"admin",
 						"leads"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get logged user profile data",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjE4LCJpYXQiOjE3MDQ0MzE2MzcsImV4cCI6MTcwNDQzNTIzN30.Ic3blGpZobatnG1No_CoN_3p0XKpyPzB7iG_ZRYg_nU",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3001/user/profile",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3001",
+					"path": [
+						"user",
+						"profile"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Admin update order status",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjMsImlhdCI6MTcwNDQ1MjUyOCwiZXhwIjoxNzA0NDU2MTI4fQ.jMhUyzzGAYpbhbwJ1k7Rml1NGilqtQRYmyR7lEdqZlc",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3001/admin/status/order/8/0",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3001",
+					"path": [
+						"admin",
+						"status",
+						"order",
+						"8",
+						"0"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Agent update profile",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjE4LCJpYXQiOjE3MDQ0NTUwMzcsImV4cCI6MTcwNDQ1ODYzN30.0RLwSXbt_w2nSPlkUR3PRvGMwJOusujvKWrlz7XKojM",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PATCH",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"name\": \"Test agent\",\r\n  \"license\": \"123456\",\r\n  \"brokerage\": \"XYZ Realty\",\r\n  \"office_address\": \"123 Main St\",\r\n  \"zip_code\": \"123456\"\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3001/user/update/profile",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3001",
+					"path": [
+						"user",
+						"update",
+						"profile"
 					]
 				}
 			},
