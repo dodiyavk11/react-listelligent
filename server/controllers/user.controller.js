@@ -38,10 +38,10 @@ exports.signUp = async (req, res) => {
     const hashedPassword = await bcrypt.hash(password, 11);
     const userInfo = {
       name,
-      license,      
+      license,
       brokerage,
       office_address,
-      zip_code,      
+      zip_code,
       email,
       role,
       password: hashedPassword,
@@ -124,7 +124,15 @@ exports.signIn = async (req, res) => {
 exports.userAddLead = async (req, res) => {
   try {
     const { name, phone, email, address, zip_code, agent_zip_code } = req.body;
-    const leadData = { name, phone, email, address, zip_code, agent_zip_code, status: 0 };
+    const leadData = {
+      name,
+      phone,
+      email,
+      address,
+      zip_code,
+      agent_zip_code,
+      status: 0,
+    };
     const addLead = await Models.Lead.create(leadData);
     return res.status(200).send({
       status: true,
@@ -141,27 +149,76 @@ exports.userAddLead = async (req, res) => {
   }
 };
 
-exports.getUserProfile = async(req, res) => {
-  try{
+exports.getUserProfile = async (req, res) => {
+  try {
     const id = req.userId;
-    const getAgentProfile = await Models.Users.findOne({ 
-      where: { id }, 
-      attributes: { exclude: ['password','role'] }
+    const getAgentProfile = await Models.Users.findOne({
+      where: { id },
+      attributes: { exclude: ["password", "role"] },
     });
-    return res.status(200).send({ status: true, message: "Profile get successfully.", data: getAgentProfile });
-  }catch(err){
-    return res.status(500).send({ status: false, message: "Profile cannot get, an error occured.", error: err.message });
+    return res.status(200).send({
+      status: true,
+      message: "Profile get successfully.",
+      data: getAgentProfile,
+    });
+  } catch (err) {
+    return res.status(500).send({
+      status: false,
+      message: "Profile cannot get, an error occured.",
+      error: err.message,
+    });
   }
-}
+};
 
-exports.userProfileUpdate = async(req, res) => {
-  try{
+exports.userProfileUpdate = async (req, res) => {
+  try {
     const id = req.userId;
     const { name, license, brokerage, office_address, zip_code } = req.body;
     const updateInfo = { name, license, brokerage, office_address, zip_code };
-    const updateUser = await Models.Users.update(updateInfo,{ where: { id } });
-    return res.status(200).send({ status: true, message: "Profile update successfully.", data: updateUser });
-  }catch(err){
-    return res.status(500).send({ status: false, message: "Profile cannot update, an error occured.", error: err.message });
+    const updateUser = await Models.Users.update(updateInfo, { where: { id } });
+    return res.status(200).send({
+      status: true,
+      message: "Profile update successfully.",
+      data: updateUser,
+    });
+  } catch (err) {
+    return res.status(500).send({
+      status: false,
+      message: "Profile cannot update, an error occured.",
+      error: err.message,
+    });
   }
-}
+};
+
+exports.changeUserPassword = async (req, res) => {
+  try {
+    const uId = req.userId;
+    const { current_password, new_password } = req.body;
+    const userData = await Models.Users.findOne({ where: { id: uId } });
+    const isPasswordValid = await bcrypt.compare(
+      current_password,
+      userData.password
+    );
+    if (!isPasswordValid) {
+      return res.status(401).send({
+        status: false,
+        message: "Your password does not match your current password",
+        data: [],
+      });
+    }
+    const newPasswordHash = await bcrypt.hash(new_password, 11);
+    updateData = { password: newPasswordHash };
+    const updatePassword = await Models.Users.update(updateData, {
+      where: { id: uId },
+    });
+    res
+      .status(200)
+      .send({ status: true, message: "Password chnageed successfully." });
+  } catch (err) {
+    res.status(500).send({
+      status: false,
+      message: "Password can not change, an error occured.",
+      error: err.message,
+    });
+  }
+};

@@ -150,7 +150,7 @@ const Login = () => {
                           <Form.Check type="checkbox" label="Remember me" />
                         </div>
                         <div className="col-md-6 text-right">
-                          <Link className="forgot-password">
+                          <Link className="forgot-password" style={{textWrap:"nowrap"}}>
                             Forgot Password?
                           </Link>
                         </div>
@@ -163,9 +163,9 @@ const Login = () => {
                         LOGIN
                       </Link>
                       <p className="text-center mt-5">
-                        Don't have an account?
-                        <Link to={"/signup"} className="new-account">
-                          Creat New Account
+                        Don't have an account? &nbsp;
+                        <Link to={"/agentsignupform"} className="new-account">
+                          Create
                         </Link>
                       </p>
                     </Form>
@@ -176,10 +176,6 @@ const Login = () => {
                     <h2 className="position-relative px-4 pb-3 mb-4">
                       Login With Listelligent
                     </h2>
-                    <p>
-                      Lorem ipsuing elit. Molomos totam est voluptatum i omos
-                      totam est voluptatum i ure sit consectetur ill
-                    </p>
                   </div>
                 </div>
               </div>

@@ -299,7 +299,9 @@
     font-size: 16px;
     font-weight: 600;
 }
-
+.highLightText{ 
+    font-size: 45px;
+}
 
 @media(max-width: 1224px){
     .first-left-col h4 {

@@ -179,24 +179,45 @@ const Agentsignupform = () => {
                     required
                     type="checkbox"
                     name="termcondition"
-                    label="I agree to the terms and conditions"
+                    // label="I agree to the terms and conditions"
+                    label={
+                      <Link
+                        to="/your-terms-and-conditions-link"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                      >
+                        I agree to the terms and conditions
+                      </Link>
+                    }
                     checked={values.termcondition}
                     onChange={(e) =>
-                      setValues({ ...values, termcondition: values.termcondition ? false : true })
+                      setValues({
+                        ...values,
+                        termcondition: values.termcondition ? false : true,
+                      })
                     }
                   />
                 </Form.Group>
               </Col>
             </Row>
             <Row>
-              <Col md={6}>
+              <Col md={12}>
+                <center>
                 <Button
                   className="find-btn btn btn-primary"
                   type="submit"
                   size="lg"
                 >
-                  Submit
+                  Signup
+                </Button>{" "}
+                <Button
+                  className="find-btn btn btn-primary"
+                  type="submit"
+                  size="lg"
+                >
+                  <Link to={"/login"} className="text-white">Back to login</Link>
                 </Button>
+                </center>
               </Col>
             </Row>
           </Form>

@@ -5,7 +5,7 @@ import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import Button from "react-bootstrap/Button";
-import { FiArrowLeft } from "react-icons/fi";
+import { FiArrowLeft, FiDownload } from "react-icons/fi";
 import Accordion from "react-bootstrap/Accordion";
 import { useNavigate, Link } from "react-router-dom";
 import axios from "axios";
@@ -20,6 +20,38 @@ const AgentOrders = () => {
   const navigate = useNavigate();
   const [ordersList, setOrderlist] = useState([]);
   const authToken = localStorage.getItem("token");
+
+  const handleDownloadClick = async (id) => {
+    try {
+      const response = await axios.get(
+        `${process.env.REACT_APP_BASE_URL}agent/generateInvoice/${id}`,
+        {
+          headers: { Authorization: `Bearer ${authToken}` },
+          withCredentials: true,
+        }
+      );
+
+      if (response.status) {
+        const link = document.createElement("a");
+        link.href = `${process.env.REACT_APP_BASE_URL}${response.data.filepath}`;
+        link.download = `invoice_${id}.pdf`;
+        link.target = "_blank";
+        link.rel = "noopener noreferrer";
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+      } else {
+        NotificationManager.error("Error", response.data.message, 3000);
+      }
+    } catch (error) {
+      if (error.response && error.response.status === 401) {
+        localStorage.clear();
+        navigate("/login");
+      } else {
+        NotificationManager.error("Error", error.response.data.message, 3000);
+      }
+    }
+  };
 
   useEffect(() => {
     const fetchData = async () => {
@@ -89,11 +121,20 @@ const AgentOrders = () => {
                         >
                           <Accordion.Header>
                             <p>
-                              Total amount : &nbsp;<b>{result.total}</b>&nbsp;&nbsp;
+                              Total amount : &nbsp;<b>{result.total}</b>
+                              &nbsp;&nbsp;
                             </p>
                             <span className="status-tag mb-3">
                               {" "}
                               <TimeAgo date={result.created_at} />
+                            </span>
+                            &nbsp;
+                            <span
+                              className="status-tag mb-3"
+                              title="Download invoice"
+                              onClick={() => handleDownloadClick(result.id)}
+                            >
+                              <FiDownload size={20} />
                             </span>
                           </Accordion.Header>
                           <Accordion.Body>

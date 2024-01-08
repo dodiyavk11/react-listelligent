@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 05, 2024 at 01:30 PM
+-- Generation Time: Jan 08, 2024 at 01:32 PM
 -- Server version: 10.4.27-MariaDB
 -- PHP Version: 7.4.33
 
@@ -109,7 +109,15 @@ INSERT INTO `lead` (`id`, `name`, `phone`, `email`, `address`, `zip_code`, `agen
 (26, 'Ab dav', '12545', 'abvsdakskkdkdskdk@gmail.com', 'Talala', 362265, 362265, 0, '2024-01-03 11:42:31', '2024-01-03 12:23:05'),
 (27, 'JJ Naghera', '6644612231', 'jjnaghera@gmail.com', '15, dkdk dksdk ndsd sdksdk ', 362730, 362730, 0, '2024-01-03 11:44:28', '2024-01-03 12:23:02'),
 (28, 'Jayesh Naghera', '09033389733', 'rjnaghera@gmail.com', 'Bhalpara', 362268, 362268, 0, '2024-01-03 12:06:25', '2024-01-03 12:22:57'),
-(31, 'Away from Saving', '4789554622', '156454545@gmail.com', 'Bhalpara', 362268, 362001, 0, '2024-01-03 12:35:21', '2024-01-04 11:48:09');
+(31, 'Away from Saving', '4789554622', '156454545@gmail.com', 'Bhalpara', 362268, 362001, 0, '2024-01-03 12:35:21', '2024-01-04 11:48:09'),
+(32, 'Jayesh Naghera', '09033389733', 'rjnaghera@gmail.com', 'Bhalpara', 362268, 38001, 0, '2024-01-08 17:25:53', '2024-01-08 17:25:53'),
+(33, '5454', '545454', 'rjnaghera@gmail.com', 'Bhalpara', 362268, 38001, 0, '2024-01-08 17:26:56', '2024-01-08 17:26:56'),
+(34, 'Jayesh Naghera', '09033389733', 'rjnaghera@gmail.com', 'Test', 362268, 0, 0, '2024-01-08 17:27:06', '2024-01-08 17:27:06'),
+(35, '455454', '54545454', 'rjnaghera@gmail.com', '1212121', 38001, 38001, 0, '2024-01-08 17:30:36', '2024-01-08 17:30:36'),
+(36, 'sds', 'hjjdhj', 'jayesh@besticoder.com', '55', 362268, 362268, 0, '2024-01-08 17:32:40', '2024-01-08 17:32:40'),
+(37, 'sds', 'hjjdhj', 'jayesh@besticoder.com', '55', 362268, 362268, 0, '2024-01-08 17:32:41', '2024-01-08 17:32:41'),
+(38, 'sds', 'hjjdhj', 'jayesh@besticoder.com', '55', 362268, 362268, 0, '2024-01-08 17:34:30', '2024-01-08 17:34:30'),
+(39, '5454545', '554545', '4wgi06hw6i@superblohey.com', '55454', 38001, 38001, 0, '2024-01-08 17:34:48', '2024-01-08 17:34:48');
 
 -- --------------------------------------------------------
 
@@ -121,22 +129,22 @@ CREATE TABLE `users` (
   `id` int(11) NOT NULL,
   `name` varchar(255) NOT NULL,
   `license` varchar(255) NOT NULL,
-  `license_date` date NOT NULL,
-  `mls_id` varchar(255) NOT NULL,
+  `license_date` date DEFAULT NULL,
+  `mls_id` varchar(255) DEFAULT NULL,
   `brokerage` varchar(255) NOT NULL,
   `office_address` varchar(255) NOT NULL,
-  `building` varchar(255) NOT NULL,
+  `building` varchar(255) DEFAULT NULL,
   `zip_code` int(11) NOT NULL DEFAULT 0,
-  `hp_address` varchar(255) NOT NULL,
-  `hp_zip_code` varchar(255) NOT NULL,
-  `hp_sales_price` varchar(10) NOT NULL,
-  `realtor_profile` varchar(255) NOT NULL,
+  `hp_address` varchar(255) DEFAULT NULL,
+  `hp_zip_code` varchar(255) DEFAULT NULL,
+  `hp_sales_price` varchar(10) DEFAULT NULL,
+  `realtor_profile` varchar(255) DEFAULT NULL,
   `email` varchar(255) NOT NULL,
   `role` int(1) NOT NULL DEFAULT 0,
   `status` int(1) NOT NULL DEFAULT 0,
   `password` varchar(255) NOT NULL,
   `created_at` datetime NOT NULL DEFAULT current_timestamp(),
-  `updated_at` datetime NOT NULL DEFAULT '0000-00-00 00:00:00' ON UPDATE current_timestamp()
+  `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
@@ -146,14 +154,14 @@ CREATE TABLE `users` (
 INSERT INTO `users` (`id`, `name`, `license`, `license_date`, `mls_id`, `brokerage`, `office_address`, `building`, `zip_code`, `hp_address`, `hp_zip_code`, `hp_sales_price`, `realtor_profile`, `email`, `role`, `status`, `password`, `created_at`, `updated_at`) VALUES
 (1, 'Vishal Ghodadara', '123456', '2023-12-05', '123456', 'Vishal', '199 Street', 'Swaraj Building', 362225, 'Address Two', '362222', '4922', 'name', 'vishal.besticoder@gmail.com', 1, 1, '$2a$11$fCg11cAgOk7RvVCffz7TuulHBoIYOMATc6iq6PjtlbbB5ieju4dG2', '2023-12-26 13:14:42', '0000-00-00 00:00:00'),
 (2, 'Kandarp Gareja', '986321', '2023-12-20', '53197', 'Testing Porpose', 'Address 1', 'Street Road', 362240, 'Address 2', '362154', '3665', 'Profile Link', 'kano.gareja84@gmail.com', 1, 1, '$2b$10$v7uDQ0pfT8oZZNeQQ0jtC.TeKQu9SEfl8dbGED1xJy8mp17easnU.', '2023-12-26 13:14:42', '0000-00-00 00:00:00'),
-(3, 'admin', '', '0000-00-00', '', '', '', '', 0, '', '', '', '', 'admin@gmail.com', 0, 0, '$2a$11$RV2U2FZxI2y1W8CYD/IjC.RVvyhMoAOk9A70xX3c.dqsOo5fDSCLy', '2023-12-26 13:14:42', '2023-12-26 15:45:47'),
+(3, 'admin', '', '0000-00-00', '', '', '', '', 0, '', '', '', '', 'admin@gmail.com', 0, 0, '$2a$11$RV2U2FZxI2y1W8CYD/IjC.RVvyhMoAOk9A70xX3c.dqsOo5fDSCLy', '2023-12-26 13:14:42', '2023-12-26 10:15:47'),
 (4, 'Vijay Dodiya', '15243634', '2023-12-06', '13675', 'Testing Perposer', 'Address 1', 'Street Road', 235796, 'Address 2', '135546', '1204', 'Testing Link', 'vishal.besticoder@gmail.com', 1, 0, '', '2023-12-26 13:14:42', '0000-00-00 00:00:00'),
 (5, 'fsdf', 'sfsf', '2023-12-22', 'adad', 'adad', 'adad', 'adad', 0, 'daad', 'adad', 'adad', 'adad', 'vishal.besticoder@gmail.com', 1, 0, '', '2023-12-26 13:14:42', '0000-00-00 00:00:00'),
-(8, 'Jayesh Naghera', 'ABC123', '2023-01-01', 'MLS123', 'XYZ Realty', '123 Main St', 'Building A', 12345, '456 Side St', '67890', '500000', 'Lorem ipsum...', 'jayesh.besticoder@gmail.com', 1, 1, '$2a$11$RV2U2FZxI2y1W8CYD/IjC.RVvyhMoAOk9A70xX3c.dqsOo5fDSCLy', '2023-12-26 15:16:46', '2023-12-27 09:45:35'),
-(18, 'Test agentt', '1234566', '2025-12-12', '1232', 'XYZ Realtyy', '123 Main Stt', '4545', 123456666, '12121', '21212', '212121', '1212', '6cmbgrndmx@skygazerhub.com', 1, 1, '$2a$11$3rIZvvL3IC7OR5OwHC/5Ou2Z.3ZEvxXzkBKrALP6uoCQWIIk0VMAO', '2023-12-28 15:14:17', '2024-01-05 17:58:21'),
-(19, 'Agent test 2', '12345', '2024-12-12', '123', '12123', '123', '113', 362001, '3662', '362001', '122', '155', 'ziylgchhs7@sfolkar.com', 1, 1, '$2a$11$XGZ5QFLLUUAYSWOZLEwvCOpfpkQkK9RSimA6FO4CuI9hJYzWWx8lq', '2024-01-02 12:12:21', '2024-01-02 12:12:51'),
-(20, 'Afetr kdd', '1221', '2025-02-02', '212', '212121', '21212', '21212', 2121, '2121', '1212', '2121', '2121212', '123@gmail.com', 1, 0, '$2a$11$qFvbNmcYm5T9mOs896hL/O9qzYfv.D9z47QQJO0K.z97E.0KDj0XG', '2024-01-03 13:24:01', '2024-01-03 13:24:01'),
-(24, 'Your agent is here', 'dsdsd', '0000-00-00', '', 'sdsds', 'sdsds', '', 362268, '', '', '', '', 'youragentishere@gmail.com', 1, 0, '$2a$11$NKxFHrOxdrFqllgOW6dwfOcNi104RZZAt/7r/WSbif0c6VAjednhG', '2024-01-03 15:55:01', '2024-01-04 12:01:51');
+(8, 'Jayesh Naghera', 'ABC123', '2023-01-01', 'MLS123', 'XYZ Realty', '123 Main St', 'Building A', 12345, '456 Side St', '67890', '500000', 'Lorem ipsum...', 'jayesh.besticoder@gmail.com', 1, 1, '$2a$11$RV2U2FZxI2y1W8CYD/IjC.RVvyhMoAOk9A70xX3c.dqsOo5fDSCLy', '2023-12-26 15:16:46', '2023-12-27 04:15:35'),
+(18, 'Test agent', '123456', '2025-12-12', '1232', 'XYZ Realty', '123 Main St', '4545', 123456, '12121', '21212', '212121', '1212', '6cmbgrndmx@skygazerhub.com', 1, 1, '$2a$11$3rIZvvL3IC7OR5OwHC/5Ou2Z.3ZEvxXzkBKrALP6uoCQWIIk0VMAO', '2023-12-28 15:14:17', '2024-01-06 07:58:37'),
+(19, 'Agent test 2', '12345', '2024-12-12', '123', '12123', '123', '113', 362001, '3662', '362001', '122', '155', 'ziylgchhs7@sfolkar.com', 1, 1, '$2a$11$XGZ5QFLLUUAYSWOZLEwvCOpfpkQkK9RSimA6FO4CuI9hJYzWWx8lq', '2024-01-02 12:12:21', '2024-01-02 06:42:51'),
+(20, 'Afetr kdd', '1221', '2025-02-02', '212', '212121', '21212', '21212', 2121, '2121', '1212', '2121', '2121212', '123@gmail.com', 1, 0, '$2a$11$qFvbNmcYm5T9mOs896hL/O9qzYfv.D9z47QQJO0K.z97E.0KDj0XG', '2024-01-03 13:24:01', '2024-01-03 07:54:01'),
+(24, 'Your agent is here', 'dsdsd', '0000-00-00', '', 'sdsds', 'sdsds', '', 362268, '', '', '', '', 'youragentishere@gmail.com', 1, 0, '$2a$11$NKxFHrOxdrFqllgOW6dwfOcNi104RZZAt/7r/WSbif0c6VAjednhG', '2024-01-03 15:55:01', '2024-01-04 06:31:51');
 
 -- --------------------------------------------------------
 
@@ -214,7 +222,7 @@ INSERT INTO `zip_orders` (`id`, `user_id`, `total`, `transaction_id`, `status`, 
 (6, 18, '850.00', 'just test', 1, '2024-01-01 18:39:07', '2024-01-05 16:41:31'),
 (7, 19, '1800.00', 'just test', 1, '2024-01-02 12:23:41', '2024-01-05 16:41:29'),
 (8, 18, '4350.00', 'just test', 1, '2024-01-02 13:48:06', '2024-01-05 16:41:27'),
-(9, 18, '1500.00', 'just test', 2, '2024-01-05 16:40:38', '2024-01-05 16:44:45');
+(9, 18, '1500.00', 'just test', 1, '2024-01-05 16:40:38', '2024-01-08 17:26:18');
 
 -- --------------------------------------------------------
 
@@ -249,7 +257,7 @@ INSERT INTO `zip_orders_product` (`id`, `order_id`, `zip_id`, `user_id`, `zip_co
 (9, 8, 2, 18, 362266, 'Patan', '850.00', '2024-01-02', '2024-02-02', 1),
 (10, 8, 4, 18, 362001, 'Junagadh', '1800.00', '2024-01-02', '2024-02-02', 1),
 (11, 8, 10, 18, 362730, 'Amreli', '850.00', '2024-01-02', '2024-02-02', 1),
-(12, 9, 21, 18, 38001, 'Ahmedabad', '1500.00', '2024-01-05', '2024-02-05', 2);
+(12, 9, 21, 18, 38001, 'Ahmedabad', '1500.00', '2024-01-05', '2024-02-05', 1);
 
 --
 -- Indexes for dumped tables
@@ -317,7 +325,7 @@ ALTER TABLE `cart`
 -- AUTO_INCREMENT for table `lead`
 --
 ALTER TABLE `lead`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=32;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=40;
 
 --
 -- AUTO_INCREMENT for table `users`

@@ -17,7 +17,7 @@ import Typography from "@mui/material/Typography";
 import Accordion from "react-bootstrap/Accordion";
 import { Link } from "react-router-dom";
 import Modal from "react-bootstrap/Modal";
-
+import HowitWork from "../../src/assets/howitworks.png";
 // Popup Video
 function MyVerticallyCenteredModal(props) {
   return (
@@ -76,13 +76,13 @@ const Howitwork = () => {
         <Container>
           <Row className="d-flex align-items-center">
             <Col md={6}>
-              <h3>How Listelligent Work</h3>
+              <h3>How Listelligent Works</h3>
               <p>
-                Does ^ and money by working with local experts that will list
+                Save time and money by working with local experts that will list
                 your home for 1%
               </p>
               <Form className="header-search">
-                <Form.Control size="lg" type="text" placeholder="Search" />
+                {/* <Form.Control size="lg" type="text" placeholder="Search" /> */}
                 <Link to={"/agentslist"}>
                   GET STARTED
                   <HiOutlineArrowSmRight />
@@ -114,7 +114,7 @@ const Howitwork = () => {
             <Col lg={6}>
               <h3>How to get started:</h3>
               <Box sx={{ maxWidth: 600 }}>
-                <Stepper activeStep={activeStep} orientation="vertical">
+                {/* <Stepper activeStep={activeStep} orientation="vertical">
                   {steps.map((step, index) => (
                     <Step key={step.label} className="hiw-step-label">
                       <StepLabel
@@ -145,10 +145,26 @@ const Howitwork = () => {
                       </StepContent>
                     </Step>
                   ))}
-                </Stepper>
+                </Stepper> */}
+                {steps.map((step, index) => (
+                  <Stepper orientation="vertical">
+                    <Step key={index} className="hiw-step-label">
+                      <StepLabel>
+                        <Typography>
+                          <b>{step.label}</b>
+                        </Typography>
+                      </StepLabel>
+                      <StepContent>
+                        <Typography>{step.description}</Typography>
+                      </StepContent>
+                    </Step>
+                  </Stepper>
+                ))}
               </Box>
             </Col>
-            <Col lg={6}></Col>
+            <Col md={6}>
+              <img src={HowitWork} alt="img" />
+            </Col>
           </Row>
         </Container>
       </div>
@@ -219,6 +235,15 @@ const Howitwork = () => {
                     Each state has different guidelines regarding buyer broker
                     co-ops. Please consult with your agent to discuss buyer
                     agent fees.
+                  </Accordion.Body>
+                </Accordion.Item>
+                <Accordion.Item eventKey="6">
+                  <Accordion.Header className="acordian-btn">
+                    Is Listelligent a brokerage?
+                  </Accordion.Header>
+                  <Accordion.Body>
+                    No. Listelligent is an online platform that connects you
+                    with local agents/brokerages based on your desired zip code.
                   </Accordion.Body>
                 </Accordion.Item>
               </Accordion>

@@ -70,7 +70,11 @@ const Agentaccount = () => {
   const authToken = localStorage.getItem("token");
   const theme = useTheme();
   const [personName, setPersonName] = React.useState([]);
-
+  const [changePassword, setChangePassword] = useState({
+    current_password: "",
+    new_password: "",
+    confirm_password: "",
+  });
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -132,8 +136,7 @@ const Agentaccount = () => {
       [name]: value,
     }));
   };
-
-  const handelSubmit = async(event) => {
+  const handelSubmit = async (event) => {
     event.preventDefault();
     try {
       const response = await axios.patch(
@@ -143,9 +146,50 @@ const Agentaccount = () => {
           headers: { Authorization: `Bearer ${authToken}` },
           withCredentials: true,
         }
-      );      
+      );
       if (response.status) {
-        NotificationManager.success("Signup", response.data.message, 1500);        
+        NotificationManager.success("Signup", response.data.message, 1500);
+      } else {
+        NotificationManager.error("Error", response.message, 3000);
+      }
+    } catch (error) {
+      NotificationManager.error("Error", error.response.data.message, 3000);
+    }
+  };
+
+  const handelChangePasswrod = async (event) => {
+    event.preventDefault();
+
+    if (changePassword.confirm_password !== changePassword.new_password) {
+      NotificationManager.error(
+        "Error",
+        "The New password confirmation does not match.",
+        3000
+      );
+      return;
+    }
+    if (
+      changePassword.confirm_password.length < 8 ||
+      changePassword.new_password.length < 8
+    ) {
+      NotificationManager.error(
+        "Error",
+        "Password must be at least 8 characters long.",
+        3000
+      );
+      return;
+    }
+    try {
+      const response = await axios.post(
+        `${process.env.REACT_APP_BASE_URL}user/password-change`,
+        changePassword,
+        {
+          headers: { Authorization: `Bearer ${authToken}` },
+          withCredentials: true,
+        }
+      );
+      if (response.status) {
+        NotificationManager.success("Password", response.data.message, 1500);
       } else {
         NotificationManager.error("Error", response.message, 3000);
       }
@@ -219,6 +263,13 @@ const Agentaccount = () => {
                     className={activeTab === "0" ? "active" : ""}
                   >
                     My profile
+                  </li>
+                  <li
+                    type="button"
+                    onClick={() => handleLiClick("10")}
+                    className={activeTab === "10" ? "active" : ""}
+                  >
+                    Change password
                   </li>
                   {/* <li
                     type="button"
@@ -345,7 +396,7 @@ const Agentaccount = () => {
                     </Accordion.Header>
                     <Accordion.Body>
                       <div className="client-preference-content">
-                        <Form  onSubmit={handelSubmit}>
+                        <Form onSubmit={handelSubmit}>
                           <Row className="border-bottom">
                             <Col lg={4}>
                               <div className="preferences-title">
@@ -434,6 +485,92 @@ const Agentaccount = () => {
                                   placeholder="00000"
                                   onChange={(event) => handelInputUpdate(event)}
                                   value={profileData.zip_code}
+                                />
+                              </div>
+                            </Col>
+                          </Row>
+                          <div className="mt-3">
+                            <Button className="form-submit-btn" type="submit">
+                              Save Changes
+                            </Button>
+                          </div>
+                        </Form>
+                      </div>
+                    </Accordion.Body>
+                  </Accordion.Item>
+
+                  <Accordion.Item eventKey="10" className="accordian-items">
+                    <Accordion.Header onClick={() => handleLiClick("10")}>
+                      Change password
+                    </Accordion.Header>
+                    <Accordion.Body>
+                      <div className="client-preference-content">
+                        <Form onSubmit={handelChangePasswrod}>
+                          <Row className="border-bottom">
+                            <Col lg={4}>
+                              <div className="preferences-title">
+                                <h6>Current password</h6>
+                              </div>
+                            </Col>
+                            <Col lg={8}>
+                              <div className="preferences-checkbox mb-3">
+                                <Form.Control
+                                  type="password"
+                                  placeholder="Current password"
+                                  required
+                                  name="currentpassword"
+                                  onChange={(e) =>
+                                    setChangePassword({
+                                      ...changePassword,
+                                      current_password: e.target.value,
+                                    })
+                                  }
+                                />
+                              </div>
+                            </Col>
+                          </Row>
+                          <Row className="border-bottom mt-3">
+                            <Col lg={4}>
+                              <div className="preferences-title">
+                                <h6>New password</h6>
+                              </div>
+                            </Col>
+                            <Col lg={8}>
+                              <div className="preferences-checkbox mb-3">
+                                <Form.Control
+                                  required
+                                  name="newpassword"
+                                  type="password"
+                                  placeholder="New password"
+                                  onChange={(e) =>
+                                    setChangePassword({
+                                      ...changePassword,
+                                      new_password: e.target.value,
+                                    })
+                                  }
+                                />
+                              </div>
+                            </Col>
+                          </Row>
+                          <Row className="border-bottom mt-3">
+                            <Col lg={4}>
+                              <div className="preferences-title">
+                                <h6>Confirm password *</h6>
+                              </div>
+                            </Col>
+                            <Col lg={8}>
+                              <div className="preferences-checkbox mb-3">
+                                <Form.Control
+                                  required
+                                  type="password"
+                                  name="confirmpassword"
+                                  placeholder="Confirm password"
+                                  onChange={(e) =>
+                                    setChangePassword({
+                                      ...changePassword,
+                                      confirm_password: e.target.value,
+                                    })
+                                  }
                                 />
                               </div>
                             </Col>

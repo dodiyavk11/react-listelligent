@@ -27,6 +27,7 @@ import Stepper from "@mui/material/Stepper";
 import Step from "@mui/material/Step";
 import StepLabel from "@mui/material/StepLabel";
 import axios from "axios";
+import homeImage from "../../src/assets/home_img.jpg";
 
 const Home = () => {
   const navigate = useNavigate();
@@ -46,6 +47,32 @@ const Home = () => {
     zip_code: cookies ? cookies["zip_code"] : "",
     agent_zip_code: cookies ? cookies["agent_zip_code"] : "",
   });
+
+  const [defaultRange, setRange] = useState(1650000);
+  const [onePer, setOnePer] = useState(0);
+  const [twoPer, setTwoPer] = useState(0);
+  const [threePer, setThreePer] = useState(0);
+  useEffect(() => {
+    setOnePer((defaultRange * 1) / 100);
+    setTwoPer((defaultRange * 2) / 100);
+    setThreePer((defaultRange * 3) / 100);
+  }, [defaultRange]);
+  const formatCurrency = (value) => {
+    return new Intl.NumberFormat("en-US", {
+      style: "currency",
+      currency: "USD",
+      minimumFractionDigits: 2,
+      maximumFractionDigits: 2,
+    }).format(value);
+  };
+
+  const handlePriceChange = (event) => {
+    setRange(event.target.value);
+    setOnePer((event.target.value * 1) / 100);
+    setTwoPer((event.target.value * 2) / 100);
+    setThreePer((event.target.value * 3) / 100);
+  };
+
   const steps = [
     {
       label: "Local Professionals",
@@ -283,13 +310,20 @@ const Home = () => {
           <Row className="mt-3 first-inner-section">
             <Col md={6} className="first-left-col">
               <h4>
-                Sell Your Home for 1% <br /> Connect With Agents in Your Zip
-                Code
+                Sell Your Home for <span className="highLightText">1%</span>{" "}
+                <br /> Connect With Agents in Your Zip Code
               </h4>
               <h5>Enter your address to match with a local professional</h5>
+              <p>
+                Buyer’s agent fee not included. Consult with your agent on local
+                broker co-op commissions.
+              </p>
               <div className="zip-search-input">
                 <Form onSubmit={handleSubmitzPro}>
-                  <InputGroup className="mt-3 zip-search-input-content">
+                  <InputGroup
+                    className="mt-3 zip-search-input-content"
+                    style={{ width: "100%" }}
+                  >
                     <Form.Control
                       placeholder="Enter Address"
                       className="shadow-none"
@@ -319,11 +353,7 @@ const Home = () => {
               <p>No Obligation-No Spam-Fast-Simple</p>
             </Col>
             <Col md={6} className="home-img">
-              <img
-                className="rounded"
-                src="https://www.lt6p.com/re/img/buysell/buyers_moving_family_new.jpg"
-                alt="Image"
-              ></img>
+              <img className="rounded" src={homeImage} alt="Image"></img>
             </Col>
           </Row>
           <Row className="second-inner-section">
@@ -364,7 +394,20 @@ const Home = () => {
             <Col md={3}></Col>
             <Col md={6} className="rang-label">
               <Form.Label>Listing Price</Form.Label>
-              <Form.Range />
+              <center>
+                <h4>{formatCurrency(defaultRange)}</h4>
+              </center>
+              <Form.Range
+                min={300000}
+                max={3000000}
+                step={10}
+                value={defaultRange}
+                onChange={handlePriceChange}
+              />
+              <div className="d-flex justify-content-between">
+                <h5>300000</h5>
+                <h5>3000000</h5>
+              </div>
             </Col>
             <Col md={3}></Col>
           </Row>
@@ -373,16 +416,16 @@ const Home = () => {
             <Col className="calculator-stat-listelligent">
               <p>Agent fees with listelligent</p>
               <p>1%</p>
-              <h3>$18,200</h3>
+              <h3>{formatCurrency(onePer)}</h3>
             </Col>
             <Col className="calculator-stat-others">
               <p>Other Agents</p>
               <p>3%</p>
-              <h3>$21,000</h3>
+              <h3>{formatCurrency(threePer)}</h3>
             </Col>
             <Col className="calculator-stat-saving">
               <p>Potential Savings:</p>
-              <h3>$2,800</h3>
+              <h3>{formatCurrency(twoPer)}</h3>
             </Col>
           </Row>
         </Container>
@@ -470,36 +513,36 @@ const Home = () => {
             </Col>
             <Col md={3} className="agents-list">
               <ul>
-                <li>Alabama</li>
-                <li>Alaska</li>
-                <li>Arizona</li>
-                <li>Arkansas</li>
-                <li>California</li>
-                <li>Colorado</li>
-                <li>Connecticut</li>
-                <li>Delaware</li>
-                <li>District Of Columbia</li>
-                <li>Florida</li>
-                <li>Georgia</li>
-                <li>Hawaii</li>
-                <li>Idaho</li>
+                <li>Illinois</li>
+                <li>Indiana</li>
+                <li>Iowa</li>
+                <li>Kansas</li>
+                <li>Kentucky</li>
+                <li>Louisiana</li>
+                <li>Maine</li>
+                <li>Maryland</li>
+                <li>Massachusetts</li>
+                <li>Michigan</li>
+                <li>Minnesota</li>
+                <li>Mississippi</li>
+                <li>Missouri</li>
               </ul>
             </Col>
             <Col md={3} className="agents-list">
               <ul>
-                <li>Alabama</li>
-                <li>Alaska</li>
-                <li>Arizona</li>
-                <li>Arkansas</li>
-                <li>California</li>
-                <li>Colorado</li>
-                <li>Connecticut</li>
-                <li>Delaware</li>
-                <li>District Of Columbia</li>
-                <li>Florida</li>
-                <li>Georgia</li>
-                <li>Hawaii</li>
-                <li>Idaho</li>
+                <li>Montana</li>
+                <li>Nebraska</li>
+                <li>Nevada</li>
+                <li>New Hampshire</li>
+                <li>New Jersey</li>
+                <li>New Mexico</li>
+                <li>New York</li>
+                <li>North Carolina</li>
+                <li>North Dakota</li>
+                <li>Ohio</li>
+                <li>Oklahoma</li>
+                <li>Oregon</li>
+                <li>Pennsylvania</li>
               </ul>
             </Col>
             <Col md={3} className="agents-list">
@@ -507,18 +550,17 @@ const Home = () => {
                 <li>
                   <Link to={"/singlepost"}>Rhode Island</Link>
                 </li>
-                <li>Alaska</li>
-                <li>Arizona</li>
-                <li>Arkansas</li>
-                <li>California</li>
-                <li>Colorado</li>
-                <li>Connecticut</li>
-                <li>Delaware</li>
-                <li>District Of Columbia</li>
-                <li>Florida</li>
-                <li>Georgia</li>
-                <li>Hawaii</li>
-                <li>Idaho</li>
+                <li>South Carolina</li>
+                <li>South Dakota</li>
+                <li>Tennessee</li>
+                <li>Texas</li>
+                <li>Utah</li>
+                <li>Vermont</li>
+                <li>Virginia</li>
+                <li>Washington</li>
+                <li>West Virginia</li>
+                <li>Wisconsin</li>
+                <li>Wyoming</li>
               </ul>
             </Col>
           </Row>

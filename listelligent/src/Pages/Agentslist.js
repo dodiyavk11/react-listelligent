@@ -94,6 +94,8 @@ const Agentslist = () => {
 
   const addUserLead = async () => {
     try {
+      const zipvalue = formData.zip_code;
+      formData.agent_zip_code = zipvalue;
       const response = await axios.post(
         `${process.env.REACT_APP_BASE_URL}user/addLead`,
         formData,
@@ -108,6 +110,7 @@ const Agentslist = () => {
         localStorage.setItem("formData", JSON.stringify(formData));
         // setIsOpen(true)
         setIsOpen((isOpen) => !isOpen);
+        agenttoggle()
         getAgentList();
       } else {
         NotificationManager.error("Error", response.data.message, 3000);

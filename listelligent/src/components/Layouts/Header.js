@@ -69,9 +69,9 @@ const Header = () => {
                                     <Nav.Link href="/howitwork">How Its Work</Nav.Link> */}
                   <Link to={"/"}>Home</Link>
                   <Link to={"/howitwork"}>How It Works</Link>
-                  <Link to={"/agentsignup"}>Agents SignUp</Link>
+                  <Link to={"/agentsignup"}>Agent Signup/Login</Link>
                 </Nav>
-                {auth ? (
+                {/* {auth ? (
                   <>
                     <Link
                       to={"/"}
@@ -92,7 +92,7 @@ const Header = () => {
                       Login
                     </Link>
                   </>
-                )}
+                )} */}
               </Offcanvas.Body>
             </Navbar.Offcanvas>
           </Container>

@@ -2,6 +2,8 @@ const Models = require("../models");
 const moment = require("moment");
 const Sequelize = require("sequelize");
 const { Op } = require("sequelize");
+const PDFDocument = require("pdfkit");
+const fs = require("fs");
 
 exports.getAllAgentsList = async (req, res) => {
   try {
@@ -142,7 +144,7 @@ exports.cartPlaceOrder = async (req, res) => {
         user_id,
         total: cartTotal,
         transaction_id: "just test",
-        status:0
+        status: 0,
       });
       const { startDate, endDate } = getAgoDate();
       const orderZipCodeItems = getCart.map((cartItem) => ({
@@ -238,90 +240,116 @@ exports.getAgentLeads = async (req, res) => {
       where: {
         agent_zip_code: { [Op.in]: zipCodes },
       },
-      order: [['status', 'ASC']],
+      order: [["status", "ASC"]],
     });
     res.status(200).send({ status: true, data: leadData });
   } catch (err) {
-    res
-      .status(500)
-      .send({
-        status: false,
-        message: "Leads cannot fetched, an error occured",
-        error: err.message,
-      });
+    res.status(500).send({
+      status: false,
+      message: "Leads cannot fetched, an error occured",
+      error: err.message,
+    });
   }
 };
 
-exports.showUserAgentList = async(req, res) => {
-  try
-  {
+exports.showUserAgentList = async (req, res) => {
+  try {
     const user_id = req.user_id;
     const { zipcode } = req.params;
-    if(zipcode)
-    {
+    if (zipcode) {
       const agentList = await Models.Users.findAll({
-      include: [
+        include: [
           {
             model: Models.orderZipCode,
             as: "activeZipcode",
             where: { zip_code: zipcode, status: 1 },
           },
-        ]        
-      })
+        ],
+      });
       return res.status(200).send({ status: true, data: agentList });
-    }    
-    return res.status(500).send({ status: false, message: "Something went to wrong", data:[] });
-  }catch(err)
-  {
-    res.status(500).send({ status: false, message: "Agent list cannot get, an error occured", error: err.message });
-  }
-}
-
-exports.viewAgentByUser = async(req, res) => {
-  try{
-    const { id } = req.params;
-    const agentData = await Models.Users.findOne({ where:{ id } });
-    if(agentData)
-    {
-      return res.status(200).send({ status: true, message: "Agent data get successfully.", data: agentData });
     }
-    return res.status(404).send({ status: false, message: "Agent cannot found or something went to wrong", data: [] })
-  }catch(err)
-  {
-    res.status(500).send({ status: false, message: "Agent cannot view, an error occured.", error: err.message });
+    return res
+      .status(500)
+      .send({ status: false, message: "Something went to wrong", data: [] });
+  } catch (err) {
+    res.status(500).send({
+      status: false,
+      message: "Agent list cannot get, an error occured",
+      error: err.message,
+    });
   }
-}
+};
 
-exports.getAgentOrdersList = async(req, res) => {
-  try{
+exports.viewAgentByUser = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const agentData = await Models.Users.findOne({ where: { id } });
+    if (agentData) {
+      return res.status(200).send({
+        status: true,
+        message: "Agent data get successfully.",
+        data: agentData,
+      });
+    }
+    return res.status(404).send({
+      status: false,
+      message: "Agent cannot found or something went to wrong",
+      data: [],
+    });
+  } catch (err) {
+    res.status(500).send({
+      status: false,
+      message: "Agent cannot view, an error occured.",
+      error: err.message,
+    });
+  }
+};
+
+exports.getAgentOrdersList = async (req, res) => {
+  try {
     const user_id = req.userId;
     const getOrders = await Models.Orders.findAll({
-      include:[
+      include: [
         {
           model: Models.orderZipCode,
           as: "orderProduct",
-        }
+        },
       ],
       where: { user_id },
-      order: [['id', 'DESC']],
-    })
-    res.status(200).send({ status: true, message: "Order get successfully", data: getOrders })
-  }catch(err){
-    res.status(500).send({ status: false, message: "Agnet order can not get, an error occured.", error: err.message });
+      order: [["id", "DESC"]],
+    });
+    res.status(200).send({
+      status: true,
+      message: "Order get successfully",
+      data: getOrders,
+    });
+  } catch (err) {
+    res.status(500).send({
+      status: false,
+      message: "Agnet order can not get, an error occured.",
+      error: err.message,
+    });
   }
-}
+};
 
-exports.agentUpdateLeadStatus = async(req, res) => {
-  try{
+exports.agentUpdateLeadStatus = async (req, res) => {
+  try {
     const { id, status } = req.params;
-    const user_id =req.userId;
+    const user_id = req.userId;
     const updateStatus = await Models.Lead.update(
       { status },
       { where: { id } }
     );
-    return res.status(200).send({ status: true, message: "Status update successfully.", data: updateStatus });
-  }catch(err)
-  {
-    return res.status(500).send({ status: false, message: "Status cannot update, an error occured", error: err.message });
+    return res.status(200).send({
+      status: true,
+      message: "Status update successfully.",
+      data: updateStatus,
+    });
+  } catch (err) {
+    return res.status(500).send({
+      status: false,
+      message: "Status cannot update, an error occured",
+      error: err.message,
+    });
   }
-}
+};
