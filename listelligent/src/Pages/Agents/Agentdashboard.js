@@ -105,6 +105,7 @@ CircularProgressWithLabel.propTypes = {
 };
 
 const Agentdashboard = () => {
+  const [searchInput, setSearchInput] = useState("");
   const navigate = useNavigate();
   const authToken = localStorage.getItem("token");
   const [value, setValue] = React.useState(0);
@@ -181,11 +182,43 @@ const Agentdashboard = () => {
     }
   };
 
+  const resetSearch = () => {
+    setSearchInput("");
+    performSearch("");
+  };
+
+  const performSearch = async (query) => {
+    try {
+      const response = await axios.get(
+        `${process.env.REACT_APP_BASE_URL}agent/leads?q=${encodeURIComponent(
+          query
+        )}`,
+        {
+          headers: { Authorization: `Bearer ${authToken}` },
+          withCredentials: true,
+        }
+      );
+
+      if (response.status) {
+        setData(response.data.data);
+      } else {
+        NotificationManager.error("Error", response.data.message, 3000);
+      }
+    } catch (error) {
+      if (error.response && error.response.status === 401) {
+        localStorage.clear();
+        navigate("/login");
+      } else {
+        NotificationManager.error("Error", error.response.data.message, 3000);
+      }
+    }
+  };
+
   return (
     <Agentlayout>
       <div className="proposal_search_form_container mt-4">
         <Container>
-          <NotificationContainer/>
+          <NotificationContainer />
           <Row className="mb-3">
             <Col lg={6}>
               <div
@@ -197,8 +230,14 @@ const Agentdashboard = () => {
                   type="text"
                   placeholder="Search for a Name, Phone #, Email or Address"
                   className="ps-4 pt-1 pb-1"
+                  value={searchInput}
+                  onChange={(e) => setSearchInput(e.target.value)}
                 ></input>
-                <button>Go</button>
+                <button onClick={() => performSearch(searchInput)}>Go</button>
+                &nbsp;
+                {searchInput !== "" && (
+                  <button onClick={resetSearch}>Clear</button>
+                )}
               </div>
             </Col>
             <Col lg={6}>
@@ -253,75 +292,96 @@ const Agentdashboard = () => {
 
                 <CustomTabPanel value={value} index={0}>
                   <Container>
-                    <Row>
-                      {data.slice(0, 3).map((result, index) => (
-                        <Col md={4} key={index}>
-                          <div className="seller-proposals">
-                            <div className="d-flex justify-content-between align-items-center">
-                              <span className="status-span">
-                                <TimeAgo date={result.created_at} />
-                              </span>
-                              <span>
-                                <DropdownButton
-                                  id="dropdown-basic-button"
-                                  variant="light"
-                                  split
-                                >
-                                  <Dropdown.Item
-                                    disabled={result.status === 1}
-                                    onClick={() =>
-                                      handleStatusUpdate(result.id, 1)
-                                    }
-                                  >
-                                    Complete
-                                  </Dropdown.Item>
-                                  <Dropdown.Item
-                                    disabled={result.status === 2}
-                                    onClick={() =>
-                                      handleStatusUpdate(result.id, 2)
-                                    }
-                                  >
-                                    Accept
-                                  </Dropdown.Item>
-                                  <Dropdown.Item
-                                    disabled={result.status === 3}
-                                    onClick={() =>
-                                      handleStatusUpdate(result.id, 3)
-                                    }
-                                  >
-                                    Decline
-                                  </Dropdown.Item>
-                                </DropdownButton>
-                              </span>
-                              {/* <span className="icon-span">
+                    {data.length > 0 && (
+                      <>
+                        <Row>
+                          {data.slice(0, 3).map((result, index) => (
+                            <Col md={4} key={index}>
+                              <div className="seller-proposals">
+                                <div className="d-flex justify-content-between align-items-center">
+                                  <span className="status-span">
+                                    <TimeAgo date={result.created_at} />
+                                  </span>
+                                  <span>
+                                    <DropdownButton
+                                      id="dropdown-basic-button"
+                                      variant="light"
+                                      split
+                                    >
+                                      <Dropdown.Item
+                                        disabled={result.status === 1}
+                                        onClick={() =>
+                                          handleStatusUpdate(result.id, 1)
+                                        }
+                                      >
+                                        Complete
+                                      </Dropdown.Item>
+                                      <Dropdown.Item
+                                        disabled={result.status === 2}
+                                        onClick={() =>
+                                          handleStatusUpdate(result.id, 2)
+                                        }
+                                      >
+                                        Accept
+                                      </Dropdown.Item>
+                                      <Dropdown.Item
+                                        disabled={result.status === 3}
+                                        onClick={() =>
+                                          handleStatusUpdate(result.id, 3)
+                                        }
+                                      >
+                                        Decline
+                                      </Dropdown.Item>
+                                    </DropdownButton>
+                                  </span>
+                                  {/* <span className="icon-span">
                               <RiDeleteBin6Line />
                             </span> */}
-                            </div>
-                            <div>
-                              <h5>{result.name}</h5>
-                              <p>{result.address}</p>
-                              <p>
-                                <b>{result.phone}</b>
-                              </p>
-                              <p>
-                                <b>{result.email}</b>
-                              </p>
-                              <p>Submitted on {result.created_at}</p>
-                            </div>
-                            {/* <div className="card-btn">
+                                </div>
+                                <div>
+                                  <h5>{result.name}</h5>
+                                  <p>{result.address}</p>
+                                  <p>
+                                    <b>{result.phone}</b>
+                                  </p>
+                                  <p>
+                                    <b>{result.email}</b>
+                                  </p>
+                                  <p>Submitted on {result.created_at}</p>
+                                </div>
+                                {/* <div className="card-btn">
                             <Button className="leave-btn">Leave Update</Button>
                             <Button className="view-proposal">
                               View Proposal
                             </Button>
                           </div> */}
-                          </div>
-                        </Col>
-                      ))}
-                    </Row>
+                              </div>
+                            </Col>
+                          ))}
+                        </Row>
 
-                    <Button className="load-more-btn">
-                      <Link to={"/leads"}>View all</Link>
-                    </Button>
+                        <Button className="load-more-btn">
+                          <Link to={"/leads"}>View all</Link>
+                        </Button>
+                      </>
+                    )}
+                    {data.length === 0 && (
+                      <div className="noLeads text-center">
+                        <h4>Welcome to the Listelligent family.</h4>
+                        <p>
+                          You don't have any leads{" "}
+                          <Button className="find-btn">
+                            <Link
+                              to={"/agent/purchase-zip"}
+                              className="text-white"
+                              style={{ textDecoration: "none" }}
+                            >
+                              Buy zip code
+                            </Link>
+                          </Button>
+                        </p>
+                      </div>
+                    )}
                   </Container>
                 </CustomTabPanel>
 

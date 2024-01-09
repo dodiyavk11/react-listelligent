@@ -30,6 +30,9 @@ import { AuthProvider } from "./AuthContext";
 import PurchaseZip from "./Pages/Agents/PurchaseZip";
 import Orders from "./Pages/Admin/Orders";
 import Leads from "./Pages/Admin/Leads";
+import Profile from "./Pages/Admin/Profile";
+import PromoCode from "./Pages/Admin/PromoCode";
+import FAQs from "./Pages/Admin/FAQs";
 function App() {
   return (
     <div>
@@ -67,6 +70,20 @@ function App() {
             <Route
               path="admin/zipcode"
               element={<Protectedrout Component={ZipCode} />}
+            />
+
+            <Route
+              path="admin/profile"
+              element={<Protectedrout Component={Profile} />}
+            />
+
+            <Route
+              path="admin/promo-code"
+              element={<Protectedrout Component={PromoCode} />}
+            />
+            <Route
+              path="admin/faqs"
+              element={<Protectedrout Component={FAQs} />}
             />
 
             <Route

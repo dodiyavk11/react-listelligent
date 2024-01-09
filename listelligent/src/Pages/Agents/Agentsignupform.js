@@ -203,20 +203,28 @@ const Agentsignupform = () => {
             <Row>
               <Col md={12}>
                 <center>
-                <Button
-                  className="find-btn btn btn-primary"
-                  type="submit"
-                  size="lg"
-                >
-                  Signup
-                </Button>{" "}
-                <Button
-                  className="find-btn btn btn-primary"
-                  type="submit"
-                  size="lg"
-                >
-                  <Link to={"/login"} className="text-white">Back to login</Link>
-                </Button>
+                  <Button
+                    className="find-btn btn btn-primary"
+                    type="submit"
+                    size="lg"
+                  >
+                    Signup
+                  </Button>{" "}                  
+                </center>
+              </Col>
+            </Row>
+            <Row>
+              <Col md={12}>
+                <center>
+                  <p className="mt-2">
+                    Already have an Account{" "}
+                    <Link
+                      to={"/login"}
+                      style={{ textDecoration: "none" }}
+                    >
+                      Login
+                    </Link>
+                  </p>
                 </center>
               </Col>
             </Row>

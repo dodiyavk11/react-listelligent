@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 08, 2024 at 01:32 PM
+-- Generation Time: Jan 09, 2024 at 02:54 PM
 -- Server version: 10.4.27-MariaDB
 -- PHP Version: 7.4.33
 
@@ -56,6 +56,33 @@ CREATE TABLE `cart` (
   `created_at` datetime DEFAULT current_timestamp(),
   `updated_at` datetime NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `faqs`
+--
+
+CREATE TABLE `faqs` (
+  `id` int(11) NOT NULL,
+  `question` varchar(255) NOT NULL,
+  `answer` text NOT NULL,
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
+  `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `faqs`
+--
+
+INSERT INTO `faqs` (`id`, `question`, `answer`, `created_at`, `updated_at`) VALUES
+(3, 'What is Listelligent?', 'Listelligent is a new platform that connects homeowners with agents that can sell their home for a 1% commission.', '2024-01-09 12:37:54', '2024-01-09 12:37:54'),
+(4, 'Are there any fees owed to Listelligent?', 'None! Listelligent is free for home sellers. Our mission is to match you with local pros that are dedicated to selling your home for 1%. This does not however include any buyer agent commissions. Be sure to consult with your agent on any broker Co-op.', '2024-01-09 12:38:14', '2024-01-09 12:38:14'),
+(5, 'How is my information shared?', 'Your contact information is only shared with the agent(s) in your desired zip code so they can reach out to introduce themselves.', '2024-01-09 12:38:39', '2024-01-09 12:38:39'),
+(6, 'What makes Listelligent different from other sites?', 'Most discount sites charge 1.5% to list a home. That’s due to the sites taking a referral fee from the agent upon close. Listelligent agents by into zip codes and are not charged a referral fee saving you more money!', '2024-01-09 12:39:14', '2024-01-09 12:39:14'),
+(7, 'Is Listelligent nationwide?', 'Listelligent is available to sellers in all 50 states!', '2024-01-09 12:39:32', '2024-01-09 12:39:32'),
+(8, 'What about the buyers agent fees?', 'Each state has different guidelines regarding buyer broker co-ops. Please consult with your agent to discuss buyer agent fees.', '2024-01-09 12:39:46', '2024-01-09 12:39:46'),
+(9, 'Is Listelligent a brokerage?', 'No. Listelligent is an online platform that connects you with local agents/brokerages based on your desired zip code.', '2024-01-09 12:40:01', '2024-01-09 13:01:46');
 
 -- --------------------------------------------------------
 
@@ -117,7 +144,34 @@ INSERT INTO `lead` (`id`, `name`, `phone`, `email`, `address`, `zip_code`, `agen
 (36, 'sds', 'hjjdhj', 'jayesh@besticoder.com', '55', 362268, 362268, 0, '2024-01-08 17:32:40', '2024-01-08 17:32:40'),
 (37, 'sds', 'hjjdhj', 'jayesh@besticoder.com', '55', 362268, 362268, 0, '2024-01-08 17:32:41', '2024-01-08 17:32:41'),
 (38, 'sds', 'hjjdhj', 'jayesh@besticoder.com', '55', 362268, 362268, 0, '2024-01-08 17:34:30', '2024-01-08 17:34:30'),
-(39, '5454545', '554545', '4wgi06hw6i@superblohey.com', '55454', 38001, 38001, 0, '2024-01-08 17:34:48', '2024-01-08 17:34:48');
+(39, '5454545', '554545', '4wgi06hw6i@superblohey.com', '55454', 38001, 38001, 0, '2024-01-08 17:34:48', '2024-01-08 17:34:48'),
+(40, 'Jayesh Naghera', '09033389733', 'rjnaghera@gmail.com', 'Test', 362268, 362268, 0, '2024-01-09 12:31:21', '2024-01-09 12:31:21'),
+(41, 'Jayesh Naghera', '09033389733', 'rjnaghera@gmail.com', 'Bhalpara', 362268, 362001, 0, '2024-01-09 12:45:07', '2024-01-09 12:45:07'),
+(42, 'TestDev TestDev', '+9112345678', 'jayesh@besticoder.com', 'Test', 123456, 741258, 0, '2024-01-09 12:45:24', '2024-01-09 12:45:24'),
+(43, 'TestDev TestDev', '+9112345678', 'jayesh@besticoder.com', 'Test', 123456, 741258, 0, '2024-01-09 12:45:33', '2024-01-09 12:45:33');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `promo_codes`
+--
+
+CREATE TABLE `promo_codes` (
+  `id` int(11) NOT NULL,
+  `code` varchar(255) NOT NULL,
+  `description` text DEFAULT NULL,
+  `discount_amount` decimal(10,2) DEFAULT NULL,
+  `expiration_date` date DEFAULT NULL,
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
+  `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `promo_codes`
+--
+
+INSERT INTO `promo_codes` (`id`, `code`, `description`, `discount_amount`, `expiration_date`, `created_at`, `updated_at`) VALUES
+(5, 'JAN123', 'Test', '35.00', NULL, '2024-01-09 11:42:29', '2024-01-09 11:42:29');
 
 -- --------------------------------------------------------
 
@@ -154,11 +208,11 @@ CREATE TABLE `users` (
 INSERT INTO `users` (`id`, `name`, `license`, `license_date`, `mls_id`, `brokerage`, `office_address`, `building`, `zip_code`, `hp_address`, `hp_zip_code`, `hp_sales_price`, `realtor_profile`, `email`, `role`, `status`, `password`, `created_at`, `updated_at`) VALUES
 (1, 'Vishal Ghodadara', '123456', '2023-12-05', '123456', 'Vishal', '199 Street', 'Swaraj Building', 362225, 'Address Two', '362222', '4922', 'name', 'vishal.besticoder@gmail.com', 1, 1, '$2a$11$fCg11cAgOk7RvVCffz7TuulHBoIYOMATc6iq6PjtlbbB5ieju4dG2', '2023-12-26 13:14:42', '0000-00-00 00:00:00'),
 (2, 'Kandarp Gareja', '986321', '2023-12-20', '53197', 'Testing Porpose', 'Address 1', 'Street Road', 362240, 'Address 2', '362154', '3665', 'Profile Link', 'kano.gareja84@gmail.com', 1, 1, '$2b$10$v7uDQ0pfT8oZZNeQQ0jtC.TeKQu9SEfl8dbGED1xJy8mp17easnU.', '2023-12-26 13:14:42', '0000-00-00 00:00:00'),
-(3, 'admin', '', '0000-00-00', '', '', '', '', 0, '', '', '', '', 'admin@gmail.com', 0, 0, '$2a$11$RV2U2FZxI2y1W8CYD/IjC.RVvyhMoAOk9A70xX3c.dqsOo5fDSCLy', '2023-12-26 13:14:42', '2023-12-26 10:15:47'),
+(3, 'Administration', '', '0000-00-00', '', '', '', '', 0, '', '', '', '', 'admin@gmail.com', 0, 0, '$2a$11$9ETd28nnE.QLK588KPIcbu8Sop1ZnTg3ukjd0zWmQ89pufnPKBeNC', '2023-12-26 13:14:42', '2024-01-09 06:01:10'),
 (4, 'Vijay Dodiya', '15243634', '2023-12-06', '13675', 'Testing Perposer', 'Address 1', 'Street Road', 235796, 'Address 2', '135546', '1204', 'Testing Link', 'vishal.besticoder@gmail.com', 1, 0, '', '2023-12-26 13:14:42', '0000-00-00 00:00:00'),
 (5, 'fsdf', 'sfsf', '2023-12-22', 'adad', 'adad', 'adad', 'adad', 0, 'daad', 'adad', 'adad', 'adad', 'vishal.besticoder@gmail.com', 1, 0, '', '2023-12-26 13:14:42', '0000-00-00 00:00:00'),
 (8, 'Jayesh Naghera', 'ABC123', '2023-01-01', 'MLS123', 'XYZ Realty', '123 Main St', 'Building A', 12345, '456 Side St', '67890', '500000', 'Lorem ipsum...', 'jayesh.besticoder@gmail.com', 1, 1, '$2a$11$RV2U2FZxI2y1W8CYD/IjC.RVvyhMoAOk9A70xX3c.dqsOo5fDSCLy', '2023-12-26 15:16:46', '2023-12-27 04:15:35'),
-(18, 'Test agent', '123456', '2025-12-12', '1232', 'XYZ Realty', '123 Main St', '4545', 123456, '12121', '21212', '212121', '1212', '6cmbgrndmx@skygazerhub.com', 1, 1, '$2a$11$3rIZvvL3IC7OR5OwHC/5Ou2Z.3ZEvxXzkBKrALP6uoCQWIIk0VMAO', '2023-12-28 15:14:17', '2024-01-06 07:58:37'),
+(18, 'Test agent', '123456', '2025-12-12', '1232', 'XYZ Realty', '123 Main St', '4545', 123456, '12121', '21212', '212121', '1212', '6cmbgrndmx@skygazerhub.com', 1, 1, '$2a$11$yfrpcgoF8xddwwGSf4Gcve46Z3jcTzNuOsFxN/1pY2o44t1DELYse', '2023-12-28 15:14:17', '2024-01-08 13:03:08'),
 (19, 'Agent test 2', '12345', '2024-12-12', '123', '12123', '123', '113', 362001, '3662', '362001', '122', '155', 'ziylgchhs7@sfolkar.com', 1, 1, '$2a$11$XGZ5QFLLUUAYSWOZLEwvCOpfpkQkK9RSimA6FO4CuI9hJYzWWx8lq', '2024-01-02 12:12:21', '2024-01-02 06:42:51'),
 (20, 'Afetr kdd', '1221', '2025-02-02', '212', '212121', '21212', '21212', 2121, '2121', '1212', '2121', '2121212', '123@gmail.com', 1, 0, '$2a$11$qFvbNmcYm5T9mOs896hL/O9qzYfv.D9z47QQJO0K.z97E.0KDj0XG', '2024-01-03 13:24:01', '2024-01-03 07:54:01'),
 (24, 'Your agent is here', 'dsdsd', '0000-00-00', '', 'sdsds', 'sdsds', '', 362268, '', '', '', '', 'youragentishere@gmail.com', 1, 0, '$2a$11$NKxFHrOxdrFqllgOW6dwfOcNi104RZZAt/7r/WSbif0c6VAjednhG', '2024-01-03 15:55:01', '2024-01-04 06:31:51');
@@ -276,9 +330,21 @@ ALTER TABLE `cart`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `faqs`
+--
+ALTER TABLE `faqs`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `lead`
 --
 ALTER TABLE `lead`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `promo_codes`
+--
+ALTER TABLE `promo_codes`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -322,10 +388,22 @@ ALTER TABLE `cart`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=49;
 
 --
+-- AUTO_INCREMENT for table `faqs`
+--
+ALTER TABLE `faqs`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+
+--
 -- AUTO_INCREMENT for table `lead`
 --
 ALTER TABLE `lead`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=40;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=44;
+
+--
+-- AUTO_INCREMENT for table `promo_codes`
+--
+ALTER TABLE `promo_codes`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `users`

@@ -210,7 +210,7 @@ const Myprofile = () => {
         </Container>
       </div>
 
-      <div className="myprofile-slider">
+      {/* <div className="myprofile-slider">
         <Container>
           <Row>
             <Col md={12}>
@@ -422,7 +422,7 @@ const Myprofile = () => {
             </Col>
           </Row>
         </Container>
-      </div>
+      </div> */}
     </Agentlayout>
   );
 };

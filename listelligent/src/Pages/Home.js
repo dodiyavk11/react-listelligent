@@ -125,6 +125,7 @@ const Home = () => {
     e.preventDefault();
     setIsOpen((isOpen) => !isOpen);
     setisSubmit(true);
+    redirectAgentList()
     // addUserLead();
   };
 
@@ -243,7 +244,7 @@ const Home = () => {
           </Row>
         </Container>
       </div>
-      {isSubmit && (
+      {/* {isSubmit && (
         <div
           className="steper-container"
           style={{ display: isSubmit ? "block" : "none" }}
@@ -300,7 +301,7 @@ const Home = () => {
             </Row>
           </Container>
         </div>
-      )}
+      )} */}
       <div
         className="first-section"
         style={{ display: isOpen || isSubmit ? "none" : "block" }}

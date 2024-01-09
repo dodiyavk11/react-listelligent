@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import "../../Style/Agents/agentaccount.css";
 import Agentlayout from "../../components/Agent/Agentlayout";
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
@@ -9,6 +8,7 @@ import { FiArrowLeft, FiDownload } from "react-icons/fi";
 import Accordion from "react-bootstrap/Accordion";
 import { useNavigate, Link } from "react-router-dom";
 import axios from "axios";
+import "../../Style/custom.css";
 import "react-notifications/lib/notifications.css";
 import {
   NotificationContainer,
@@ -95,10 +95,15 @@ const AgentOrders = () => {
           <Row>
             <Col>
               <div className="account-header">
-                <Button>
-                  <FiArrowLeft />
-                  <Link to={"/agentDashboard"}>Go back to Dashboard</Link>
-                </Button>
+                <div className="d-flex justify-content-between">
+                  <Button className="buymoreBtn">
+                    <FiArrowLeft className="text-white"/>
+                    <Link to={"/agentDashboard"}>Go back to Dashboard</Link>
+                  </Button>
+                  <Button className="buymoreBtn">
+                    <Link to={"/agent/purchase-zip"}>Buy more</Link>
+                  </Button>
+                </div>
                 <h1>Orders</h1>
               </div>
             </Col>

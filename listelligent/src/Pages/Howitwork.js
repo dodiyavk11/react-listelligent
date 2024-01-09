@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Layout from "../components/Layouts/Layout";
 import "../Style/howitwork.css";
 import Container from "react-bootstrap/Container";
@@ -15,9 +15,15 @@ import StepContent from "@mui/material/StepContent";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import Accordion from "react-bootstrap/Accordion";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Modal from "react-bootstrap/Modal";
 import HowitWork from "../../src/assets/howitworks.png";
+import {
+  NotificationContainer,
+  NotificationManager,
+} from "react-notifications";
+import axios from "axios";
+
 // Popup Video
 function MyVerticallyCenteredModal(props) {
   return (
@@ -62,18 +68,45 @@ const steps = [
 
 const Howitwork = () => {
   // Popup Video
+  const navigate = useNavigate();
   const [modalShow, setModalShow] = React.useState(false);
 
   const [activeStep, setActiveStep] = React.useState(0);
-
+  const [faqsList, setFaqsList] = useState([]);
   const handleNext = () => {
     setActiveStep((prevActiveStep) => prevActiveStep + 1);
+  };
+  useEffect(() => {
+    getFaqs();
+  }, []);
+  const getFaqs = async () => {
+    try {
+      const response = await axios.get(
+        `${process.env.REACT_APP_BASE_URL}admin/faqs`,
+        {
+          withCredentials: true,
+        }
+      );
+      if (response.status) {
+        setFaqsList(response.data.data);
+      } else {
+        NotificationManager.error("Error", response.data.message, 3000);
+      }
+    } catch (error) {
+      if (error.response && error.response.status === 401) {
+        localStorage.clear();
+        navigate("/login");
+      } else {
+        NotificationManager.error("Error", error.response.data.message, 3000);
+      }
+    }
   };
 
   return (
     <Layout>
       <div className="hiw-first-section">
         <Container>
+          <NotificationContainer />
           <Row className="d-flex align-items-center">
             <Col md={6}>
               <h3>How Listelligent Works</h3>
@@ -177,7 +210,15 @@ const Howitwork = () => {
             </Col>
             <Col md={12} className="mt-5 p-0">
               <Accordion defaultActiveKey="0" flush>
-                <Accordion.Item eventKey="0">
+                {faqsList.map((item, index) => (
+                  <Accordion.Item key={index} eventKey={index}>
+                    <Accordion.Header className="acordian-btn">
+                      {item.question}
+                    </Accordion.Header>
+                    <Accordion.Body>{item.answer}</Accordion.Body>
+                  </Accordion.Item>
+                ))}
+                {/* <Accordion.Item eventKey="0">
                   <Accordion.Header className="acordian-btn">
                     What is Listelligent?
                   </Accordion.Header>
@@ -245,7 +286,7 @@ const Howitwork = () => {
                     No. Listelligent is an online platform that connects you
                     with local agents/brokerages based on your desired zip code.
                   </Accordion.Body>
-                </Accordion.Item>
+                </Accordion.Item> */}
               </Accordion>
             </Col>
           </Row>

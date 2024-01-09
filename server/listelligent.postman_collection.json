@@ -651,7 +651,7 @@
 					"bearer": [
 						{
 							"key": "token",
-							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjE4LCJpYXQiOjE3MDQxMTIzMDgsImV4cCI6MTcwNDExNTkwOH0.osjR7QM1D39w0dW_cC_U8AXwp9-5o252VJYo4sQQuuI",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjE4LCJpYXQiOjE3MDQ3NzI0MjAsImV4cCI6MTcwNDc3NjAyMH0.JZcPzuXifqopISsOIpSC-Yi-uaAbIrmu0Kk7aFZv1uw",
 							"type": "string"
 						}
 					]
@@ -936,6 +936,384 @@
 						"user",
 						"update",
 						"profile"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "agent generate invoice pdf",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjE4LCJpYXQiOjE3MDQ2OTAyMzcsImV4cCI6MTcwNDY5MzgzN30.8GJNFwKawHEJl6vwI_trT3bbJOn2BtzDbd0lxeen5JU",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3001/agent/generateInvoice/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3001",
+					"path": [
+						"agent",
+						"generateInvoice",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Change password",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjE4LCJpYXQiOjE3MDQ2OTUxNTIsImV4cCI6MTcwNDY5ODc1Mn0.t_P8pDm8PsL-nc21QZmrIYbMTXRQge9GiM1FwMxRnI0",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"new_password\":\"\",\r\n    \"current_password\":\"\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3001/user/password-change",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3001",
+					"path": [
+						"user",
+						"password-change"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Lead search ",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjE4LCJpYXQiOjE3MDQ3NzI0MjAsImV4cCI6MTcwNDc3NjAyMH0.JZcPzuXifqopISsOIpSC-Yi-uaAbIrmu0Kk7aFZv1uw",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3001/agent/leads?q=parlk",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3001",
+					"path": [
+						"agent",
+						"leads"
+					],
+					"query": [
+						{
+							"key": "q",
+							"value": "parlk"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Admin add promo code",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjMsImlhdCI6MTcwNDc5MjYxNiwiZXhwIjoxNzA0Nzk2MjE2fQ.fwqYd_SC__A8NXq84C3na8TB8wgD8_K7Jkqx7zKGnPQ",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"code\":\"BAR123\",\r\n    \"description\":\"test cod\",\r\n    \"discount_amount\":500\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3001/admin/add/promocode",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3001",
+					"path": [
+						"admin",
+						"add",
+						"promocode"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Admin add Faqs",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjMsImlhdCI6MTcwNDc5MjYxNiwiZXhwIjoxNzA0Nzk2MjE2fQ.fwqYd_SC__A8NXq84C3na8TB8wgD8_K7Jkqx7zKGnPQ",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"question\": \"How to do\",\r\n    \"answer\":\"Tane khabar\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3001/admin/add/faqs",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3001",
+					"path": [
+						"admin",
+						"add",
+						"faqs"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get FAQs list",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjMsImlhdCI6MTcwNDc5MjYxNiwiZXhwIjoxNzA0Nzk2MjE2fQ.fwqYd_SC__A8NXq84C3na8TB8wgD8_K7Jkqx7zKGnPQ",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3001/admin/faqs",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3001",
+					"path": [
+						"admin",
+						"faqs"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Admin Update FAQs ",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjMsImlhdCI6MTcwNDc5MjYxNiwiZXhwIjoxNzA0Nzk2MjE2fQ.fwqYd_SC__A8NXq84C3na8TB8wgD8_K7Jkqx7zKGnPQ",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PATCH",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"question\": \"How to do\",\r\n    \"answer\": \"Tane khabar\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3001/admin/faqs/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3001",
+					"path": [
+						"admin",
+						"faqs",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Admin Delete FAQs",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjMsImlhdCI6MTcwNDc5MjYxNiwiZXhwIjoxNzA0Nzk2MjE2fQ.fwqYd_SC__A8NXq84C3na8TB8wgD8_K7Jkqx7zKGnPQ",
+							"type": "string"
+						}
+					]
+				},
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3001/admin/faqs/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3001",
+					"path": [
+						"admin",
+						"faqs",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get promo code list",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3001/admin/promocode",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3001",
+					"path": [
+						"admin",
+						"promocode"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Admin Update promo code",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjMsImlhdCI6MTcwNDc5MjYxNiwiZXhwIjoxNzA0Nzk2MjE2fQ.fwqYd_SC__A8NXq84C3na8TB8wgD8_K7Jkqx7zKGnPQ",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PATCH",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"code\": \"BAR123\",\r\n    \"description\": \"Test code\",\r\n    \"discount_amount\": \"500\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3001/admin/promocode/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3001",
+					"path": [
+						"admin",
+						"promocode",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Admin delete promo code",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjMsImlhdCI6MTcwNDc5MjYxNiwiZXhwIjoxNzA0Nzk2MjE2fQ.fwqYd_SC__A8NXq84C3na8TB8wgD8_K7Jkqx7zKGnPQ",
+							"type": "string"
+						}
+					]
+				},
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3001/admin/promocode/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3001",
+					"path": [
+						"admin",
+						"promocode",
+						"1"
 					]
 				}
 			},

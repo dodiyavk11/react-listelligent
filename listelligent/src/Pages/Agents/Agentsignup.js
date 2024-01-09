@@ -49,7 +49,13 @@ const Agentsignup = () => {
               <p>No Monthly Contracts</p>
               <div className="button">
                 <Link to={"/agentsignupform"}>
-                  Join Listelligent
+                  Join Listelligent&nbsp;
+                  <FaArrowRight />
+                </Link>
+              </div>
+              <div className="button">
+                <Link to={"/login"}>
+                 Login&nbsp;
                   <FaArrowRight />
                 </Link>
               </div>

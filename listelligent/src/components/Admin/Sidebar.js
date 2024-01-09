@@ -1,8 +1,8 @@
 import React from "react";
-import { Link,useLocation } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { AiOutlineDashboard } from "react-icons/ai";
 import { FiMapPin } from "react-icons/fi";
-import { FaRegUser } from "react-icons/fa";
+import { FaRegUser, FaQuestionCircle, FaTag } from "react-icons/fa";
 import { FaShoppingCart } from "react-icons/fa";
 import { FaHandshake } from "react-icons/fa";
 
@@ -38,7 +38,15 @@ const Sidebar = () => {
         <li className={isActive("/admin/zipcode") ? "active" : ""}>
           <FiMapPin />
           <Link to={"/admin/zipcode"}>Zip Code</Link>
-        </li>        
+        </li>
+        <li className={isActive("/admin/faqs") ? "active" : ""}>
+          <FaQuestionCircle />
+          <Link to={"/admin/faqs"}>Faqs</Link>
+        </li>
+        <li className={isActive("/admin/promo-code") ? "active" : ""}>
+          <FaTag />
+          <Link to={"/admin/promo-code"}>Promo code</Link>
+        </li>
       </ul>
     </div>
   );

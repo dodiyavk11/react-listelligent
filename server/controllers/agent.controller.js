@@ -232,14 +232,30 @@ exports.getAgentActiveZipCode = async (req, res) => {
 exports.getAgentLeads = async (req, res) => {
   try {
     const user_id = req.userId;
+    const { q } = req.query;
     const activeZipCode = await Models.orderZipCode.findAll({
       where: { user_id },
     });
     const zipCodes = activeZipCode.map((result) => result.zip_code);
+    const baseConditions = {
+      agent_zip_code: { [Op.in]: zipCodes },
+    };
+    if (q) {
+      const ilikeCondition = `%${q}%`;
+      const caseInsensitiveCollation = { collate: 'utf8_general_ci' };
+    
+      Object.assign(baseConditions, {
+        [Op.or]: [
+          { name: { [Op.like]: ilikeCondition } },
+          { email: { [Op.like]: ilikeCondition } },
+          { address: { [Op.like]: ilikeCondition} },
+          { phone: { [Op.like]: ilikeCondition } },
+          { zip_code: { [Op.like]: ilikeCondition } },
+        ],
+      });
+    }
     const leadData = await Models.Lead.findAll({
-      where: {
-        agent_zip_code: { [Op.in]: zipCodes },
-      },
+      where: baseConditions,
       order: [["status", "ASC"]],
     });
     res.status(200).send({ status: true, data: leadData });
